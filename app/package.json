@@ -19,13 +19,14 @@
     "d3-scale": "^4.0.2",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
-    "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/web3.js": "^1.98.0",
     "@coral-xyz/anchor": "0.32.1",
     "@solana/spl-token": "^0.4.9",
     "@limit-plus/sdk": "*",
-    "@limit-plus/pricing": "*"
+    "@limit-plus/pricing": "*",
+    "@solana/wallet-adapter-phantom": "^0.9.28",
+    "@solana/wallet-adapter-solflare": "^0.6.32"
   },
   "devDependencies": {
     "tailwindcss": "^4.0.0",

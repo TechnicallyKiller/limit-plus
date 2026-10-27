@@ -9,3 +9,9 @@
   state stays `Deposit` through the bidding window (Bidding is time-derived) and moves to `Reveal` at `resolve_cutoff`;
   `solana-keccak-hasher` added as a direct dependency (it is what `solana_program::keccak` re-exports);
   Cargo.lock pins `zeroize`/`blake3` to versions the SBF toolchain's Cargo 1.84 can parse.
+
+## Phase 3-4: oracle, pricing, bots, keeper, demo-run
+- Pyth `PriceUpdateV2` layout verified against pyth-crosschain SDK source; receiver id and NVDA feed ids saved with sources in `config/addresses.*.json`.
+- `packages/pricing` (Black-Scholes, realized vol, fair/reserve), `bots/mm-bot.ts`, `bots/keeper.ts`, `scripts/create-round.ts`, `scripts/post-price-and-settle.ts`.
+- X1, X2, X3, X4 pass: `scripts/demo-run.ts` completes a compressed round on a local validator in about 2 minutes.
+- Not done yet: O2 (needs devnet SOL for the program deploy; wallet had about 1 SOL).

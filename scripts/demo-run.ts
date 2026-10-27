@@ -21,7 +21,7 @@ const RPC = "http://127.0.0.1:8899";
 async function startValidator(): Promise<ChildProcess> {
   const ledger = fs.mkdtempSync(path.join(os.tmpdir(), "limitplus-ledger-"));
   const so = path.join(__dirname, "../target/deploy/limit_plus.so");
-  const p = spawn("solana-test-validator", ["--reset", "--quiet", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), so], { stdio: "ignore" });
+  const p = spawn("solana-test-validator", ["--reset", "--quiet", "--limit-ledger-size", "5000", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), so], { stdio: "ignore" });
   const c = new Connection(RPC, "confirmed");
   for (let i = 0; i < 90; i++) {
     try { await c.getVersion(); return p; } catch { await sleep(1000); }
@@ -84,8 +84,8 @@ const usd = (x: bigint | number) => `$${(Number(x) / 1e6).toFixed(4)}`;
 
     const signal = { stop: false };
     const botLog = (m: string) => say(`${stamp()} ${m}`);
-    const botRuns = bots.map((b) => runMmBot({ connection: c, wallet: b.kp, name: `${b.name}-${round.toBase58().slice(0, 4)}`, edge: b.edge, size: b.size, round, pollMs: 1500, signal, log: botLog }));
-    const keepers = [0, 1].map(() => runKeeper({ connection: c, payer: keeperWallet, round, oracle: "mock", pollMs: 1500, signal, log: botLog }));
+    const botRuns = bots.map((b) => runMmBot({ connection: c, wallet: b.kp, name: `${b.name}-${round.toBase58().slice(0, 4)}`, edge: b.edge, size: b.size, round, pollMs: 3000, signal, log: botLog }));
+    const keepers = [0, 1].map(() => runKeeper({ connection: c, payer: keeperWallet, round, oracle: "mock", pollMs: 3000, signal, log: botLog }));
 
     // Admin posts the Friday close once the auction has cleared (mock oracle).
     const priceTask = (async () => {
@@ -93,7 +93,7 @@ const usd = (x: bigint | number) => `$${(Number(x) / 1e6).toFixed(4)}`;
         const r = await client.fetchRound(round);
         const ph = phaseOf(r, await chainNow(c));
         if (["cleared", "awaitingSettle"].includes(ph)) break;
-        await sleep(1500);
+        await sleep(3000);
       }
       const r = await client.fetchRound(round);
       await send(c, [await client.setMockPrice(admin.publicKey, FEED, 16_500_000, -5, 1000, Number(r.expiryTs.toString()))], [admin]);
@@ -109,7 +109,7 @@ const usd = (x: bigint | number) => `$${(Number(x) / 1e6).toFixed(4)}`;
           log(`Users were paid ${usd(r.premiumToUsers.toString())} up front (split pro-rata).`);
           return;
         }
-        await sleep(1500);
+        await sleep(3000);
       }
     })();
 
