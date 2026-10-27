@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ NVDAx round</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.rd-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.rd-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.rd-glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.025));-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.rd-obs{background:#0E0E13;border:1px solid rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.rd-card{position:absolute;width:124px;height:168px;box-sizing:border-box;border-radius:18px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(165deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.04) 38%,rgba(255,255,255,.02) 100%);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(0,0,0,.5),0 24px 40px -18px rgba(0,0,0,.9)}
+.rd-sealed{background-image:radial-gradient(rgba(237,232,221,.22) 1.3px,transparent 1.9px),linear-gradient(165deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.03) 40%,rgba(255,255,255,.02) 100%);background-size:9px 9px,100% 100%}
+.rd-film{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(34,24,20,.78),rgba(14,12,14,.84)) padding-box,conic-gradient(from 210deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+.rd-ctl:focus-visible,.rd-film:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+.rd-amt:focus-within{box-shadow:0 0 0 2px #FF5B22}
+</style>
+</helmet>
+<main style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif">
+
+<header style="position: absolute; left: 40px; right: 40px; top: 28px; height: 56px; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" class="rd-disp rd-ctl" style="font-size: 22px; color: #EDE8DD; text-decoration: none">limit<span style="color: #FF5B22">+</span></a>
+<nav aria-label="Main" class="rd-glass" style="display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px">
+<a href="Pools.dc.html" class="rd-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">Pools</a>
+<a href="Round.dc.html" aria-current="page" class="rd-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #07070A; background: #EDE8DD; text-decoration: none">Rounds</a>
+<a href="#" class="rd-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">How it works</a>
+<button type="button" class="rd-ctl rd-mono" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(237,232,221,.22); background: rgba(237,232,221,.06); color: #EDE8DD; font-size: 13px; cursor: pointer">7xKp…r2Fd</button>
+</nav>
+</header>
+
+<section aria-label="Round" style="position: absolute; left: 40px; top: 108px; width: 1360px; height: 104px; display: flex; align-items: flex-end; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: inline-flex; align-self: flex-start; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #C8F53C; color: #07070A; font-size: 13px; font-weight: 700">Buy lower</span>
+<h1 class="rd-disp" style="margin: 0; font-size: 60px; line-height: 0.9">NVDAx</h1>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; color: #A39E94">Your price</span>
+<span class="rd-mono" style="font-size: 44px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">$171.00</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; color: #A39E94">vs now</span>
+<span class="rd-mono" style="font-size: 44px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #A39E94">-5.0%</span>
+</div>
+<figure style="margin: 0 0 0 auto; position: relative; width: 520px; height: 96px">
+<svg width="520" height="96" viewBox="0 0 520 96" role="img" aria-label="NVDA this week, from 186 to 180 dollars, your price 171 dollars">
+<path d="M0 30 L20 34 L40 28 L60 22 L80 26 L100 18 L120 20 L140 14 L160 24 L180 30 L200 26 L220 36 L240 40 L260 34 L280 44 L300 38 L320 32 L340 36 L360 42 L380 38 L400 46 L420 40 L440 36 L460 42 L480 38 L500 36" fill="none" stroke="#EDE8DD" stroke-width="1.5" stroke-linejoin="round"></path>
+<line x1="0" y1="69" x2="500" y2="69" stroke="#FF5B22" stroke-width="1.5" stroke-dasharray="5 5"></line>
+<circle cx="500" cy="36" r="3.5" fill="#EDE8DD"></circle>
+</svg>
+<span class="rd-mono" style="position: absolute; right: 0; top: 0; font-size: 12px; color: #A39E94">$180.00</span>
+<span class="rd-mono" style="position: absolute; right: 0; top: 76px; font-size: 12px; color: #FF5B22">$171.00</span>
+</figure>
+</section>
+
+<section aria-label="Sealed bids" class="rd-obs" style="position: absolute; left: 40px; top: 236px; width: 900px; height: 384px; box-sizing: border-box; border-radius: 28px; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; left: -300px; top: 150px; width: 1500px; height: 620px; transform: perspective(700px) rotateX(70deg); transform-origin: 50% 0; background-image: radial-gradient(rgba(237,232,221,.28) 1.3px, transparent 2px); background-size: 30px 30px; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%)"></div>
+
+<div style="position: absolute; left: 28px; top: 24px; right: 28px; display: flex; justify-content: space-between; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em">Sealed bids</h2>
+<p style="margin: 0; font-size: 14px; color: #A39E94">Six market makers bid before the candle went out. Three revealed so far.</p>
+</div>
+<span style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255,91,34,.5); color: #FF5B22; font-size: 13px; font-weight: 700"><svg width="10" height="14" viewBox="0 0 10 14" aria-hidden="true"><path d="M5 0.5 C6.8 3.2 9.2 5.4 9.2 8.6 A4.2 4.2 0 0 1 0.8 8.6 C0.8 6.6 2.2 5.4 3 4 C3.4 5.4 4.2 6 4.8 6 C4.4 4.2 4.6 2.2 5 0.5 Z" fill="#FF5B22"></path></svg>Revealing</span>
+</div>
+
+<div style="position: absolute; left: 0; top: 0; width: 900px; height: 384px; perspective: 1100px; perspective-origin: 40% 30%">
+<div style="position: absolute; left: 0; top: 0; width: 900px; height: 384px; transform-style: preserve-3d">
+
+<div class="rd-card" style="left: 48px; top: 134px; transform: translateZ(60px) rotateY(18deg) rotateX(4deg)">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="rd-mono" style="font-size: 10px; color: #A39E94">9fQ2…a1Lm</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="display: inline-flex; align-self: flex-start; height: 22px; align-items: center; padding: 0 9px; border-radius: 999px; background: #FFB547; color: #07070A; font-size: 11px; font-weight: 700">Best bid</span>
+<span class="rd-mono" style="font-size: 30px; font-weight: 600; letter-spacing: -0.05em; color: #FFB547">0.62%</span>
+<span style="font-size: 11px; color: #A39E94">a week</span>
+</div>
+</div>
+
+<div class="rd-card" style="left: 186px; top: 116px; transform: translateZ(20px) rotateY(10deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Ht7c…9wPe</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="rd-mono" style="font-size: 30px; font-weight: 600; letter-spacing: -0.05em">0.58%</span>
+<span style="font-size: 11px; color: #A39E94">a week</span>
+</div>
+</div>
+
+<div class="rd-card rd-sealed" style="left: 320px; top: 128px; transform: translateZ(-10px) rotateY(3deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Bq4r…s0Na</span>
+<span style="align-self: flex-start; padding: 5px 10px; border-radius: 999px; background: #07070A; font-size: 11px; font-weight: 700; color: #EDE8DD">Sealed</span>
+</div>
+
+<div class="rd-card" style="left: 452px; top: 108px; transform: translateZ(10px) rotateY(-5deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Lm8v…e3Tx</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="rd-mono" style="font-size: 30px; font-weight: 600; letter-spacing: -0.05em">0.55%</span>
+<span style="font-size: 11px; color: #A39E94">a week</span>
+</div>
+</div>
+
+<div class="rd-card rd-sealed" style="left: 582px; top: 132px; transform: translateZ(40px) rotateY(-12deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Cz1k…h6Ru</span>
+<span style="align-self: flex-start; padding: 5px 10px; border-radius: 999px; background: #07070A; font-size: 11px; font-weight: 700; color: #EDE8DD">Sealed</span>
+</div>
+
+<div class="rd-card rd-sealed" style="left: 254px; top: 196px; transform: translateZ(150px) rotateY(6deg) rotateX(6deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Wd5n…q8Jb</span>
+<span style="align-self: flex-start; padding: 5px 10px; border-radius: 999px; background: #07070A; font-size: 11px; font-weight: 700; color: #EDE8DD">Sealed</span>
+</div>
+
+<div class="rd-card" style="left: 706px; top: 92px; opacity: 0.34; filter: saturate(0.4); transform: translateZ(-300px) rotateY(-20deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Pk2s…m4Zy</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="rd-mono" style="font-size: 30px; font-weight: 600; letter-spacing: -0.05em; text-decoration: line-through">0.71%</span>
+<span style="font-size: 11px; color: #A39E94">a week</span>
+</div>
+</div>
+
+<div class="rd-card" style="left: 790px; top: 110px; opacity: 0.30; filter: saturate(0.4); transform: translateZ(-380px) rotateY(-24deg) rotateX(4deg)">
+<span class="rd-mono" style="font-size: 10px; color: #A39E94">Fn9t…c7Kd</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="rd-mono" style="font-size: 30px; font-weight: 600; letter-spacing: -0.05em; text-decoration: line-through">0.66%</span>
+<span style="font-size: 11px; color: #A39E94">a week</span>
+</div>
+</div>
+
+</div>
+</div>
+
+<span style="position: absolute; left: 740px; top: 322px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(237,232,221,.16); background: #07070A; color: #A39E94; font-size: 12px; font-weight: 600">After the close</span>
+</section>
+
+<section aria-label="Candle ring" class="rd-obs" style="position: absolute; left: 40px; top: 636px; width: 900px; height: 236px; box-sizing: border-box; border-radius: 28px; padding: 20px">
+<svg width="196" height="196" viewBox="0 0 200 200" role="img" aria-label="This week's phases. The candle auction closed Tuesday at 14:32:07. Reveal is live." style="position: absolute; left: 20px; top: 20px">
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.07)" stroke-width="14"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.42)" stroke-width="14" stroke-dasharray="39.7 502.65" stroke-dashoffset="0" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,91,34,.38)" stroke-width="14" stroke-dasharray="126.7 502.65" stroke-dashoffset="-44.2" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="#FF5B22" stroke-width="14" stroke-dasharray="110.1 502.65" stroke-dashoffset="-174.9" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.16)" stroke-width="14" stroke-dasharray="211.6 502.65" stroke-dashoffset="-289" transform="rotate(-90 100 100)"></circle>
+<line x1="152.3" y1="135.1" x2="182.2" y2="155.6" stroke="#EDE8DD" stroke-width="3" stroke-linecap="round"></line>
+<circle cx="83.1" cy="178.2" r="5.5" fill="#EDE8DD" stroke="#0E0E13" stroke-width="2.5"></circle>
+<text x="100" y="94" text-anchor="middle" fill="#A39E94" font-family="Archivo, sans-serif" font-size="13" font-weight="600">Reveal ends in</text>
+<text x="100" y="118" text-anchor="middle" fill="#EDE8DD" font-family="Martian Mono, monospace" font-size="17" font-weight="500">04:12:09</text>
+</svg>
+<span class="rd-mono" style="position: absolute; left: 206px; top: 166px; padding: 6px 12px; border-radius: 999px; background: #07070A; border: 1px solid rgba(237,232,221,.16); font-size: 12px; color: #EDE8DD; white-space: nowrap">Closed at 14:32:07</span>
+
+<div style="position: absolute; left: 400px; top: 24px; right: 28px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0 0 4px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em">This week</h2>
+<div style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px">
+<span aria-hidden="true" style="height: 8px; border-radius: 999px; background: rgba(237,232,221,.42)"></span><span style="color: #A39E94">Deposits open</span><span class="rd-mono" style="font-size: 12px; color: #A39E94">Mon</span>
+</div>
+<div style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px">
+<span aria-hidden="true" style="height: 8px; border-radius: 999px; background: rgba(255,91,34,.38)"></span><span style="color: #A39E94">Candle auction, ends at a hidden moment</span><span class="rd-mono" style="font-size: 12px; color: #A39E94">Mon 09:30</span>
+</div>
+<div style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px">
+<span aria-hidden="true" style="height: 8px; border-radius: 999px; background: #FF5B22"></span><span style="color: #EDE8DD; font-weight: 700">Reveal, bids open one by one</span><span class="rd-mono" style="font-size: 12px; color: #EDE8DD">Tue 14:32</span>
+</div>
+<div style="display: grid; grid-template-columns: 28px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px">
+<span aria-hidden="true" style="height: 8px; border-radius: 999px; background: rgba(237,232,221,.16)"></span><span style="color: #A39E94">Waiting for Friday's official close</span><span class="rd-mono" style="font-size: 12px; color: #A39E94">Fri 16:00</span>
+</div>
+</div>
+</section>
+
+<form aria-label="Order ticket" class="rd-glass" style="position: absolute; left: 964px; top: 236px; width: 436px; height: 636px; box-sizing: border-box; border-radius: 28px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02)); margin: 0">
+
+<div role="radiogroup" aria-label="Side" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: rgba(7,7,10,.6); border: 1px solid rgba(255,255,255,.06)">
+<button type="button" role="radio" aria-checked="true" class="rd-ctl" style="height: 44px; border-radius: 999px; border: none; background: #C8F53C; color: #07070A; font: 700 15px Archivo, sans-serif; cursor: pointer">Buy lower</button>
+<button type="button" role="radio" aria-checked="false" class="rd-ctl" style="height: 44px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 15px Archivo, sans-serif; cursor: pointer">Sell higher</button>
+</div>
+
+<div class="rd-amt" style="border-radius: 18px; padding: 4px; background: rgba(7,7,10,.55); border: 1px solid rgba(255,255,255,.06)">
+<label for="rd-amount" style="display: block; padding: 12px 14px 4px; font-size: 13px; color: #A39E94">Amount</label>
+<div style="display: flex; align-items: center; gap: 8px; padding: 0 6px 6px 14px; border-radius: 14px">
+<input id="rd-amount" type="text" inputmode="decimal" value="1,000" class="rd-mono" style="flex: 1; min-width: 0; height: 48px; border: none; outline: none; background: transparent; color: #EDE8DD; font-size: 30px; font-weight: 500; letter-spacing: -0.04em; padding: 0">
+<span class="rd-mono" style="font-size: 13px; color: #A39E94">USDC</span>
+<button type="button" class="rd-ctl" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.18); background: transparent; color: #EDE8DD; font: 600 13px Archivo, sans-serif; cursor: pointer">Max</button>
+</div>
+</div>
+
+<div style="border-radius: 18px; padding: 18px; background: rgba(7,7,10,.55); border: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; color: #A39E94">You get paid now</span>
+<span class="rd-mono" style="font-size: 60px; font-weight: 600; line-height: 1; letter-spacing: -0.05em; color: #FFB547">$6.20</span>
+<span style="font-size: 13px; color: #A39E94">0.62% of $1,000, sent to your wallet when you deposit.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="border-radius: 18px; padding: 16px; background: rgba(7,7,10,.55); border: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-height: 124px">
+<span style="font-size: 13px; line-height: 1.35; color: #A39E94">If NVDA closes at or below $171.00 you get</span>
+<span class="rd-mono" style="font-size: 22px; font-weight: 600; letter-spacing: -0.04em">5.84 NVDAx</span>
+</div>
+<div style="border-radius: 18px; padding: 16px; background: rgba(7,7,10,.55); border: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-height: 124px">
+<span style="font-size: 13px; line-height: 1.35; color: #A39E94">If it closes above you get</span>
+<span class="rd-mono" style="font-size: 22px; font-weight: 600; letter-spacing: -0.04em">$1,000 back</span>
+</div>
+</div>
+
+<p style="margin: 0; padding: 6px 12px; font-size: 13px; line-height: 1.45; color: #EDE8DD">If the price falls far below your price, you still buy at your price.</p>
+
+<div style="flex: 1"></div>
+
+<button type="submit" class="rd-film" style="height: 60px; border-radius: 999px; color: #EDE8DD; font-family: Archivo, sans-serif; font-stretch: 112%; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; cursor: pointer">Deposit</button>
+<p style="margin: 0; padding: 4px 12px 6px; font-size: 12px; color: #A39E94">Settles at Friday's official close, 4:00 pm ET.</p>
+</form>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

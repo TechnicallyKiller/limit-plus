@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ component sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.cs-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.cs-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.cs-glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.025));-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.cs-obs{background:#0E0E13;border:1px solid rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.cs-well{border-radius:18px;background:#07070A;border:1px solid rgba(255,255,255,.07)}
+.cs-panel{border-radius:28px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px}
+.cs-h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-0.01em}
+.cs-cap{font-size:13px;color:#A39E94}
+.cs-btn{height:56px;padding:0 28px;border-radius:999px;color:#EDE8DD;font-family:Archivo,sans-serif;font-stretch:112%;font-weight:700;font-size:17px;display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-sizing:border-box;width:100%}
+.cs-film{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(34,24,20,.78),rgba(14,12,14,.84)) padding-box,conic-gradient(from 210deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+.cs-film-hover{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(60,36,26,.85),rgba(22,15,14,.88)) padding-box,conic-gradient(from 270deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.42)}
+.cs-mint{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(18,30,24,.8),rgba(10,14,12,.86)) padding-box,linear-gradient(180deg,#9CF2CB,#3DDC97) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.26)}
+.cs-locked{border:1px solid rgba(255,255,255,.06);background:rgba(237,232,221,.04);color:rgba(237,232,221,.4);cursor:not-allowed;box-shadow:none}
+.cs-chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.cs-skel{border-radius:18px;background:linear-gradient(100deg,rgba(237,232,221,.045) 30%,rgba(237,232,221,.09) 50%,rgba(237,232,221,.045) 70%);background-size:300% 100%;background-position:40% 0}
+.cs-ctl:focus-visible,.cs-film:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+</style>
+</helmet>
+<main style="width: 1440px; height: 2200px; box-sizing: border-box; padding: 64px; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif; display: flex; flex-direction: column; gap: 32px">
+
+<header style="display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px">
+<h1 class="cs-disp" style="margin: 0; font-size: 56px; line-height: 0.95">limit<span style="color: #FF5B22">+</span> components</h1>
+<p style="margin: 0; font-size: 16px; color: #A39E94; max-width: 760px">Obsidian for structure, glass for what you touch, pigment for data, flame for the candle and focus. One iridescent button per screen.</p>
+</header>
+
+<section aria-labelledby="cs-primary" class="cs-panel cs-obs">
+<h2 id="cs-primary" class="cs-h2">Primary button</h2>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" class="cs-btn cs-film">Deposit</button><span class="cs-cap">Idle</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" class="cs-btn cs-film-hover">Deposit</button><span class="cs-cap">Hover, the film rotates</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" aria-busy="true" class="cs-btn cs-film"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="rgba(237,232,221,.2)" stroke-width="2" fill="none"></circle><path d="M9 2 A7 7 0 0 1 16 9" stroke="#FF5B22" stroke-width="2" fill="none" stroke-linecap="round"></path></svg>Depositing</button><span class="cs-cap">Loading</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" class="cs-btn cs-mint"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Deposited</button><span class="cs-cap">Success, mint rim</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" disabled="" class="cs-btn cs-locked"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><rect x="1.5" y="7" width="11" height="8" rx="2.5" stroke="currentColor" stroke-width="1.6" fill="none"></rect><path d="M4 7 V5 A3 3 0 0 1 10 5 V7" stroke="currentColor" stroke-width="1.6" fill="none"></path></svg>Deposit</button><span class="cs-cap">Locked, no rim</span></div>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+<section aria-labelledby="cs-other" class="cs-panel cs-obs">
+<h2 id="cs-other" class="cs-h2">Other buttons</h2>
+<div style="display: flex; align-items: flex-start; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" class="cs-ctl cs-glass" style="height: 48px; padding: 0 22px; border-radius: 999px; color: #EDE8DD; font: 600 15px Archivo, sans-serif; cursor: pointer">Connect wallet</button><span class="cs-cap">Glass</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><a href="#" class="cs-ctl" style="display: inline-flex; align-items: center; height: 48px; font-size: 15px; font-weight: 600; color: #EDE8DD; text-decoration: underline; text-decoration-color: rgba(237,232,221,.35); text-underline-offset: 4px">View on explorer</a><span class="cs-cap">Text</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><button type="button" aria-label="Add order" class="cs-ctl cs-glass" style="width: 48px; height: 48px; border-radius: 999px; color: #EDE8DD; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V14 M2 8 H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button><span class="cs-cap">Icon</span></div>
+</div>
+</section>
+
+<section aria-labelledby="cs-switch" class="cs-panel cs-obs">
+<h2 id="cs-switch" class="cs-h2">Side switch</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div role="radiogroup" aria-label="Side" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: #07070A; border: 1px solid rgba(255,255,255,.07)">
+<button type="button" role="radio" aria-checked="true" class="cs-ctl" style="height: 44px; border-radius: 999px; border: none; background: #C8F53C; color: #07070A; font: 700 15px Archivo, sans-serif">Buy lower</button>
+<button type="button" role="radio" aria-checked="false" class="cs-ctl" style="height: 44px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 15px Archivo, sans-serif">Sell higher</button>
+</div><span class="cs-cap">Buy lower</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div role="radiogroup" aria-label="Side" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: #07070A; border: 1px solid rgba(255,255,255,.07)">
+<button type="button" role="radio" aria-checked="false" class="cs-ctl" style="height: 44px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 15px Archivo, sans-serif">Buy lower</button>
+<button type="button" role="radio" aria-checked="true" class="cs-ctl" style="height: 44px; border-radius: 999px; border: none; background: #9C7CFF; color: #07070A; font: 700 15px Archivo, sans-serif">Sell higher</button>
+</div><span class="cs-cap">Sell higher</span></div>
+</div>
+</section>
+</div>
+
+<section aria-labelledby="cs-input" class="cs-panel cs-obs">
+<h2 id="cs-input" class="cs-h2">Amount input</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="cs-well" style="padding: 4px"><label for="cs-a1" style="display: block; padding: 10px 14px 2px; font-size: 13px; color: #A39E94">Amount</label><div style="display: flex; align-items: center; gap: 8px; padding: 0 6px 6px 14px"><input id="cs-a1" type="text" inputmode="decimal" placeholder="0.00" class="cs-mono" style="flex: 1; min-width: 0; height: 46px; border: none; outline: none; background: transparent; color: #EDE8DD; font-size: 28px; padding: 0"><span class="cs-mono" style="font-size: 12px; color: #A39E94">USDC</span><button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.18); background: transparent; color: #EDE8DD; font: 600 13px Archivo, sans-serif">Max</button></div></div>
+<span class="cs-cap">Default</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="cs-well" style="padding: 4px; border-color: transparent; box-shadow: 0 0 0 2px #FF5B22"><label for="cs-a2" style="display: block; padding: 10px 14px 2px; font-size: 13px; color: #A39E94">Amount</label><div style="display: flex; align-items: center; gap: 8px; padding: 0 6px 6px 14px"><input id="cs-a2" type="text" inputmode="decimal" value="1,000" class="cs-mono" style="flex: 1; min-width: 0; height: 46px; border: none; outline: none; background: transparent; color: #EDE8DD; font-size: 28px; padding: 0"><span class="cs-mono" style="font-size: 12px; color: #A39E94">USDC</span><button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.18); background: transparent; color: #EDE8DD; font: 600 13px Archivo, sans-serif">Max</button></div></div>
+<span class="cs-cap">Focused, 2px flame ring</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="cs-well" style="padding: 4px; border-color: #FF5470"><label for="cs-a3" style="display: block; padding: 10px 14px 2px; font-size: 13px; color: #A39E94">Amount</label><div style="display: flex; align-items: center; gap: 8px; padding: 0 6px 6px 14px"><input id="cs-a3" type="text" inputmode="decimal" value="1,000" aria-invalid="true" aria-describedby="cs-a3-err" class="cs-mono" style="flex: 1; min-width: 0; height: 46px; border: none; outline: none; background: transparent; color: #EDE8DD; font-size: 28px; padding: 0"><span class="cs-mono" style="font-size: 12px; color: #A39E94">USDC</span><button type="button" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.18); background: transparent; color: #EDE8DD; font: 600 13px Archivo, sans-serif">Max</button></div></div>
+<p id="cs-a3-err" style="margin: 0; padding: 0 14px; font-size: 13px; line-height: 1.45; color: #FF5470">Amount is above your USDC balance (<span class="cs-mono">412.50</span>). Lower it or add funds.</p>
+<span class="cs-cap">Error</span></div>
+</div>
+</section>
+
+<section aria-labelledby="cs-tickets" class="cs-panel cs-obs">
+<h2 id="cs-tickets" class="cs-h2">Ticket card</h2>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px">
+
+<article class="cs-well" style="padding: 18px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="cs-disp" style="font-size: 19px">NVDAx</span><span class="cs-chip" style="border: 1px solid rgba(237,232,221,.3); color: #EDE8DD">Waiting</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="cs-cap">Buy lower at</span><span class="cs-mono" style="font-size: 20px">$171.00</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Auction opens</span><span class="cs-mono" style="color: #EDE8DD">Mon 09:30</span></div>
+</article>
+
+<article class="cs-well" style="padding: 18px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="cs-disp" style="font-size: 19px">NVDAx</span><span class="cs-chip" style="border: 1px solid rgba(255,91,34,.55); color: #FF5B22"><svg width="8" height="11" viewBox="0 0 10 14" aria-hidden="true"><path d="M5 0.5 C6.8 3.2 9.2 5.4 9.2 8.6 A4.2 4.2 0 0 1 0.8 8.6 C0.8 6.6 2.2 5.4 3 4 C3.4 5.4 4.2 6 4.8 6 C4.4 4.2 4.6 2.2 5 0.5 Z" fill="#FF5B22"></path></svg>In auction</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="cs-cap">Best bid so far</span><span class="cs-mono" style="font-size: 20px">0.62%</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Candle closes</span><span style="color: #EDE8DD">any moment</span></div>
+</article>
+
+<article class="cs-well" style="padding: 18px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="cs-disp" style="font-size: 19px">NVDAx</span><span class="cs-chip" style="background: #FFB547; color: #07070A">Paid</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="cs-cap">You were paid</span><span class="cs-mono" style="font-size: 20px; color: #FFB547">$6.20</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Settles</span><span class="cs-mono" style="color: #EDE8DD">Fri 16:00</span></div>
+</article>
+
+<article class="cs-well" style="padding: 18px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="cs-disp" style="font-size: 19px">NVDAx</span><span class="cs-chip" style="background: #EDE8DD; color: #07070A">Settled</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="cs-cap">You get</span><span class="cs-mono" style="font-size: 20px">5.84 NVDAx</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Close</span><span class="cs-mono" style="color: #EDE8DD">$168.42</span></div>
+</article>
+
+<article class="cs-well" style="padding: 18px; display: flex; flex-direction: column; gap: 18px; opacity: .72">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="cs-disp" style="font-size: 19px">NVDAx</span><span class="cs-chip" style="border: 1px solid rgba(237,232,221,.2); color: #A39E94"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Claimed</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="cs-cap">In your wallet</span><span class="cs-mono" style="font-size: 20px">5.84 NVDAx</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Claimed</span><span class="cs-mono" style="color: #EDE8DD">Fri 16:04</span></div>
+</article>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: 520px minmax(0, 1fr); gap: 32px">
+<section aria-labelledby="cs-empty" class="cs-panel cs-obs">
+<h2 id="cs-empty" class="cs-h2">Empty portfolio</h2>
+<div class="cs-well" style="flex: 1; padding: 32px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 24px; min-height: 260px; background-color: #07070A; background-image: radial-gradient(rgba(237,232,221,.09) 1px, transparent 1.6px); background-size: 20px 20px">
+<p style="margin: 0; font-size: 24px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; max-width: 340px">No orders yet. Pick a pool and name your price.</p>
+<a href="Pools.dc.html" class="cs-film cs-ctl" style="display: inline-flex; align-items: center; height: 52px; padding: 0 26px; border-radius: 999px; color: #EDE8DD; text-decoration: none; font-family: Archivo, sans-serif; font-stretch: 112%; font-weight: 700; font-size: 16px">Open the pools board</a>
+</div>
+</section>
+
+<section aria-labelledby="cs-skel" class="cs-panel cs-obs" aria-busy="true">
+<h2 id="cs-skel" class="cs-h2">Pools loading</h2>
+<div class="cs-well" style="position: relative; height: 300px; padding: 0; border-radius: 28px; overflow: hidden" aria-label="Loading pools">
+<div class="cs-skel" style="position: absolute; left: 1.3%; top: 10px; width: 40.6%; height: 170px"></div>
+<div class="cs-skel" style="position: absolute; left: 1.3%; top: 186px; width: 40.6%; height: 104px"></div>
+<div class="cs-skel" style="position: absolute; left: 42.6%; top: 10px; width: 22.4%; height: 148px"></div>
+<div class="cs-skel" style="position: absolute; left: 42.6%; top: 164px; width: 22.4%; height: 126px"></div>
+<div class="cs-skel" style="position: absolute; left: 65.8%; top: 10px; width: 17.9%; height: 134px"></div>
+<div class="cs-skel" style="position: absolute; left: 84.4%; top: 10px; width: 14.3%; height: 134px"></div>
+<div class="cs-skel" style="position: absolute; left: 65.8%; top: 150px; width: 19.1%; height: 74px"></div>
+<div class="cs-skel" style="position: absolute; left: 65.8%; top: 230px; width: 19.1%; height: 60px"></div>
+<div class="cs-skel" style="position: absolute; left: 85.7%; top: 150px; width: 13%; height: 82px"></div>
+<div class="cs-skel" style="position: absolute; left: 85.7%; top: 238px; width: 13%; height: 52px"></div>
+</div>
+</section>
+</div>
+
+<div style="display: grid; grid-template-columns: 520px minmax(0, 1fr); gap: 32px">
+<section aria-labelledby="cs-dialog" class="cs-panel cs-obs">
+<h2 id="cs-dialog" class="cs-h2">Connect wallet dialog</h2>
+<div style="position: relative; border-radius: 18px; padding: 36px 24px; background-color: #07070A; background-image: radial-gradient(rgba(237,232,221,.07) 1px, transparent 1.6px); background-size: 20px 20px; display: flex; justify-content: center">
+<div role="dialog" aria-modal="true" aria-labelledby="cs-dlg-title" class="cs-glass" style="width: 400px; box-sizing: border-box; border-radius: 28px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(180deg,rgba(40,40,48,.66),rgba(16,16,20,.86))">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 6px 6px 16px">
+<h3 id="cs-dlg-title" style="margin: 0; font-size: 20px; font-weight: 800">Connect a wallet</h3>
+<button type="button" aria-label="Close" class="cs-ctl cs-glass" style="width: 44px; height: 44px; border-radius: 999px; color: #EDE8DD; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+</div>
+<button type="button" class="cs-ctl" style="display: flex; align-items: center; gap: 14px; height: 68px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); background: rgba(7,7,10,.6); color: #EDE8DD; font: 700 16px Archivo, sans-serif; cursor: pointer; text-align: left">
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 12px; background: #1A1A22; border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900">P</span>
+<span style="flex: 1">Phantom</span><span style="font-size: 13px; font-weight: 500; color: #A39E94">Detected</span>
+</button>
+<button type="button" class="cs-ctl" style="display: flex; align-items: center; gap: 14px; height: 68px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); background: rgba(7,7,10,.6); color: #EDE8DD; font: 700 16px Archivo, sans-serif; cursor: pointer; text-align: left">
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 12px; background: #1A1A22; border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900">S</span>
+<span style="flex: 1">Solflare</span><span style="font-size: 13px; font-weight: 500; color: #A39E94">Install</span>
+</button>
+<p style="margin: 0; padding: 8px 16px 12px; font-size: 13px; line-height: 1.45; color: #A39E94">Limit+ never moves funds without your signature.</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="cs-toast" class="cs-panel cs-obs">
+<h2 id="cs-toast" class="cs-h2">Toast</h2>
+<div style="flex: 1; position: relative; border-radius: 18px; padding: 24px; background-color: #07070A; background-image: radial-gradient(rgba(237,232,221,.07) 1px, transparent 1.6px); background-size: 20px 20px; display: flex; align-items: flex-end; justify-content: flex-start">
+<div role="status" class="cs-glass" style="display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 18px; border-radius: 999px; background: linear-gradient(180deg,rgba(40,40,48,.7),rgba(16,16,20,.86))">
+<svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-size: 15px; font-weight: 600">Deposited <span class="cs-mono">1,000</span> USDC into NVDAx Buy lower</span>
+<a href="#" class="cs-ctl" style="font-size: 14px; font-weight: 600; color: #EDE8DD; text-decoration: underline; text-decoration-color: rgba(237,232,221,.35); text-underline-offset: 4px; white-space: nowrap">View on explorer</a>
+<button type="button" aria-label="Dismiss" class="cs-ctl" style="width: 40px; height: 40px; border-radius: 999px; border: none; background: rgba(237,232,221,.08); color: #EDE8DD; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+</div>
+</div>
+</section>
+</div>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

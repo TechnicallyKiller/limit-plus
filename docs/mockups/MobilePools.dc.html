@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ pools board, mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.mb-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.mb-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.mb-glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.025));-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.mb-tile{box-sizing:border-box;border-radius:18px;color:#07070A;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:14px}
+.mb-pill{display:inline-flex;align-items:center;border-radius:999px;background:#07070A;font-family:'Martian Mono',monospace;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap;padding:4px 9px;font-size:11px}
+.mb-ctl:focus-visible,.mb-tile:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif">
+<main style="position: absolute; inset: 0; overflow-y: auto; padding: 16px 16px 120px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+
+<header style="display: flex; align-items: center; justify-content: space-between; height: 52px">
+<a href="Main.dc.html" class="mb-disp mb-ctl" style="font-size: 20px; color: #EDE8DD; text-decoration: none">limit<span style="color: #FF5B22">+</span></a>
+<button type="button" class="mb-ctl mb-mono mb-glass" style="height: 44px; padding: 0 16px; border-radius: 999px; color: #EDE8DD; font-size: 12px; cursor: pointer">7xKp…r2Fd</button>
+</header>
+
+<h1 class="mb-disp" style="margin: 0; padding: 0 4px; font-size: 36px; line-height: 0.95">Pools</h1>
+
+<section aria-label="This week" style="display: flex; flex-direction: column; gap: 16px; padding: 0 4px 20px; border-bottom: 1px solid rgba(237,232,221,.08)">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #A39E94">Waiting in pools</span><span class="mb-mono" style="font-size: 34px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">$2,418,930</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #A39E94">Paid out this week</span><span class="mb-mono" style="font-size: 34px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #FFB547">$14,210</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #A39E94"><svg width="9" height="12" viewBox="0 0 10 14" aria-hidden="true"><path d="M5 0.5 C6.8 3.2 9.2 5.4 9.2 8.6 A4.2 4.2 0 0 1 0.8 8.6 C0.8 6.6 2.2 5.4 3 4 C3.4 5.4 4.2 6 4.8 6 C4.4 4.2 4.6 2.2 5 0.5 Z" fill="#FF5B22"></path></svg>Next Friday close</span><span class="mb-mono" style="font-size: 34px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">2d 04:12:09</span></div>
+</section>
+
+<div style="display: flex; gap: 8px; align-items: center">
+<div role="group" aria-label="View" class="mb-glass" style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4px; border-radius: 999px">
+<button type="button" aria-pressed="true" class="mb-ctl" style="height: 40px; border-radius: 999px; border: none; background: #EDE8DD; color: #07070A; font: 700 14px Archivo, sans-serif; cursor: pointer">Board</button>
+<button type="button" aria-pressed="false" class="mb-ctl" style="height: 40px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 14px Archivo, sans-serif; cursor: pointer">List</button>
+</div>
+<button type="button" aria-label="Filter by stock" class="mb-ctl mb-glass" style="width: 50px; height: 50px; border-radius: 999px; color: #EDE8DD; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.8" fill="none"></circle><path d="M12.2 12.2 L16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+</div>
+
+<section aria-label="Pools by money waiting" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+<a href="MobileSheet.dc.html" class="mb-tile" style="grid-column: span 2; height: 176px; padding: 18px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 24px">NVDAx</span><span class="mb-pill" style="color: #C8F53C; font-size: 12px; padding: 5px 10px">-5.0%</span></div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between"><span class="mb-mono" style="font-size: 64px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.62%</span><span class="mb-mono" style="font-size: 11px; font-weight: 500">$612,400</span></div>
+</a>
+<a href="#" class="mb-tile" style="height: 150px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 17px">TSLAx</span><span class="mb-pill" style="color: #9C7CFF">+8.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="mb-mono" style="font-size: 34px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.14%</span><span class="mb-mono" style="font-size: 10px">$418,250</span></div>
+</a>
+<a href="#" class="mb-tile" style="height: 150px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 17px">AAPLx</span><span class="mb-pill" style="color: #C8F53C">-3.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="mb-mono" style="font-size: 34px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.38%</span><span class="mb-mono" style="font-size: 10px">$302,180</span></div>
+</a>
+<a href="#" class="mb-tile" style="height: 128px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 17px">SPYx</span><span class="mb-pill" style="color: #C8F53C">-2.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="mb-mono" style="font-size: 30px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.21%</span><span class="mb-mono" style="font-size: 10px">$276,040</span></div>
+</a>
+<a href="#" class="mb-tile" style="height: 128px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 17px">METAx</span><span class="mb-pill" style="color: #9C7CFF">+6.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="mb-mono" style="font-size: 30px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.71%</span><span class="mb-mono" style="font-size: 10px">$214,300</span></div>
+</a>
+<a href="#" class="mb-tile" style="height: 112px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 16px">GOOGLx</span><span class="mb-pill" style="color: #C8F53C">-4.0%</span></div>
+<span class="mb-mono" style="font-size: 26px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.44%</span>
+</a>
+<a href="#" class="mb-tile" style="height: 112px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 16px">MSTRx</span><span class="mb-pill" style="color: #9C7CFF">+12.0%</span></div>
+<span class="mb-mono" style="font-size: 26px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.86%</span>
+</a>
+<a href="#" class="mb-tile" style="height: 100px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 15px">AMZNx</span><span class="mb-pill" style="color: #C8F53C">-4.0%</span></div>
+<span class="mb-mono" style="font-size: 22px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.47%</span>
+</a>
+<a href="#" class="mb-tile" style="height: 100px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 15px">CRCLx</span><span class="mb-pill" style="color: #9C7CFF">+15.0%</span></div>
+<span class="mb-mono" style="font-size: 22px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">2.31%</span>
+</a>
+<a href="#" class="mb-tile" style="height: 100px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="mb-disp" style="font-size: 15px">HOODx</span><span class="mb-pill" style="color: #9C7CFF">+10.0%</span></div>
+<span class="mb-mono" style="font-size: 22px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.52%</span>
+</a>
+</section>
+<p style="margin: 0; padding: 0 4px; font-size: 12px; line-height: 1.5; color: #A39E94">Sorted by money waiting. The big number is what a pool pays you each week.</p>
+</main>
+
+<nav aria-label="Main" class="mb-glass" style="position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 4px; padding: 5px; border-radius: 999px; background: linear-gradient(180deg,rgba(28,28,34,.72),rgba(10,10,14,.82))">
+<a href="MobilePools.dc.html" aria-current="page" class="mb-ctl" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: #EDE8DD; color: #07070A; font-size: 14px; font-weight: 700; text-decoration: none">Pools</a>
+<a href="MobileSheet.dc.html" class="mb-ctl" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; color: #A39E94; font-size: 14px; font-weight: 600; text-decoration: none">Rounds</a>
+<a href="MobilePortfolio.dc.html" class="mb-ctl" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; color: #A39E94; font-size: 14px; font-weight: 600; text-decoration: none">Portfolio</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ NVDAx round, ticket sheet, mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.mb-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.mb-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.mb-glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.025));-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.mb-obs{background:#0E0E13;border:1px solid rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.mb-well{border-radius:18px;background:rgba(7,7,10,.55);border:1px solid rgba(255,255,255,.06)}
+.mb-bid{box-sizing:border-box;height:96px;border-radius:14px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(165deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 45%);border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}
+.mb-sealed{background-image:radial-gradient(rgba(237,232,221,.22) 1.2px,transparent 1.8px),linear-gradient(165deg,rgba(255,255,255,.12),rgba(255,255,255,.03) 45%);background-size:8px 8px,100% 100%}
+.mb-film{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(34,24,20,.8),rgba(14,12,14,.86)) padding-box,conic-gradient(from 210deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+.mb-ctl:focus-visible,.mb-film:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between; height: 52px">
+<span class="mb-disp" style="font-size: 20px">limit<span style="color: #FF5B22">+</span></span>
+<span class="mb-glass mb-mono" style="display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 999px; font-size: 12px">7xKp…r2Fd</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 4px 4px 0">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span class="mb-disp" style="font-size: 44px; line-height: 0.9">NVDAx</span>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #C8F53C; color: #07070A; font-size: 13px; font-weight: 700">Buy lower</span>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #A39E94">Your price</span><span class="mb-mono" style="font-size: 28px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">$171.00</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #A39E94">vs now</span><span class="mb-mono" style="font-size: 28px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #A39E94">-5.0%</span></div>
+</div>
+</div>
+<div class="mb-obs" style="border-radius: 28px; padding: 18px 10px 10px; display: flex; flex-direction: column; gap: 12px">
+<span style="padding: 0 8px; font-size: 18px; font-weight: 800">Sealed bids</span>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<div class="mb-bid"><span class="mb-mono" style="font-size: 9px; color: #A39E94">9fQ2…a1Lm</span><span class="mb-mono" style="font-size: 18px; font-weight: 600; color: #FFB547">0.62%</span></div>
+<div class="mb-bid"><span class="mb-mono" style="font-size: 9px; color: #A39E94">Ht7c…9wPe</span><span class="mb-mono" style="font-size: 18px; font-weight: 600">0.58%</span></div>
+<div class="mb-bid mb-sealed"><span class="mb-mono" style="font-size: 9px; color: #A39E94">Bq4r…s0Na</span><span style="align-self: flex-start; padding: 3px 8px; border-radius: 999px; background: #07070A; font-size: 10px; font-weight: 700">Sealed</span></div>
+<div class="mb-bid"><span class="mb-mono" style="font-size: 9px; color: #A39E94">Lm8v…e3Tx</span><span class="mb-mono" style="font-size: 18px; font-weight: 600">0.55%</span></div>
+<div class="mb-bid mb-sealed"><span class="mb-mono" style="font-size: 9px; color: #A39E94">Cz1k…h6Ru</span><span style="align-self: flex-start; padding: 3px 8px; border-radius: 999px; background: #07070A; font-size: 10px; font-weight: 700">Sealed</span></div>
+<div class="mb-bid mb-sealed"><span class="mb-mono" style="font-size: 9px; color: #A39E94">Wd5n…q8Jb</span><span style="align-self: flex-start; padding: 3px 8px; border-radius: 999px; background: #07070A; font-size: 10px; font-weight: 700">Sealed</span></div>
+</div>
+</div>
+</div>
+
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(4,4,6,.62)"></div>
+
+<form role="dialog" aria-modal="true" aria-labelledby="ms-title" class="mb-glass" style="position: absolute; left: 6px; right: 6px; bottom: 6px; margin: 0; height: 606px; box-sizing: border-box; border-radius: 28px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(180deg,rgba(40,40,48,.62),rgba(16,16,20,.86))">
+<div aria-hidden="true" style="align-self: center; width: 40px; height: 5px; border-radius: 999px; background: rgba(237,232,221,.3); margin-top: 2px"></div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 10px">
+<h2 id="ms-title" style="margin: 0; font-size: 18px; font-weight: 800">Name your price</h2>
+<button type="button" aria-label="Close" class="mb-ctl mb-glass" style="width: 44px; height: 44px; border-radius: 999px; color: #EDE8DD; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+</div>
+
+<div role="radiogroup" aria-label="Side" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: rgba(7,7,10,.6); border: 1px solid rgba(255,255,255,.06)">
+<button type="button" role="radio" aria-checked="true" class="mb-ctl" style="height: 44px; border-radius: 999px; border: none; background: #C8F53C; color: #07070A; font: 700 15px Archivo, sans-serif; cursor: pointer">Buy lower</button>
+<button type="button" role="radio" aria-checked="false" class="mb-ctl" style="height: 44px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 15px Archivo, sans-serif; cursor: pointer">Sell higher</button>
+</div>
+
+<div class="mb-well" style="padding: 4px">
+<label for="ms-amount" style="display: block; padding: 10px 12px 2px; font-size: 13px; color: #A39E94">Amount</label>
+<div style="display: flex; align-items: center; gap: 8px; padding: 0 6px 6px 12px">
+<input id="ms-amount" type="text" inputmode="decimal" value="1,000" class="mb-mono" style="flex: 1; min-width: 0; height: 44px; border: none; outline: none; background: transparent; color: #EDE8DD; font-size: 26px; font-weight: 500; letter-spacing: -0.04em; padding: 0">
+<span class="mb-mono" style="font-size: 12px; color: #A39E94">USDC</span>
+<button type="button" class="mb-ctl" style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.18); background: transparent; color: #EDE8DD; font: 600 13px Archivo, sans-serif; cursor: pointer">Max</button>
+</div>
+</div>
+
+<div class="mb-well" style="padding: 14px 16px; display: flex; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #A39E94">You get paid now</span><span class="mb-mono" style="font-size: 48px; font-weight: 600; line-height: 1; letter-spacing: -0.05em; color: #FFB547">$6.20</span></div>
+<span class="mb-mono" style="font-size: 12px; color: #A39E94; padding-bottom: 4px">0.62%</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div class="mb-well" style="padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; min-height: 104px">
+<span style="font-size: 12px; line-height: 1.35; color: #A39E94">If NVDA closes at or below $171.00 you get</span>
+<span class="mb-mono" style="font-size: 16px; font-weight: 600; letter-spacing: -0.04em">5.84 NVDAx</span>
+</div>
+<div class="mb-well" style="padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; min-height: 104px">
+<span style="font-size: 12px; line-height: 1.35; color: #A39E94">If it closes above you get</span>
+<span class="mb-mono" style="font-size: 16px; font-weight: 600; letter-spacing: -0.04em">$1,000 back</span>
+</div>
+</div>
+
+<p style="margin: 0; padding: 2px 10px; font-size: 13px; line-height: 1.45">If the price falls far below your price, you still buy at your price.</p>
+
+<div style="flex: 1"></div>
+<button type="submit" class="mb-film" style="height: 56px; border-radius: 999px; color: #EDE8DD; font-family: Archivo, sans-serif; font-stretch: 112%; font-weight: 700; font-size: 17px; cursor: pointer">Deposit</button>
+</form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ NVDAx round, settled</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.lx-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.lx-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.lx-glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.025));-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.lx-obs{background:#0E0E13;border:1px solid rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.lx-well{border-radius:18px;background:rgba(7,7,10,.55);border:1px solid rgba(255,255,255,.06)}
+.lx-film{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(34,24,20,.78),rgba(14,12,14,.84)) padding-box,conic-gradient(from 210deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+.lx-ctl:focus-visible,.lx-film:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+.lx-text-link{color:#EDE8DD;text-decoration:underline;text-decoration-color:rgba(237,232,221,.35);text-underline-offset:4px}
+.lx-text-link:hover{color:#FF5B22;text-decoration-color:#FF5B22}
+</style>
+</helmet>
+<main style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif">
+
+<header style="position: absolute; left: 40px; right: 40px; top: 28px; height: 56px; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" class="lx-disp lx-ctl" style="font-size: 22px; color: #EDE8DD; text-decoration: none">limit<span style="color: #FF5B22">+</span></a>
+<nav aria-label="Main" class="lx-glass" style="display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px">
+<a href="Pools.dc.html" class="lx-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">Pools</a>
+<a href="Settled.dc.html" aria-current="page" class="lx-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #07070A; background: #EDE8DD; text-decoration: none">Rounds</a>
+<a href="#" class="lx-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">Portfolio</a>
+<button type="button" class="lx-ctl lx-mono" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(237,232,221,.22); background: rgba(237,232,221,.06); color: #EDE8DD; font-size: 13px; cursor: pointer">7xKp…r2Fd</button>
+</nav>
+</header>
+
+<section aria-label="Round" style="position: absolute; left: 40px; top: 108px; width: 1360px; height: 104px; display: flex; align-items: flex-end; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: inline-flex; align-self: flex-start; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #C8F53C; color: #07070A; font-size: 13px; font-weight: 700">Buy lower</span>
+<h1 class="lx-disp" style="margin: 0; font-size: 60px; line-height: 0.9">NVDAx</h1>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; color: #A39E94">Your price</span>
+<span class="lx-mono" style="font-size: 44px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">$171.00</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; color: #A39E94">Close vs your price</span>
+<span class="lx-mono" style="font-size: 44px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #FF5470">-1.5%</span>
+</div>
+<figure style="margin: 0 0 0 auto; position: relative; width: 520px; height: 100px">
+<svg width="520" height="100" viewBox="0 0 520 100" role="img" aria-label="NVDA this week, from 186 dollars down to the official close of 168.42, below your price of 171">
+<path d="M0 30 L20 34 L40 28 L60 22 L80 26 L100 18 L120 20 L140 14 L160 24 L180 30 L200 26 L220 36 L240 40 L260 34 L280 44 L300 38 L320 32 L340 36 L360 42 L380 38 L400 46 L420 52 L440 50 L460 60 L480 66 L500 78.5" fill="none" stroke="#EDE8DD" stroke-width="1.5" stroke-linejoin="round"></path>
+<line x1="0" y1="69" x2="520" y2="69" stroke="#FF5B22" stroke-width="1.5" stroke-dasharray="5 5"></line>
+<circle cx="500" cy="78.5" r="4" fill="#EDE8DD"></circle>
+</svg>
+<span class="lx-mono" style="position: absolute; left: 0; top: 50px; font-size: 12px; color: #FF5B22">$171.00</span>
+<span class="lx-mono" style="position: absolute; right: 0; top: 84px; font-size: 12px; color: #EDE8DD">$168.42</span>
+</figure>
+</section>
+
+<section aria-label="Settlement" class="lx-obs" style="position: absolute; left: 40px; top: 236px; width: 900px; height: 384px; box-sizing: border-box; border-radius: 28px; padding: 10px; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 10px">
+<div style="padding: 18px 18px 18px 18px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em">Settlement</h2>
+<span style="display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 999px; background: #EDE8DD; color: #07070A; font-size: 12px; font-weight: 700">Settled</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; color: #A39E94">Official close</span>
+<span class="lx-mono" style="font-size: 92px; font-weight: 500; line-height: 0.9; letter-spacing: -0.05em">$168.42</span>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; column-gap: 28px; row-gap: 10px; font-size: 14px">
+<dt style="color: #A39E94">Source</dt><dd style="margin: 0; font-weight: 600">Pyth</dd>
+<dt style="color: #A39E94">Published</dt><dd class="lx-mono" style="margin: 0; font-size: 13px">Fri 16:00:01 New York</dd>
+</dl>
+</div>
+<div style="border-radius: 18px; background: #C8F53C; color: #07070A; padding: 24px; display: flex; flex-direction: column; justify-content: space-between">
+<p style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3">NVDA closed below your price.</p>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 18px; font-weight: 700">You get</span>
+<span class="lx-mono" style="font-size: 54px; font-weight: 600; line-height: 1; letter-spacing: -0.05em">5.84</span>
+<span class="lx-disp" style="font-size: 30px">NVDAx.</span>
+</div>
+</div>
+</section>
+
+<section aria-label="Candle ring" class="lx-obs" style="position: absolute; left: 40px; top: 636px; width: 900px; height: 236px; box-sizing: border-box; border-radius: 28px; padding: 20px">
+<svg width="196" height="196" viewBox="0 0 200 200" role="img" aria-label="The week is complete. Every phase has finished." style="position: absolute; left: 20px; top: 20px">
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.55)" stroke-width="14" stroke-dasharray="39.7 502.65" stroke-dashoffset="0" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.55)" stroke-width="14" stroke-dasharray="126.7 502.65" stroke-dashoffset="-44.2" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="rgba(237,232,221,.55)" stroke-width="14" stroke-dasharray="110.1 502.65" stroke-dashoffset="-174.9" transform="rotate(-90 100 100)"></circle>
+<circle cx="100" cy="100" r="80" fill="none" stroke="#EDE8DD" stroke-width="14" stroke-dasharray="211.6 502.65" stroke-dashoffset="-289" transform="rotate(-90 100 100)"></circle>
+<line x1="152.3" y1="135.1" x2="182.2" y2="155.6" stroke="#FF5B22" stroke-width="3" stroke-linecap="round"></line>
+<text x="100" y="94" text-anchor="middle" fill="#A39E94" font-family="Archivo, sans-serif" font-size="13" font-weight="600">Week complete</text>
+<text x="100" y="118" text-anchor="middle" fill="#EDE8DD" font-family="Martian Mono, monospace" font-size="16" font-weight="500">16:00:01</text>
+</svg>
+<span class="lx-mono" style="position: absolute; left: 206px; top: 166px; padding: 6px 12px; border-radius: 999px; background: #07070A; border: 1px solid rgba(237,232,221,.16); font-size: 12px; color: #A39E94; white-space: nowrap">Closed at 14:32:07</span>
+
+<div style="position: absolute; left: 400px; top: 24px; right: 28px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0 0 4px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em">This week</h2>
+<div style="display: grid; grid-template-columns: 18px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Deposits open</span><span class="lx-mono" style="font-size: 12px; color: #A39E94">Mon</span></div>
+<div style="display: grid; grid-template-columns: 18px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Candle auction</span><span class="lx-mono" style="font-size: 12px; color: #A39E94">Tue 14:32</span></div>
+<div style="display: grid; grid-template-columns: 18px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Reveal and clearing</span><span class="lx-mono" style="font-size: 12px; color: #A39E94">Wed 16:00</span></div>
+<div style="display: grid; grid-template-columns: 18px 1fr auto; align-items: center; column-gap: 12px; font-size: 14px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 L6.5 12 L13 4.5" stroke="#3DDC97" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-weight: 700">Official close and settlement</span><span class="lx-mono" style="font-size: 12px; color: #EDE8DD">Fri 16:00</span></div>
+</div>
+</section>
+
+<section aria-label="Your ticket" class="lx-glass" style="position: absolute; left: 964px; top: 236px; width: 436px; height: 636px; box-sizing: border-box; border-radius: 28px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02))">
+
+<div class="lx-well" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 14px 18px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #A39E94">Your order</span><span class="lx-mono" style="font-size: 15px">$1,000 at $171.00</span></div>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #EDE8DD; color: #07070A; font-size: 13px; font-weight: 700">Settled</span>
+</div>
+
+<div class="lx-well" style="padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; color: #A39E94">You bought</span>
+<span class="lx-mono" style="font-size: 52px; font-weight: 600; line-height: 1; letter-spacing: -0.05em">5.84 NVDAx</span>
+<span style="font-size: 13px; color: #A39E94">At your price of $171.00, as promised.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div class="lx-well" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; color: #A39E94">You were paid</span>
+<span class="lx-mono" style="font-size: 26px; font-weight: 600; letter-spacing: -0.04em; color: #FFB547">$6.20</span>
+</div>
+<div class="lx-well" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; color: #A39E94">Value at close</span>
+<span class="lx-mono" style="font-size: 26px; font-weight: 600; letter-spacing: -0.04em">$983.57</span>
+</div>
+</div>
+
+<div class="lx-well" style="padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 14px">
+<span style="color: #A39E94">Net, counting your $6.20</span>
+<span class="lx-mono" style="font-size: 15px; color: #FF5470">-1.0%</span>
+</div>
+
+<div style="flex: 1"></div>
+
+<button type="button" class="lx-film" style="height: 60px; border-radius: 999px; color: #EDE8DD; font-family: Archivo, sans-serif; font-stretch: 112%; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; cursor: pointer">Claim <span class="lx-mono" style="font-weight: 600">5.84</span> NVDAx</button>
+<a href="#" class="lx-text-link lx-ctl" style="align-self: flex-start; margin: 4px 12px 8px; font-size: 14px; font-weight: 600">View on explorer</a>
+</section>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

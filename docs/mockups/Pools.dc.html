@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit+ pools board</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Martian+Mono:wdth,wght@75..112.5,100..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07070A}
+a{color:#EDE8DD}a:hover{color:#FF5B22}
+.pb-mono{font-family:'Martian Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.pb-disp{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;letter-spacing:-0.03em}
+.pb-glass{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4)}
+.pb-obs{background:#0E0E13;border:1px solid rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.pb-tile{position:absolute;box-sizing:border-box;border-radius:18px;color:#07070A;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.pb-tile:hover{filter:brightness(1.06)}
+.pb-tile:focus-visible,.pb-ctl:focus-visible{outline:2px solid #FF5B22;outline-offset:3px}
+.pb-pill{display:inline-flex;align-items:center;border-radius:999px;background:#07070A;font-family:'Martian Mono',monospace;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+.pb-film{border:1.5px solid transparent;background:linear-gradient(180deg,rgba(34,24,20,.72),rgba(14,12,14,.78)) padding-box,conic-gradient(from 210deg,#FF5B22,#FFB547,#F4ECD0,#8FE6CF,#FF9BB8,#FF5B22) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+</style>
+</helmet>
+<main style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #07070A; color: #EDE8DD; font-family: Archivo, system-ui, sans-serif">
+
+<header style="position: absolute; left: 40px; right: 40px; top: 28px; height: 56px; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" class="pb-disp pb-ctl" style="font-size: 22px; color: #EDE8DD; text-decoration: none">limit<span style="color: #FF5B22">+</span></a>
+<nav aria-label="Main" class="pb-glass" style="display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px">
+<a href="Pools.dc.html" aria-current="page" class="pb-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #07070A; background: #EDE8DD; text-decoration: none">Pools</a>
+<a href="Round.dc.html" class="pb-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">Rounds</a>
+<a href="#" class="pb-ctl" style="padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; color: #A39E94; text-decoration: none">How it works</a>
+<button type="button" class="pb-ctl pb-mono" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(237,232,221,.22); background: rgba(237,232,221,.06); color: #EDE8DD; font-size: 13px; cursor: pointer">7xKp…r2Fd</button>
+</nav>
+</header>
+
+<section aria-label="This week" style="position: absolute; left: 40px; top: 118px; width: 1360px; height: 128px; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 24px; border-bottom: 1px solid rgba(237,232,221,.08)">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; color: #A39E94">Waiting in pools</span>
+<span class="pb-mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">$2,418,930</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; color: #A39E94">Paid out this week</span>
+<span class="pb-mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #FFB547">$14,210</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 15px; color: #A39E94"><svg width="10" height="14" viewBox="0 0 10 14" aria-hidden="true"><path d="M5 0.5 C6.8 3.2 9.2 5.4 9.2 8.6 A4.2 4.2 0 0 1 0.8 8.6 C0.8 6.6 2.2 5.4 3 4 C3.4 5.4 4.2 6 4.8 6 C4.4 4.2 4.6 2.2 5 0.5 Z" fill="#FF5B22"></path></svg>Next Friday close</span>
+<span class="pb-mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.04em">2d 04:12:09</span>
+</div>
+</section>
+
+<section aria-label="Pools treemap" class="pb-obs" style="position: absolute; left: 40px; top: 280px; width: 1036px; height: 580px; box-sizing: border-box; border-radius: 28px">
+
+<a href="Round.dc.html" class="pb-tile" style="left: 10px; top: 10px; width: 429px; height: 330px; padding: 22px; background: #C8F53C; outline: 2px solid #FF5B22; outline-offset: 3px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 30px">NVDAx</span><span class="pb-pill" style="padding: 6px 12px; font-size: 13px; color: #C8F53C">-5.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 96px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.62%</span><span style="font-size: 15px; font-weight: 600">a week, on $612,400 waiting</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 10px; top: 346px; width: 429px; height: 224px; padding: 22px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 26px">TSLAx</span><span class="pb-pill" style="padding: 6px 12px; font-size: 13px; color: #9C7CFF">+8.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 72px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.14%</span><span style="font-size: 14px; font-weight: 600">a week, on $418,250 waiting</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 445px; top: 10px; width: 238px; height: 290px; padding: 18px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 22px">AAPLx</span><span class="pb-pill" style="padding: 5px 10px; font-size: 12px; color: #C8F53C">-3.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 52px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.38%</span><span style="font-size: 13px; font-weight: 600">$302,180 waiting</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 445px; top: 306px; width: 238px; height: 264px; padding: 18px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 22px">SPYx</span><span class="pb-pill" style="padding: 5px 10px; font-size: 12px; color: #C8F53C">-2.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 52px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.21%</span><span style="font-size: 13px; font-weight: 600">$276,040 waiting</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 690px; top: 10px; width: 186px; height: 261px; padding: 16px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 19px">METAx</span><span class="pb-pill" style="padding: 4px 9px; font-size: 11px; color: #9C7CFF">+6.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 40px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.71%</span><span style="font-size: 12px; font-weight: 600">$214,300 waiting</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 881px; top: 10px; width: 145px; height: 261px; padding: 14px; background: #C8F53C">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px"><span class="pb-disp" style="font-size: 17px">GOOGLx</span><span class="pb-pill" style="padding: 4px 9px; font-size: 11px; color: #C8F53C">-4.0%</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="pb-mono" style="font-size: 32px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.44%</span><span style="font-size: 12px; font-weight: 600">$167,960</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 690px; top: 277px; width: 202px; height: 157px; padding: 16px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 19px">MSTRx</span><span class="pb-pill" style="padding: 4px 9px; font-size: 11px; color: #9C7CFF">+12.0%</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between"><span class="pb-mono" style="font-size: 38px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.86%</span><span class="pb-mono" style="font-size: 11px; font-weight: 500">$142,110</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 690px; top: 440px; width: 202px; height: 130px; padding: 16px; background: #C8F53C">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 19px">AMZNx</span><span class="pb-pill" style="padding: 4px 9px; font-size: 11px; color: #C8F53C">-4.0%</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between"><span class="pb-mono" style="font-size: 34px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">0.47%</span><span class="pb-mono" style="font-size: 11px; font-weight: 500">$118,420</span></div>
+</a>
+
+<a href="#" class="pb-tile" style="left: 898px; top: 277px; width: 128px; height: 165px; padding: 14px; background: #9C7CFF">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px"><span class="pb-disp" style="font-size: 16px">CRCLx</span><span class="pb-pill" style="padding: 4px 8px; font-size: 11px; color: #9C7CFF">+15.0%</span></div>
+<span class="pb-mono" style="font-size: 28px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">2.31%</span>
+</a>
+
+<a href="#" class="pb-tile" style="left: 898px; top: 448px; width: 128px; height: 122px; padding: 14px; background: #9C7CFF">
+<div style="display: flex; justify-content: space-between; align-items: flex-start"><span class="pb-disp" style="font-size: 16px">HOODx</span></div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px"><span class="pb-mono" style="font-size: 26px; font-weight: 600; line-height: 0.9; letter-spacing: -0.05em">1.52%</span><span class="pb-pill" style="padding: 3px 8px; font-size: 11px; color: #9C7CFF">+10.0%</span></div>
+</a>
+
+<div role="tooltip" class="pb-glass" style="position: absolute; left: 248px; top: 176px; width: 236px; box-sizing: border-box; padding: 16px 18px; border-radius: 18px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg,rgba(28,28,34,.72),rgba(12,12,16,.78))">
+<span style="font-size: 14px; font-weight: 700">NVDAx, buy lower</span>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Pool price</span><span class="pb-mono" style="color: #EDE8DD">$171.00</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>NVDA now</span><span class="pb-mono" style="color: #EDE8DD">$180.00</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #A39E94"><span>Paid on $1,000</span><span class="pb-mono" style="color: #FFB547">$6.20</span></div>
+</div>
+</section>
+
+<aside aria-label="Filters" class="pb-obs" style="position: absolute; left: 1100px; top: 280px; width: 300px; height: 580px; box-sizing: border-box; border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 28px">
+
+<div role="group" aria-label="View" class="pb-glass" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 5px; border-radius: 999px">
+<button type="button" aria-pressed="true" class="pb-ctl" style="height: 40px; border-radius: 999px; border: none; background: #EDE8DD; color: #07070A; font: 700 15px Archivo, sans-serif; cursor: pointer">Board</button>
+<button type="button" aria-pressed="false" class="pb-ctl" style="height: 40px; border-radius: 999px; border: none; background: transparent; color: #A39E94; font: 600 15px Archivo, sans-serif; cursor: pointer">List</button>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<label for="pb-stock" style="font-size: 14px; color: #A39E94">Stock</label>
+<input id="pb-stock" type="search" placeholder="Search a ticker" class="pb-ctl" style="height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 14px; border: 1px solid rgba(237,232,221,.12); background: #07070A; color: #EDE8DD; font: 500 15px Archivo, sans-serif">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" aria-pressed="true" class="pb-ctl pb-mono" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #EDE8DD; background: rgba(237,232,221,.08); color: #EDE8DD; font-size: 12px; cursor: pointer">All 10</button>
+<button type="button" aria-pressed="false" class="pb-ctl pb-mono" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.14); background: transparent; color: #A39E94; font-size: 12px; cursor: pointer">NVDAx</button>
+<button type="button" aria-pressed="false" class="pb-ctl pb-mono" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.14); background: transparent; color: #A39E94; font-size: 12px; cursor: pointer">TSLAx</button>
+<button type="button" aria-pressed="false" class="pb-ctl pb-mono" style="height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(237,232,221,.14); background: transparent; color: #A39E94; font-size: 12px; cursor: pointer">SPYx</button>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 14px; color: #A39E94">Side</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<button type="button" aria-pressed="true" class="pb-ctl" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 8px 0 18px; border-radius: 999px; border: 1px solid rgba(237,232,221,.12); background: transparent; color: #EDE8DD; font: 600 15px Archivo, sans-serif; cursor: pointer">Buy lower<span class="pb-mono" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; background: #C8F53C; color: #07070A; font-size: 12px">$1,477,000</span></button>
+<button type="button" aria-pressed="true" class="pb-ctl" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 8px 0 18px; border-radius: 999px; border: 1px solid rgba(237,232,221,.12); background: transparent; color: #EDE8DD; font: 600 15px Archivo, sans-serif; cursor: pointer">Sell higher<span class="pb-mono" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; background: #9C7CFF; color: #07070A; font-size: 12px">$941,930</span></button>
+</div>
+</div>
+
+<p style="margin: auto 0 0; font-size: 13px; line-height: 1.5; color: #A39E94">Tile size is money waiting. The big number is what a pool pays you each week while it waits. The pill is the pool price against today.</p>
+</aside>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
