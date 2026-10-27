@@ -15,3 +15,10 @@
 - `packages/pricing` (Black-Scholes, realized vol, fair/reserve), `bots/mm-bot.ts`, `bots/keeper.ts`, `scripts/create-round.ts`, `scripts/post-price-and-settle.ts`.
 - X1, X2, X3, X4 pass: `scripts/demo-run.ts` completes a compressed round on a local validator in about 2 minutes.
 - Not done yet: O2 (needs devnet SOL for the program deploy; wallet had about 1 SOL).
+
+## Phase 5: frontend ("Obsidian & Flame")
+- Next.js 15 App Router + Tailwind v4 (`app/styles/tokens.css` from DESIGN.md §2), Archivo + Martian Mono, Phantom and Solflare only.
+- Pages: `/` (halftone wordmark, live board, how a week works), `/pools` (treemap + list), `/round/[pubkey]` (sealed-bid stage, candle ring, fair-price check, order ticket, bottom sheet on mobile), `/portfolio` (ticket cards, claim).
+- Reads live rounds through `packages/sdk` when `NEXT_PUBLIC_RPC_URL` is set; otherwise shows clearly marked example data.
+- QA: Playwright screenshots at 1440x900 and 390x844 reviewed; no banned words (F2), no em/en dashes, one iridescent element per viewport, no horizontal scroll, 2px flame focus ring.
+- Known gaps: F1 (wallet deposit on devnet) and O2 (Pyth settle on devnet) are not run: the deploy wallet had about 1 SOL and a program deploy needs about 3.

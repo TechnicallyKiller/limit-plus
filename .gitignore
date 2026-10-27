@@ -9,3 +9,7 @@ test-ledger
 keys/
 .bids/
 .next/
+qa/*.png
+app/.next/
+next-env.d.ts
+tsconfig.tsbuildinfo

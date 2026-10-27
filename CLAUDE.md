@@ -61,7 +61,10 @@ anchor test                          # build + run tests on a local validator
 anchor test --skip-local-validator   # run tests against an already running surfpool/validator
 cargo test -p limit_plus             # pure Rust unit tests (math.rs)
 anchor build -- --features mock-oracle   # build with the mock oracle (localnet/devnet demo ONLY)
-yarn workspace app dev               # frontend on localhost:3000
+./scripts/test.sh                    # mock-oracle build + cargo tests + integration (LiteSVM) + SDK/pricing tests
+yarn ts-node -P tsconfig.json scripts/demo-run.ts   # compressed end-to-end round on a local validator (needs the mock-oracle build)
+yarn workspace app dev               # frontend on localhost:3000 (NEXT_PUBLIC_RPC_URL empty = example data)
+yarn workspace app build             # production build
 yarn ts-node bots/keeper.ts --round <ROUND_PUBKEY>
 yarn ts-node bots/mm-bot.ts --name alpha --edge 0.10 --round <ROUND_PUBKEY>
 ```

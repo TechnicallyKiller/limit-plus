@@ -5,4 +5,4 @@ cd "$(dirname "$0")/.."
 anchor build -- --features mock-oracle
 cp target/idl/limit_plus.json packages/sdk/src/idl.json
 cargo test -p limit_plus
-yarn ts-mocha -p tsconfig.json -t 120000 "tests/**/*.ts" "packages/*/test/**/*.ts"
+yarn ts-mocha -p tsconfig.json -t 120000 "tests/limit-plus.ts" "packages/*/test/**/*.ts"
