@@ -44,7 +44,7 @@ export class Flow {
       this.bidders.push(b);
       this.atas(b);
       const escrow = s.escrow ?? s.price * s.qty;
-      const { ix, salt } = await this.w.commit(b, this.key, s.price, s.qty, escrow, s.salt);
+      const { ix, salt } = await this.w.commit(b, this.key, s.price, s.qty, escrow, s.salt as Uint8Array);
       this.specs.set(b.publicKey.toBase58(), { ...s, escrow, salt });
       if (s.commitAt) this.w.warp(s.commitAt);
       this.w.ok([ix], [b]);

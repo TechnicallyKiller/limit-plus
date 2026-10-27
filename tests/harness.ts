@@ -183,7 +183,7 @@ export class World {
     return this.client.deposit(user.publicKey, key, r, contracts);
   }
 
-  async commit(bidder: Keypair, key: PublicKey, price: number, qty: number, escrow: number, salt = new Uint8Array(32).fill(bidder.publicKey.toBytes()[0])) {
+  async commit(bidder: Keypair, key: PublicKey, price: number, qty: number, escrow: number, salt: Uint8Array = new Uint8Array(32).fill(bidder.publicKey.toBytes()[0])) {
     const r = await this.round(key);
     this.mintTo(this.quoteMint, bidder.publicKey, escrow);
     const c = computeCommitment(key, bidder.publicKey, price, qty, salt);

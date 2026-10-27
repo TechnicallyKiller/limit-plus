@@ -1,0 +1,27 @@
+{
+  "cluster": "mainnet-beta",
+  "pyth_receiver_program": {
+    "address": "rec5EKMGg6MxZYaMdyBfgwp4d5rB9T1VQH5pJv5LtFJ",
+    "source": "https://github.com/pyth-network/pyth-crosschain/blob/main/target_chains/solana/sdk/js/pyth_solana_receiver/src/address.ts"
+  },
+  "pyth_feed_nvda_us": {
+    "id": "0xb1073854ed24cbc755dc527418f52b7d271f6cc967bbf8d8129112b18860a593",
+    "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity (Equity.US.NVDA/USD, regular US hours)"
+  },
+  "pyth_feed_nvda_24_7": {
+    "id": "0xa470c4ac46f44b547b2cba52338f311fb642b79375ce5f0cfd5cb5b99227b852",
+    "source": "same query (Equity.Index.NVDA/USD, 24/7 index feed, not the official close)"
+  },
+  "quote_mint": {
+    "address": "TODO: look up official USDC",
+    "source": "https://developers.circle.com/stablecoins/usdc-on-main-networks"
+  },
+  "underlying_mint": {
+    "address": "TODO: look up NVDAx",
+    "source": "https://xstocks.fi / Backed Finance official docs"
+  },
+  "program_id": {
+    "address": "TODO: not deployed (no mainnet deploy without explicit instruction)",
+    "source": "n/a"
+  }
+}

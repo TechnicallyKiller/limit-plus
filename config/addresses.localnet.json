@@ -1,3 +1,6 @@
-{ "quote_mint": { "address": "TODO: created by scripts/setup-localnet.ts", "source": "mock USDC created locally" },
-  "underlying_mint": { "address": "TODO: created by scripts/setup-localnet.ts", "source": "mock NVDAx (Token-2022) created locally" },
-  "pyth_feed_nvda": { "id": "TODO: look up", "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity" } }
+{
+  "cluster": "localnet",
+  "pyth_feed_nvda_us": { "id": "0xb1073854ed24cbc755dc527418f52b7d271f6cc967bbf8d8129112b18860a593", "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity" },
+  "quote_mint": { "address": "created at runtime by scripts/demo-run.ts", "source": "mock USDC" },
+  "underlying_mint": { "address": "created at runtime by scripts/demo-run.ts", "source": "mock NVDAx (Token-2022, ScaledUiAmount 1.0)" }
+}
