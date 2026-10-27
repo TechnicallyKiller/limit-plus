@@ -13,3 +13,6 @@ qa/*.png
 app/.next/
 next-env.d.ts
 tsconfig.tsbuildinfo
+.local-demo.json
+video/out/
+video/node_modules/

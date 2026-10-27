@@ -1,0 +1,21 @@
+{
+  "name": "video",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts Pitch out/still.png --frame=0",
+    "render": "remotion render src/index.ts Pitch out/pitch-4x5.mp4 --concurrency=2",
+    "render16": "remotion render src/index.ts Pitch16 out/pitch-16x9.mp4 --concurrency=2"
+  },
+  "dependencies": {
+    "remotion": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.0",
+    "@remotion/shapes": "^4.0.0",
+    "@remotion/transitions": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": { "typescript": "^5.7.3", "@types/react": "^19.0.0" }
+}
