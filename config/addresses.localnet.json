@@ -1,0 +1,3 @@
+{ "quote_mint": { "address": "TODO: created by scripts/setup-localnet.ts", "source": "mock USDC created locally" },
+  "underlying_mint": { "address": "TODO: created by scripts/setup-localnet.ts", "source": "mock NVDAx (Token-2022) created locally" },
+  "pyth_feed_nvda": { "id": "TODO: look up", "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity" } }
