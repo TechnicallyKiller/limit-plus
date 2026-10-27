@@ -1,0 +1,78 @@
+{
+ "AAPLx": {
+  "file": "logos/Apple_logo_black.svg",
+  "aspect": 0.814
+ },
+ "AMZNx": {
+  "file": "logos/Amazon_logo.svg",
+  "aspect": 3.313
+ },
+ "METAx": {
+  "file": "logos/Meta_Platforms_Inc._logo.svg",
+  "aspect": 4.963
+ },
+ "GOOGLx": {
+  "file": "logos/Google__G__logo.svg",
+  "aspect": 1.0
+ },
+ "COINx": {
+  "file": "logos/Coinbase.svg",
+  "aspect": 5.598
+ },
+ "AMDx": {
+  "file": "logos/AMD_Logo.svg",
+  "aspect": 4.193
+ },
+ "NFLXx": {
+  "file": "logos/Netflix_2015_logo.svg",
+  "aspect": 3.7
+ },
+ "PLTRx": {
+  "file": "logos/Palantir_Technologies_logo.svg",
+  "aspect": 4.15
+ },
+ "UBERx": {
+  "file": "logos/Uber_logo_2018.svg",
+  "aspect": 2.881
+ },
+ "SHOPx": {
+  "file": "logos/Shopify_logo_2018.svg",
+  "aspect": 3.188
+ },
+ "DISx": {
+  "file": "logos/Disney_wordmark.svg",
+  "aspect": 2.378
+ },
+ "NKEx": {
+  "file": "logos/Logo_NIKE.svg",
+  "aspect": 2.806
+ },
+ "KOx": {
+  "file": "logos/Coca-Cola_logo.svg",
+  "aspect": 3.188
+ },
+ "WMTx": {
+  "file": "logos/Walmart_logo.svg",
+  "aspect": 4.244
+ },
+ "PYPLx": {
+  "file": "logos/PayPal.svg",
+  "aspect": 3.758
+ },
+ "INTCx": {
+  "file": "logos/Intel_logo__2006-2020_.svg",
+  "aspect": 1.516
+ },
+ "CRMx": {
+  "file": "logos/Salesforce.com_logo.svg",
+  "aspect": 1.429
+ },
+ "NVDAx": {
+  "file": "logos/Nvidia_logo.svg",
+  "aspect": 5.332
+ },
+ "TSLAx": {
+  "file": "logos/Tesla_T_symbol.svg",
+  "aspect": 1.0
+ }
+}

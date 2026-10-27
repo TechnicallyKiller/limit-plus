@@ -111,7 +111,7 @@ Cut to black while it is still wobbling. In the black: "...you already got paid.
 
 **0:51 to 0:55.** Black. The opening shot returns for one second, but the dashed line now carries an amber "+ $6.20". Same tick. The loop is closed.
 
-**0:55 to 1:00.** The halftone wordmark on the dot field. Under it, in Archivo, sentence case: "Name your price. Get paid while you wait." Small line: "Live on Solana. Prices from Pyth. Example numbers shown." Final hit, one second tail.
+**0:55 to 1:00.** The halftone wordmark on the dot field. Under it, in Archivo, sentence case: "Name your price. Get paid while you wait." Small line: "Live on Solana. Prices from Pyth. Example numbers shown." Second small line: "Company names and logos are trademarks of their owners. Not affiliated with or endorsed by them." Final hit, one second tail.
 
 ---
 
