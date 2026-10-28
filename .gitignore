@@ -16,3 +16,4 @@ tsconfig.tsbuildinfo
 .local-demo.json
 video/out/
 video/node_modules/
+video/public/*.wav

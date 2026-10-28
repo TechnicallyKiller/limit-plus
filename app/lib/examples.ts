@@ -37,7 +37,8 @@ export function exampleRound(phase: RoundView["phase"] = "reveal"): RoundView {
     vol: 0.46, years: 5 / 365, rate: 0.04,
     ts: { open: t - 3 * 86400, bidStart: t - 2 * 86400, candleStart: bidEnd - 3600, bidEnd, revealEnd: t + 1800, expiry, exerciseEnd: expiry + 3600 },
     cutoffTs: bidEnd - 1260,
-    bids: bids.map((b) => ({ ...b, wonQty: cleared && b.valid && b.revealed ? b.qty : undefined })),
+    settlePrice: phase === "awaitingFinalize" || phase === "finalized" ? 165 : undefined, inTheMoney: phase === "awaitingFinalize" || phase === "finalized" ? true : undefined,
+    bids: phase === "deposit" ? [] : bids.map((b) => ({ ...b, wonQty: cleared && b.valid && b.revealed ? b.qty : undefined })),
     spark,
   };
 }

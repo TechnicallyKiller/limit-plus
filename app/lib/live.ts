@@ -39,7 +39,7 @@ export async function loadPools(): Promise<PoolView[]> {
 }
 
 export async function loadRound(key: string): Promise<RoundView> {
-  if (!hasChain || key === "demo") return exampleRound();
+  if (!hasChain || key.startsWith("demo")) return exampleRound(({ demo: "reveal", "demo-deposit": "deposit", "demo-cleared": "cleared", "demo-settled": "awaitingFinalize" } as Record<string, any>)[key] ?? "reveal");
   const c = client();
   const pk = new PublicKey(key);
   const r = await c.fetchRound(pk);
