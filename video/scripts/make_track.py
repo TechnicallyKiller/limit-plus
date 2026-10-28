@@ -1,13 +1,19 @@
 """Original temp track for the intro, 120 BPM, 60 s (30 bars). Writes public/track.wav. Leaves space for voice over."""
 import numpy as np, wave
 SR = 44100; BPM = 120; BEAT = 60 / BPM; BAR = BEAT * 4; DUR = 60
-N = SR * DUR; L = np.zeros(N); R = np.zeros(N); rng = np.random.default_rng(11)
+N = SR * DUR; L = np.zeros(N); R = np.zeros(N); FL = np.zeros(N); FR = np.zeros(N); rng = np.random.default_rng(11)
 
 def put(sig, t, g=1.0, pan=0.0):
     i = int(t * SR); j = min(N, i + len(sig))
     if i < 0 or i >= N: return
     s = sig[: j - i] * g
     L[i:j] += s * (1 - max(0, pan)); R[i:j] += s * (1 + min(0, pan))
+
+def putfx(sig, t, g=1.0, pan=0.0):
+    i = int(t * SR); j = min(N, i + len(sig))
+    if i < 0 or i >= N: return
+    s_ = sig[: j - i] * g
+    FL[i:j] += s_ * (1 - max(0, pan)); FR[i:j] += s_ * (1 + min(0, pan))
 
 def kick(dur=0.45):
     t = np.arange(int(dur * SR)) / SR; f = 45 + 110 * np.exp(-t * 28)
@@ -62,14 +68,14 @@ for b in range(1, 31):
 for b in (6, 7, 8):
     for beat in range(4): put(hat(0.05), bars(b) + beat * BEAT, 0.7)
 # Risers into the turn and into the end
-put(riser(BAR * 2), bars(8), 0.7); put(riser(BAR * 2, 300, 8000), bars(24), 0.6)
+putfx(riser(BAR * 2), bars(8), 0.7); putfx(riser(BAR * 2, 300, 8000), bars(24), 0.6)
 # The turn at bar 9 beat 3 (0:17): half a beat of silence at bar 9, then the stomp on bar 10 beat 1 (0:18)
-put(impact(), bars(10), 1.0)
+putfx(impact(), bars(10), 1.0)
 # Candle goes out (bar 15 end / bar 16): one beat of silence then a hit
-put(impact(1.6), bars(16) + BEAT, 0.8)
+putfx(impact(1.6), bars(16) + BEAT, 0.8)
 # Closing hit and tail
-put(impact(3.0), bars(26), 1.0); put(impact(1.8), bars(28), 0.85)
-for i, f in enumerate([523, 659, 784, 1047]): put(pluck(f, 1.2) * 3, bars(29) + i * BEAT / 2, 0.6)
+putfx(impact(3.0), bars(26) - 4 / 30, 1.0); putfx(impact(1.8), bars(28), 0.85)
+for i, f in enumerate([523, 659, 784, 1047]): putfx(pluck(f, 1.2) * 3, bars(29) + i * BEAT / 2, 0.6)
 
 # Sidechain duck under voice over lines (approximate windows, seconds) so the voice always sits on top
 vo = [(0.2, 6.0), (6.2, 8.3), (10.0, 16.0), (18.0, 19.0), (20.0, 22.0), (24.0, 26.0), (28.0, 30.0), (32.0, 34.0), (36.0, 44.0), (44.0, 47.0), (52.0, 58.0)]
@@ -83,3 +89,9 @@ pcm = (np.stack([L, R], 1) * 32767).astype(np.int16)
 with wave.open("public/track.wav", "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
 print("wrote public/track.wav", len(pcm) / SR, "s")
+
+mf = max(np.abs(FL).max(), np.abs(FR).max(), 1e-9)
+fx = (np.stack([FL, FR], 1) / mf * 0.9 * 32767).astype(np.int16)
+with wave.open("public/fx.wav", "wb") as w2:
+    w2.setnchannels(2); w2.setsampwidth(2); w2.setframerate(SR); w2.writeframes(fx.tobytes())
+print("wrote public/fx.wav")

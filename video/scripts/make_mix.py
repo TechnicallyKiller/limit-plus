@@ -27,7 +27,7 @@ PIECES = [
     (7, 5.14, 7.00, 36.20),  # Friday's official close decides.
     (7, 7.66, 9.64, 39.60),  # Stock at your price. Or your money back.
     (7, 10.60, 12.38, 42.20),# Either way, you keep the payment.
-    (7, 13.90, 14.64, 50.00),# Limit plus.  (second stomp)
+    (7, 13.90, 14.64, 49.88),# Limit plus.  (second stomp, snapped to the beat)
     (7, 16.00, 18.30, 51.60),# Name your price. Get paid while you wait.
     (7, 19.70, 20.26, 54.10),# Coming soon.
 ]
@@ -62,14 +62,25 @@ for clip, a, b, at in PIECES:
     vo[s:s + len(seg)] += seg[: N - s]
 vo = np.tanh(vo * 1.15) / np.tanh(1.15)                   # gentle limiter
 
-music = np.zeros((N, 2))
-w = wave.open("public/track.wav"); raw = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64).reshape(-1, 2) / 32768
-music[: len(raw)] = raw[:N]
+# music bed: Street Life, starting 63.9 s in so the breakdown sits under "for nothing" and the beat returns on the 0:18 stomp
+import subprocess as sp
+sp.run(["npx", "remotion", "ffmpeg", "-y", "-loglevel", "error", "-ss", "63.9", "-t", "58.5", "-i", "out/saraahh-street-life-266841.mp3", "-ac", "2", "-ar", str(SR), "/tmp/street44.wav"], check=True)
+w = wave.open("/tmp/street44.wav"); raw = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64).reshape(-1, 2) / 32768
+music = np.zeros((N, 2)); music[: min(N, len(raw))] = raw[:N]
+music *= 0.95 / max(1e-9, np.abs(music).max())
+fi = int(0.3 * SR); music[:fi] *= np.linspace(0, 1, fi)[:, None]
+fo = int(2.0 * SR); music[N - fo:] *= np.linspace(1, 0, fo)[:, None]
+# the candle goes out at 0:30: a real beat of silence in the music
+a0, a1, a2 = int(29.95 * SR), int(30.0 * SR), int(30.55 * SR)
+music[a0:a1] *= np.linspace(1, 0, a1 - a0)[:, None]; music[a1:a2] = 0
+music[a2:a2 + int(0.1 * SR)] *= np.linspace(0, 1, int(0.1 * SR))[:, None]
+w = wave.open("public/fx.wav"); fxr = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64).reshape(-1, 2) / 32768
+fxb = np.zeros((N, 2)); fxb[: min(N, len(fxr))] = fxr[:N]
 env = np.abs(vo); k = int(0.05 * SR); env = np.convolve(env, np.ones(k) / k, mode="same")
 active = (env > 0.02).astype(float)
 rel = int(0.35 * SR); active = np.convolve(active, np.ones(rel) / rel, mode="same"); active = np.minimum(1, active * 3)
 duck = 1 - 0.58 * active
-mix = music * duck[:, None] * 0.85 + vo[:, None] * 1.0
+mix = music * duck[:, None] * 0.8 + fxb * (0.5 + 0.5 * duck)[:, None] * 0.75 + vo[:, None] * 1.0
 mix *= 0.93 / max(1e-9, np.abs(mix).max())
 pcm = (mix * 32767).astype(np.int16)
 with wave.open("public/mix.wav", "wb") as o:

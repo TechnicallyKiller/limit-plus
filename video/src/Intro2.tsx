@@ -230,7 +230,7 @@ export const Intro2: React.FC<{ w: number; h: number }> = ({ w, h }) => (
     <Sequence from={bar(16, 1) + 85} durationInFrames={BAR * 3 - BEAT - 85}><Cut><DevicesOnce w={w} h={h} /></Cut></Sequence>
     <Sequence from={bar(19)} durationInFrames={BAR * 4}><Cut><Act4 w={w} h={h} /></Cut></Sequence>
     <Sequence from={bar(23)} durationInFrames={BAR * 2}><Cut><FieldCallback w={w} h={h} /></Cut></Sequence>
-    <Sequence from={bar(25)} durationInFrames={BAR * 2}><Stomp w={w} h={h} stompAt={BAR} /></Sequence>
+    <Sequence from={bar(25) - 4} durationInFrames={BAR * 2 + 4}><Stomp w={w} h={h} stompAt={BAR} /></Sequence>
     <Sequence from={bar(27)} durationInFrames={BAR * 3}><EndCard w={w} h={h} /></Sequence>
     <Caps h={h} />
   </AbsoluteFill>
