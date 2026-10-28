@@ -2,8 +2,10 @@
 import subprocess, wave, numpy as np, os
 SR = 44100
 os.makedirs("/tmp/vo44", exist_ok=True)
-for i in range(1, 8):
-    subprocess.run(["npx", "remotion", "ffmpeg", "-y", "-loglevel", "error", "-i", f"vo/{i}.ogg", "-ac", "1", "-ar", str(SR), f"/tmp/vo44/{i}.wav"], check=True)
+SRC = {i: f"vo/{i}.ogg" for i in range(3, 8)}
+SRC[8] = "vo/audio_2026-10-28_08-00-08.ogg"   # the new intro: "...Hack in Hills, powered by TinyFish..."
+for i, path in SRC.items():
+    subprocess.run(["npx", "remotion", "ffmpeg", "-y", "-loglevel", "error", "-i", path, "-ac", "1", "-ar", str(SR), f"/tmp/vo44/{i}.wav"], check=True)
 
 def load(p):
     w = wave.open(p); x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768
@@ -12,8 +14,7 @@ def load(p):
 # (clip, speech start in clip, speech end in clip, video time the speech should START)  -- all seconds.
 # Speech boundaries come from the loudness curve of each clip; the words come from the transcript.
 PIECES = [
-    (1, 0.84, 6.38, 0.34),   # Hi, I'm Divyanshh, and I help stock traders get paid while they wait for their price.
-    (2, 0.96, 4.58, 6.20),   # By letting market makers bid on their limit orders.
+    (8, 0.88, 9.80, 0.34),   # Hi, I'm Divyanshh, and this is Limit plus, built for Hack in Hills, powered by TinyFish. It helps stock traders get paid while they wait for their price.
     (3, 0.50, 2.76, 10.00),  # You want NVIDIA at one seventy-one.
     (3, 3.80, 5.04, 12.45),  # It's at one eighty.
     (4, 0.78, 1.70, 14.00),  # So you wait.

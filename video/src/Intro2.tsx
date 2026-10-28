@@ -203,7 +203,7 @@ const FieldCallback: React.FC<{ w: number; h: number }> = ({ w, h }) => {
 const RoomWrap: React.FC<{ w: number; h: number }> = ({ w, h }) => { const f = useCurrentFrame(); return <AbsoluteFill style={{ background: C.obsidian0 }}><Level2 w={w} h={h} t={f / 30 + 0.2} /></AbsoluteFill>; };
 
 const CAPS = [
-  [0.2, 6.2, "Hi, I'm Divyanshh, and I help stock traders get paid while they wait for their price."], [6.2, 9.9, "By letting market makers bid on their limit orders."],
+  [0.3, 2.6, "Hi, I'm Divyanshh, and this is Limit+"], [2.7, 5.5, "Built for Hack in Hills, powered by TinyFish."], [5.8, 9.7, "It helps stock traders get paid while they wait for their price."],
   [10.0, 12.4, "You want NVIDIA at $171."], [12.45, 13.9, "It's at $180."], [14.0, 16.3, "So you wait. For nothing."], [18.0, 19.7, "Limit+"],
   [20.2, 22.3, "You name your price. You get paid."], [24.2, 26.9, "Market makers bid in secret."], [27.7, 30.0, "The auction ends at a random moment."], [31.0, 33.7, "One price clears. You get paid."],
   [36.2, 38.5, "Friday's official close decides."], [39.6, 42.0, "Stock at your price. Or your money back."], [42.2, 44.5, "Either way, you keep the payment."], [44.7, 48.0, "All onchain. On Solana."],

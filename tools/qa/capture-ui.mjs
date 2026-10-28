@@ -1,5 +1,5 @@
 import { chromium } from "@playwright/test";
-const base = "http://127.0.0.1:3000", out = "../video/public/ui";
+const base = "http://127.0.0.1:3000", out = "../../video/public/ui";
 const b = await chromium.launch();
 const laptop = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1.5 });
 const phone = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });

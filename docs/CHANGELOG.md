@@ -22,3 +22,8 @@
 - Reads live rounds through `packages/sdk` when `NEXT_PUBLIC_RPC_URL` is set; otherwise shows clearly marked example data.
 - QA: Playwright screenshots at 1440x900 and 390x844 reviewed; no banned words (F2), no em/en dashes, one iridescent element per viewport, no horizontal scroll, 2px flame focus ring.
 - Known gaps: F1 (wallet deposit on devnet) and O2 (Pyth settle on devnet) are not run: the deploy wallet had about 1 SOL and a program deploy needs about 3.
+
+## Pitch video
+- `video/` is a Remotion project (React) that renders the 1 minute pitch from the same design tokens as the app. Sound design, particle fire and the beat-locked edit are code, not footage.
+- Scripts and delivery notes live in `docs/video`.
+- Media (renders, voice recordings, music) is intentionally not in the repository.
