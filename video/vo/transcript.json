@@ -1,0 +1,801 @@
+{
+ "1": [
+  {
+   "from": 0,
+   "to": 0.06,
+   "text": ""
+  },
+  {
+   "from": 0.06,
+   "to": 0.14,
+   "text": "Hi"
+  },
+  {
+   "from": 0.14,
+   "to": 0.28,
+   "text": ","
+  },
+  {
+   "from": 0.28,
+   "to": 0.35,
+   "text": "I"
+  },
+  {
+   "from": 0.35,
+   "to": 0.85,
+   "text": "am"
+  },
+  {
+   "from": 0.85,
+   "to": 1.06,
+   "text": "Div"
+  },
+  {
+   "from": 1.06,
+   "to": 1.61,
+   "text": "yan"
+  },
+  {
+   "from": 1.61,
+   "to": 1.99,
+   "text": "se"
+  },
+  {
+   "from": 1.99,
+   "to": 2.24,
+   "text": "."
+  },
+  {
+   "from": 2.24,
+   "to": 2.43,
+   "text": "I"
+  },
+  {
+   "from": 2.43,
+   "to": 2.67,
+   "text": "have"
+  },
+  {
+   "from": 2.67,
+   "to": 3.1,
+   "text": "stock"
+  },
+  {
+   "from": 3.1,
+   "to": 3.7,
+   "text": "traders"
+  },
+  {
+   "from": 3.7,
+   "to": 3.97,
+   "text": "get"
+  },
+  {
+   "from": 3.97,
+   "to": 4.75,
+   "text": "paid"
+  },
+  {
+   "from": 4.75,
+   "to": 4.82,
+   "text": "while"
+  },
+  {
+   "from": 4.82,
+   "to": 5.24,
+   "text": "they"
+  },
+  {
+   "from": 5.24,
+   "to": 5.67,
+   "text": "wait"
+  },
+  {
+   "from": 5.67,
+   "to": 5.72,
+   "text": "for"
+  },
+  {
+   "from": 5.72,
+   "to": 5.94,
+   "text": "their"
+  },
+  {
+   "from": 5.94,
+   "to": 6.2,
+   "text": "price"
+  },
+  {
+   "from": 6.2,
+   "to": 6.52,
+   "text": "."
+  }
+ ],
+ "2": [
+  {
+   "from": 0,
+   "to": 0.06,
+   "text": ""
+  },
+  {
+   "from": 0.06,
+   "to": 0.95,
+   "text": "By"
+  },
+  {
+   "from": 0.95,
+   "to": 1.12,
+   "text": "letting"
+  },
+  {
+   "from": 1.12,
+   "to": 1.86,
+   "text": "market"
+  },
+  {
+   "from": 1.86,
+   "to": 2.93,
+   "text": "makers"
+  },
+  {
+   "from": 2.93,
+   "to": 2.97,
+   "text": "bid"
+  },
+  {
+   "from": 2.97,
+   "to": 3.35,
+   "text": "on"
+  },
+  {
+   "from": 3.35,
+   "to": 3.59,
+   "text": "the"
+  },
+  {
+   "from": 3.59,
+   "to": 4.2,
+   "text": "limit"
+  },
+  {
+   "from": 4.2,
+   "to": 4.99,
+   "text": "orders"
+  },
+  {
+   "from": 4.99,
+   "to": 5,
+   "text": "."
+  }
+ ],
+ "3": [
+  {
+   "from": 0,
+   "to": 0.07,
+   "text": ""
+  },
+  {
+   "from": 0.07,
+   "to": 0.49,
+   "text": "You"
+  },
+  {
+   "from": 0.49,
+   "to": 0.94,
+   "text": "want"
+  },
+  {
+   "from": 0.94,
+   "to": 1.07,
+   "text": "N"
+  },
+  {
+   "from": 1.07,
+   "to": 1.35,
+   "text": "VD"
+  },
+  {
+   "from": 1.35,
+   "to": 1.47,
+   "text": "I"
+  },
+  {
+   "from": 1.47,
+   "to": 1.74,
+   "text": "at"
+  },
+  {
+   "from": 1.74,
+   "to": 2.87,
+   "text": "171"
+  },
+  {
+   "from": 2.87,
+   "to": 3.33,
+   "text": "?"
+  },
+  {
+   "from": 3.33,
+   "to": 3.6,
+   "text": "It"
+  },
+  {
+   "from": 3.6,
+   "to": 3.8,
+   "text": "'s"
+  },
+  {
+   "from": 3.8,
+   "to": 4.01,
+   "text": "at"
+  },
+  {
+   "from": 4.01,
+   "to": 4.99,
+   "text": "181"
+  },
+  {
+   "from": 4.99,
+   "to": 5.28,
+   "text": "."
+  }
+ ],
+ "4": [
+  {
+   "from": 0,
+   "to": 0.07,
+   "text": ""
+  },
+  {
+   "from": 0.07,
+   "to": 0.85,
+   "text": "So"
+  },
+  {
+   "from": 0.85,
+   "to": 1.1,
+   "text": "you"
+  },
+  {
+   "from": 1.1,
+   "to": 2.14,
+   "text": "wait"
+  },
+  {
+   "from": 2.14,
+   "to": 2.9,
+   "text": "for"
+  },
+  {
+   "from": 2.9,
+   "to": 4.58,
+   "text": "nothing"
+  },
+  {
+   "from": 4.58,
+   "to": 6,
+   "text": "."
+  }
+ ],
+ "5": [
+  {
+   "from": 0,
+   "to": 0.08,
+   "text": ""
+  },
+  {
+   "from": 0.08,
+   "to": 1.17,
+   "text": "Limit"
+  },
+  {
+   "from": 1.17,
+   "to": 1.72,
+   "text": "plus"
+  },
+  {
+   "from": 1.72,
+   "to": 2.26,
+   "text": "."
+  },
+  {
+   "from": 2.26,
+   "to": 2.43,
+   "text": "If"
+  },
+  {
+   "from": 2.43,
+   "to": 2.92,
+   "text": "you"
+  },
+  {
+   "from": 2.92,
+   "to": 3.03,
+   "text": "name"
+  },
+  {
+   "from": 3.03,
+   "to": 3.37,
+   "text": "your"
+  },
+  {
+   "from": 3.37,
+   "to": 3.8,
+   "text": "price"
+  },
+  {
+   "from": 3.8,
+   "to": 4.17,
+   "text": ","
+  },
+  {
+   "from": 4.17,
+   "to": 4.3,
+   "text": "you"
+  },
+  {
+   "from": 4.3,
+   "to": 4.6,
+   "text": "get"
+  },
+  {
+   "from": 4.6,
+   "to": 4.8,
+   "text": "paid"
+  },
+  {
+   "from": 4.8,
+   "to": 5,
+   "text": "."
+  },
+  {
+   "from": 5,
+   "to": 5,
+   "text": ""
+  },
+  {
+   "from": 5,
+   "to": 5.64,
+   "text": "["
+  },
+  {
+   "from": 5.64,
+   "to": 6.1,
+   "text": "BL"
+  },
+  {
+   "from": 6.1,
+   "to": 6.1,
+   "text": "ANK"
+  },
+  {
+   "from": 6.1,
+   "to": 6.1,
+   "text": "_"
+  },
+  {
+   "from": 6.1,
+   "to": 6.1,
+   "text": "AUD"
+  },
+  {
+   "from": 6.1,
+   "to": 6.1,
+   "text": "IO"
+  },
+  {
+   "from": 6.1,
+   "to": 13.26,
+   "text": "]"
+  }
+ ],
+ "6": [
+  {
+   "from": 0,
+   "to": 0.65,
+   "text": ""
+  },
+  {
+   "from": 0.65,
+   "to": 1,
+   "text": "Market"
+  },
+  {
+   "from": 1,
+   "to": 1.39,
+   "text": "week"
+  },
+  {
+   "from": 1.39,
+   "to": 1.69,
+   "text": "has"
+  },
+  {
+   "from": 1.69,
+   "to": 2.08,
+   "text": "been"
+  },
+  {
+   "from": 2.08,
+   "to": 2.29,
+   "text": "in"
+  },
+  {
+   "from": 2.29,
+   "to": 2.38,
+   "text": "a"
+  },
+  {
+   "from": 2.38,
+   "to": 2.99,
+   "text": "secret"
+  },
+  {
+   "from": 2.99,
+   "to": 3.33,
+   "text": "."
+  },
+  {
+   "from": 3.33,
+   "to": 3.4,
+   "text": "The"
+  },
+  {
+   "from": 3.4,
+   "to": 3.88,
+   "text": "auction"
+  },
+  {
+   "from": 3.88,
+   "to": 4.21,
+   "text": "ends"
+  },
+  {
+   "from": 4.21,
+   "to": 4.28,
+   "text": "at"
+  },
+  {
+   "from": 4.28,
+   "to": 4.34,
+   "text": "a"
+  },
+  {
+   "from": 4.34,
+   "to": 4.75,
+   "text": "random"
+  },
+  {
+   "from": 4.75,
+   "to": 5.16,
+   "text": "moment"
+  },
+  {
+   "from": 5.16,
+   "to": 5.42,
+   "text": "."
+  },
+  {
+   "from": 5.42,
+   "to": 5.42,
+   "text": ""
+  },
+  {
+   "from": 5.42,
+   "to": 6.09,
+   "text": "["
+  },
+  {
+   "from": 6.09,
+   "to": 7.45,
+   "text": "BL"
+  },
+  {
+   "from": 7.45,
+   "to": 8.95,
+   "text": "ANK"
+  },
+  {
+   "from": 8.95,
+   "to": 8.95,
+   "text": "_"
+  },
+  {
+   "from": 8.95,
+   "to": 8.95,
+   "text": "AUD"
+  },
+  {
+   "from": 8.95,
+   "to": 8.95,
+   "text": "IO"
+  },
+  {
+   "from": 8.95,
+   "to": 14.22,
+   "text": "]"
+  }
+ ],
+ "7": [
+  {
+   "from": 0,
+   "to": 0.08,
+   "text": ""
+  },
+  {
+   "from": 0.08,
+   "to": 0.7,
+   "text": "1"
+  },
+  {
+   "from": 0.7,
+   "to": 1.13,
+   "text": "price"
+  },
+  {
+   "from": 1.13,
+   "to": 1.75,
+   "text": "clears"
+  },
+  {
+   "from": 1.75,
+   "to": 2.37,
+   "text": "you"
+  },
+  {
+   "from": 2.37,
+   "to": 2.58,
+   "text": "get"
+  },
+  {
+   "from": 2.58,
+   "to": 2.97,
+   "text": "paid"
+  },
+  {
+   "from": 2.97,
+   "to": 3.28,
+   "text": "."
+  },
+  {
+   "from": 3.28,
+   "to": 3.7,
+   "text": "Fry"
+  },
+  {
+   "from": 3.7,
+   "to": 3.98,
+   "text": "it"
+  },
+  {
+   "from": 3.98,
+   "to": 4.74,
+   "text": "as"
+  },
+  {
+   "from": 4.74,
+   "to": 5.4,
+   "text": "official"
+  },
+  {
+   "from": 5.4,
+   "to": 5.82,
+   "text": "fee"
+  },
+  {
+   "from": 5.82,
+   "to": 6.24,
+   "text": "was"
+  },
+  {
+   "from": 6.24,
+   "to": 7.28,
+   "text": "decided"
+  },
+  {
+   "from": 7.28,
+   "to": 7.32,
+   "text": "."
+  },
+  {
+   "from": 7.32,
+   "to": 7.73,
+   "text": "Stock"
+  },
+  {
+   "from": 7.73,
+   "to": 7.9,
+   "text": "at"
+  },
+  {
+   "from": 7.9,
+   "to": 8.25,
+   "text": "your"
+  },
+  {
+   "from": 8.25,
+   "to": 8.79,
+   "text": "price"
+  },
+  {
+   "from": 8.79,
+   "to": 8.83,
+   "text": "or"
+  },
+  {
+   "from": 8.83,
+   "to": 9.12,
+   "text": "your"
+  },
+  {
+   "from": 9.12,
+   "to": 9.53,
+   "text": "money"
+  },
+  {
+   "from": 9.53,
+   "to": 9.9,
+   "text": "back"
+  },
+  {
+   "from": 9.9,
+   "to": 10.61,
+   "text": "."
+  },
+  {
+   "from": 10.61,
+   "to": 10.98,
+   "text": "Either"
+  },
+  {
+   "from": 10.98,
+   "to": 11.34,
+   "text": "way"
+  },
+  {
+   "from": 11.34,
+   "to": 11.73,
+   "text": "you"
+  },
+  {
+   "from": 11.73,
+   "to": 12.25,
+   "text": "keep"
+  },
+  {
+   "from": 12.25,
+   "to": 12.6,
+   "text": "the"
+  },
+  {
+   "from": 12.6,
+   "to": 13.59,
+   "text": "payment"
+  },
+  {
+   "from": 13.59,
+   "to": 14,
+   "text": "."
+  },
+  {
+   "from": 14,
+   "to": 14.47,
+   "text": "Limit"
+  },
+  {
+   "from": 14.47,
+   "to": 14.87,
+   "text": "plus"
+  },
+  {
+   "from": 14.87,
+   "to": 14.88,
+   "text": "."
+  },
+  {
+   "from": 14.88,
+   "to": 16.01,
+   "text": "Name"
+  },
+  {
+   "from": 16.01,
+   "to": 16.28,
+   "text": "your"
+  },
+  {
+   "from": 16.28,
+   "to": 17.2,
+   "text": "price"
+  },
+  {
+   "from": 17.2,
+   "to": 17.32,
+   "text": ","
+  },
+  {
+   "from": 17.32,
+   "to": 17.61,
+   "text": "get"
+  },
+  {
+   "from": 17.61,
+   "to": 17.9,
+   "text": "paid"
+  },
+  {
+   "from": 17.9,
+   "to": 18.11,
+   "text": "while"
+  },
+  {
+   "from": 18.11,
+   "to": 18.25,
+   "text": "you"
+  },
+  {
+   "from": 18.25,
+   "to": 18.43,
+   "text": "wait"
+  },
+  {
+   "from": 18.43,
+   "to": 18.44,
+   "text": "."
+  },
+  {
+   "from": 18.44,
+   "to": 19.7,
+   "text": "Coming"
+  },
+  {
+   "from": 19.7,
+   "to": 20.2,
+   "text": "soon"
+  },
+  {
+   "from": 20.2,
+   "to": 20.2,
+   "text": "."
+  },
+  {
+   "from": 20.2,
+   "to": 20.2,
+   "text": ""
+  },
+  {
+   "from": 20.2,
+   "to": 20.83,
+   "text": "["
+  },
+  {
+   "from": 20.83,
+   "to": 21.33,
+   "text": "BL"
+  },
+  {
+   "from": 21.33,
+   "to": 21.33,
+   "text": "ANK"
+  },
+  {
+   "from": 21.33,
+   "to": 21.33,
+   "text": "_"
+  },
+  {
+   "from": 21.33,
+   "to": 21.33,
+   "text": "AUD"
+  },
+  {
+   "from": 21.33,
+   "to": 21.33,
+   "text": "IO"
+  },
+  {
+   "from": 21.33,
+   "to": 28.32,
+   "text": "]"
+  }
+ ]
+}

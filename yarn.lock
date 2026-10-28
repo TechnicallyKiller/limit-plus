@@ -977,6 +977,13 @@
   dependencies:
     remotion "4.0.539"
 
+"@remotion/install-whisper-cpp@4":
+  version "4.0.539"
+  resolved "https://registry.yarnpkg.com/@remotion/install-whisper-cpp/-/install-whisper-cpp-4.0.539.tgz#fa0f94bdf583c62f6d26526072c03a021611e8b6"
+  integrity sha512-ml5K+bkFTVQ+Yyi8ZpjiaYwK38JdQuCuoAIt6hxt+kkznhpXGjEXWTqqNdP56x5vekIfKxbJhHqxIpslxWUZcQ==
+  dependencies:
+    "@remotion/captions" "4.0.539"
+
 "@remotion/licensing@4.0.539":
   version "4.0.539"
   resolved "https://registry.yarnpkg.com/@remotion/licensing/-/licensing-4.0.539.tgz#3c6480819f876dd02387b0516d39a44ad7d1ca56"

@@ -17,3 +17,5 @@ tsconfig.tsbuildinfo
 video/out/
 video/node_modules/
 video/public/*.wav
+video/vo/*.ogg
+video/vo/*Zone.Identifier
