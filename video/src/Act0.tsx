@@ -5,12 +5,12 @@ import { C, mono, sans, sec } from "./tokens";
 /** ACT 0, THE WAIT. 0:00 to 0:09. One chart, then the pull back into every token waiting. */
 const TICKERS = ["NVDAx", "TSLAx", "AAPLx", "MSFTx", "AMZNx", "METAx", "GOOGLx", "COINx", "AMDx", "NFLXx", "SPYx", "QQQx", "PLTRx", "MSTRx", "AVGOx", "ORCLx", "CRMx", "UBERx", "SHOPx", "PYPLx", "INTCx", "BABAx", "DISx", "NKEx", "KOx", "PEPx", "JPMx", "BACx", "Vx", "MAx", "WMTx", "COSTx", "HDx", "LLYx", "UNHx", "JNJx", "PFEx", "XOMx", "CVXx", "BAx", "GEx", "CATx", "SBUXx", "MCDx", "ABNBx", "SNOWx", "CRWDx", "PANWx"];
 import logoData from "./logos.json";
-const LOGOS = logoData as Record<string, { file: string; aspect: number }>;
+export const LOGOS = logoData as Record<string, { file: string; aspect: number }>;
 const W = 1300, H = 1650, GAP = 10;
 const rand = (n: number) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
-interface Leaf { name: string; i: number; x: number; y: number; w: number; h: number }
-const leaves: Leaf[] = (() => {
+export interface Leaf { name: string; i: number; x: number; y: number; w: number; h: number }
+export const leaves: Leaf[] = (() => {
   const root = hierarchy<any>({ children: TICKERS.map((name, i) => ({ name, i, value: 1 / Math.pow(i + 1, 0.95) })) }).sum((d) => d.value ?? 0);
   treemap<any>().tile(treemapSquarify).size([W, H]).paddingInner(GAP)(root);
   return root.leaves().map((l: any) => ({ name: l.data.name, i: l.data.i, x: l.x0, y: l.y0, w: l.x1 - l.x0, h: l.y1 - l.y0 }));
@@ -23,7 +23,7 @@ const price = (seed: number, t: number) => {
   return v;
 };
 
-function Chart({ seed, t, w, h, stroke }: { seed: number; t: number; w: number; h: number; stroke: string }) {
+export function Chart({ seed, t, w, h, stroke }: { seed: number; t: number; w: number; h: number; stroke: string }) {
   const pts: string[] = [];
   for (let i = 0; i <= 28; i++) pts.push(`${(i / 28) * w},${h * 0.3 + (1 - price(seed, t - (28 - i) * 0.12)) * h * 0.4}`);
   const dashY = h * 0.3 + 0.62 * h * 0.4;
@@ -93,7 +93,7 @@ export const Act0: React.FC<{ w: number; h: number }> = ({ w, h }) => {
   );
 };
 
-function mix(a: string, b: string, k: number) {
+export function mix(a: string, b: string, k: number) {
   const p = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
   const [ar, ag, ab] = p(a), [br, bg, bb] = p(b);
   return `rgb(${Math.round(ar + (br - ar) * k)}, ${Math.round(ag + (bg - ag) * k)}, ${Math.round(ab + (bb - ab) * k)})`;

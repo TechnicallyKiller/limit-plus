@@ -88,8 +88,8 @@ export const Act4: React.FC<{ w: number; h: number }> = ({ w, h }) => {
     const chip = ease((t - (falls ? 2.2 : 3.0)) / 0.8);
     return (
       <div style={{ position: "absolute", left: ox, top: oy, width: halfW, height: halfH }}>
-        <div style={{ position: "absolute", left: (halfW - tw) / 2, top: halfH * 0.085, fontFamily: sans, fontSize: halfH * 0.05, color: C.boneDim }}>Friday close</div>
-        <div style={{ position: "absolute", right: (halfW - tw) / 2, top: halfH * 0.05, fontFamily: mono, fontSize: halfH * 0.085, color: C.bone }}>${(falls ? 180 - k * 15 : 180 + k * 5).toFixed(2)}</div>
+        <div style={{ position: "absolute", left: (halfW - tw) / 2, top: halfH * 0.085, fontFamily: sans, fontSize: halfH * 0.04, color: C.boneDim }}>Friday close</div>
+        <div style={{ position: "absolute", right: (halfW - tw) / 2, top: halfH * 0.05, fontFamily: mono, fontSize: halfH * 0.062, color: C.bone }}>${(falls ? 180 - k * 15 : 180 + k * 5).toFixed(2)}</div>
         <div style={{ position: "absolute", left: (halfW - tw) / 2, top: halfH * 0.2, width: tw, height: th, borderRadius: 20, background: C.obsidian1, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)", overflow: "hidden" }}>
           <svg width={tw} height={th}>
             <line x1={0} x2={tw} y1={dashY} y2={dashY} stroke={C.flame} strokeWidth={4} strokeDasharray="14 10" />

@@ -2,6 +2,7 @@ import webpack from "next/dist/compiled/webpack/webpack-lib.js";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: { cpus: 1, webpackMemoryOptimizations: true, workerThreads: false },
   transpilePackages: ["@limit-plus/sdk", "@limit-plus/pricing"],
   webpack(config) {
     // Anchor and web3.js expect Node's Buffer in the browser.
