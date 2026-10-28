@@ -63,7 +63,7 @@ const Level1: React.FC<{ w: number; h: number; t: number }> = ({ w, h, t }) => {
 };
 
 const ADDR = ["9fQ2...a1Lm", "Ht7c...9wPe", "Bq4r...s0Na", "Lm8v...e3Tx", "Cz1k...h6Ru", "Wd5n...q8Jb", "Pk2s...m4Zy"];
-const Level2: React.FC<{ w: number; h: number; t: number }> = ({ w, h, t }) => {
+export const Level2: React.FC<{ w: number; h: number; t: number }> = ({ w, h, t }) => {
   const cw = Math.min(w, h) * 0.2, ch = cw * 1.4;
   const drift = Math.sin(t * 0.45) * 7;
   return (

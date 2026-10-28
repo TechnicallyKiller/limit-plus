@@ -45,7 +45,7 @@ for b in range(1, 31):
     section_drive = 2 <= b <= 5 or 11 <= b <= 25 or b >= 26
     if b == 9 or b == 10:        # the turn: stripped for the stomp
         pass
-    if section_drive and b not in (9, 10, 16):
+    if section_drive and b not in (9, 10, 16, 25):
         for beat in range(4): put(kick(), t0 + beat * BEAT, 0.9)
         for e in range(8): put(hat(), t0 + e * BEAT / 2 + BEAT / 4, 0.5 if e % 2 else 0.3)
         put(snare(), t0 + BEAT, 0.6); put(snare(), t0 + 3 * BEAT, 0.6)
@@ -68,11 +68,11 @@ put(impact(), bars(10), 1.0)
 # Candle goes out (bar 15 end / bar 16): one beat of silence then a hit
 put(impact(1.6), bars(16) + BEAT, 0.8)
 # Closing hit and tail
-put(impact(3.0), bars(27), 1.0)
-for i, f in enumerate([523, 659, 784, 1047]): put(pluck(f, 1.2) * 3, bars(30) + i * BEAT / 2, 0.6)
+put(impact(3.0), bars(26), 1.0); put(impact(1.8), bars(28), 0.85)
+for i, f in enumerate([523, 659, 784, 1047]): put(pluck(f, 1.2) * 3, bars(29) + i * BEAT / 2, 0.6)
 
 # Sidechain duck under voice over lines (approximate windows, seconds) so the voice always sits on top
-vo = [(0.2, 6.0), (6.2, 8.3), (10.0, 16.0), (18.0, 19.0), (20.0, 22.0), (24.0, 26.0), (28.0, 30.0), (32.0, 34.0), (36.0, 44.0), (44.0, 47.0), (52.0, 60.0)]
+vo = [(0.2, 6.0), (6.2, 8.3), (10.0, 16.0), (18.0, 19.0), (20.0, 22.0), (24.0, 26.0), (28.0, 30.0), (32.0, 34.0), (36.0, 44.0), (44.0, 47.0), (52.0, 58.0)]
 duck = np.ones(N)
 for a, b in vo:
     i, j = int(a * SR), int(b * SR); duck[i:j] = 0.45

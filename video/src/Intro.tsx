@@ -6,33 +6,33 @@ import { WordmarkDots, clamp01, ease, easeIO, rand, useWordmarkDots } from "./pa
 import { C, mono, sans } from "./tokens";
 
 /** v2 INTRO. 120 BPM: 1 beat = 15 frames, 1 bar = 60 frames. Bars are 1-based like the script. */
-const BEAT = 15, BAR = 60;
-const bar = (n: number, beat = 0) => (n - 1) * BAR + beat * BEAT;
+export const BEAT = 15, BAR = 60;
+export const bar = (n: number, beat = 0) => (n - 1) * BAR + beat * BEAT;
 
-const shake = (f: number, at: number, dur = 10, amp = 14): [number, number] => {
+export const shake = (f: number, at: number, dur = 10, amp = 14): [number, number] => {
   const k = f - at; if (k < 0 || k > dur) return [0, 0];
   const d = 1 - k / dur; return [Math.sin(k * 5.1) * amp * d, Math.cos(k * 4.3) * amp * 0.7 * d];
 };
 /** Punch-in entrance: scale and blur settle over a few frames after `at`. */
-const punch = (f: number, at: number, from = 1.5, frames = 6) => {
+export const punch = (f: number, at: number, from = 1.5, frames = 6) => {
   const k = clamp01((f - at) / frames), e = 1 - Math.pow(1 - k, 3);
   return { scale: from + (1 - from) * e, blur: (1 - e) * 14, opacity: f >= at ? 1 : 0 };
 };
-const flash = (f: number, at: number, dur = 4, a = 0.9) => (f >= at && f < at + dur ? a * (1 - (f - at) / dur) : 0);
+export const flash = (f: number, at: number, dur = 4, a = 0.9) => (f >= at && f < at + dur ? a * (1 - (f - at) / dur) : 0);
 
 /* ---------- devices with real UI ---------- */
-const Laptop: React.FC<{ src: string; w: number }> = ({ src, w }) => (
+export const Laptop: React.FC<{ src: string; w: number }> = ({ src, w }) => (
   <div style={{ width: w, borderRadius: w * 0.022, padding: w * 0.012, background: "linear-gradient(180deg,#23232D,#15151C)", boxShadow: "0 0 0 1.5px rgba(255,255,255,0.1), 0 50px 90px -30px rgba(0,0,0,0.95)" }}>
     <Img src={staticFile(src)} style={{ width: "100%", display: "block", borderRadius: w * 0.012 }} />
   </div>
 );
-const Phone: React.FC<{ src: string; w: number }> = ({ src, w }) => (
+export const Phone: React.FC<{ src: string; w: number }> = ({ src, w }) => (
   <div style={{ width: w, borderRadius: w * 0.14, padding: w * 0.035, background: "linear-gradient(180deg,#2a2a34,#15151C)", boxShadow: "0 0 0 1.5px rgba(255,255,255,0.12), 0 50px 90px -20px rgba(0,0,0,0.95)" }}>
     <Img src={staticFile(src)} style={{ width: "100%", display: "block", borderRadius: w * 0.11 }} />
   </div>
 );
 
-const Word: React.FC<{ text: string; at: number; f: number; size: number; color?: string; x?: number; y?: number }> = ({ text, at, f, size, color = C.bone, x = 0, y = 0 }) => {
+export const Word: React.FC<{ text: string; at: number; f: number; size: number; color?: string; x?: number; y?: number }> = ({ text, at, f, size, color = C.bone, x = 0, y = 0 }) => {
   const p = punch(f, at, 1.7, 7);
   if (p.opacity === 0) return null;
   return <div style={{ position: "absolute", left: x, top: y, transform: `scale(${p.scale})`, transformOrigin: "0 100%", filter: `blur(${p.blur}px)`, fontFamily: sans, fontWeight: 900, fontStretch: "125%", fontSize: size, lineHeight: 0.9, letterSpacing: "-0.04em", color, whiteSpace: "nowrap" }}>{text}</div>;
@@ -99,7 +99,7 @@ const TileSlam: React.FC<{ w: number; h: number }> = ({ w, h }) => {
 };
 
 /* ---------- S3 story: bars 6-8 ---------- */
-const Story: React.FC<{ w: number; h: number }> = ({ w, h }) => {
+export const Story: React.FC<{ w: number; h: number }> = ({ w, h }) => {
   const f0 = useCurrentFrame();
   const FREEZE = 150;                                         // bar 8 beat 3
   const f = Math.min(f0, FREEZE);
@@ -123,7 +123,7 @@ const Story: React.FC<{ w: number; h: number }> = ({ w, h }) => {
 };
 
 /* ---------- S4 and S8 wordmark stomp with fire ---------- */
-const Stomp: React.FC<{ w: number; h: number; stompAt: number }> = ({ w, h, stompAt }) => {
+export const Stomp: React.FC<{ w: number; h: number; stompAt: number }> = ({ w, h, stompAt }) => {
   const f = useCurrentFrame();
   const pitch = 10, wh = Math.round(h * 0.4);
   const dots = useWordmarkDots(w, wh, pitch);
@@ -214,7 +214,7 @@ const Montage: React.FC<{ w: number; h: number }> = ({ w, h }) => {
 };
 
 /* ---------- S8 end card ---------- */
-const EndCard: React.FC<{ w: number; h: number }> = ({ w, h }) => {
+export const EndCard: React.FC<{ w: number; h: number }> = ({ w, h }) => {
   const f = useCurrentFrame();                                // local 0 = bar 28
   const tag = punch(f, 0, 1.3, 7), soon = punch(f, 60, 1.6, 8);
   const [sx, sy] = shake(f, 60, 12, 20);
