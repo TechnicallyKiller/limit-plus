@@ -3,7 +3,7 @@ import { Act3, Act4, HeroTile } from "./Act3";
 import { Chart, LOGOS, leaves } from "./Act0";
 import { Level2 } from "./Act2";
 import { Fire } from "./Fire";
-import { BAR, BEAT, EndCard, Laptop, Phone, Stomp, Story, Word, flash, punch, shake } from "./Intro";
+import { BAR, BEAT, EndCard, Laptop, Phone, Stomp, Word, flash, punch, shake } from "./Intro";
 import { clamp01, ease, easeIO, rand } from "./parts";
 import { C, mono, sans } from "./tokens";
 import { staticFile as sf } from "remotion";
@@ -69,6 +69,51 @@ const PullBack: React.FC<{ w: number; h: number }> = ({ w, h }) => {
           })}
         </div>
       </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+
+/* bars 6-8, rebuilt to follow the voice: 10.0 your price, 12.45 now, 14.0 the wait, 15.3 nothing. Local t = seconds since 0:10. */
+const StoryV2: React.FC<{ w: number; h: number }> = ({ w, h }) => {
+  const f = useCurrentFrame(); const t = f / 30;
+  const tw = Math.min(w, h) * 0.66, th = tw * 0.92, left = (w - tw) / 2, top = (h - th) / 2 - h * 0.05;
+  const dashY = top + th * 0.58, priceY = top + th * 0.3;
+  const speed = 1 + 2.2 * clamp01((t - 4.0) / 1.0);
+  const drain = clamp01((t - 5.2) / 0.5);
+  const [sx, sy] = [0, 2.45, 4.0, 5.3].reduce<[number, number]>((a, at) => { const k = shake(f, at * 30, 7, 10); return [a[0] + k[0], a[1] + k[1]]; }, [0, 0]);
+  const tag = punch(f, 5, 1.5, 6), now = punch(f, 2.45 * 30, 1.5, 6);
+  const gap = ease((t - 2.6) / 0.5);
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const flat = ease((t - 5.3) / 0.35);
+  const nothing = punch(f, 5.4 * 30, 1.8, 7);
+  return (
+    <AbsoluteFill style={{ background: C.obsidian0, transform: `translate(${sx}px,${sy}px)` }}>
+      <AbsoluteFill style={{ filter: `grayscale(${drain})` }}>
+        <HeroTile w={w} h={h} t={t * speed} y={-h * 0.05} above />
+        {/* your price tag on the dashed line */}
+        {t >= 0.15 && <div style={{ position: "absolute", left: left + tw * 0.04, top: dashY + th * 0.03, transform: `scale(${tag.scale})`, transformOrigin: "0 0", padding: `${h * 0.008}px ${h * 0.018}px`, borderRadius: 999, boxShadow: `inset 0 0 0 2px ${C.flame}`, background: C.obsidian1, fontFamily: mono, fontSize: h * 0.024, color: C.flame }}>Your price $171.00</div>}
+        {/* now marker and the measured gap */}
+        {t >= 2.45 && <>
+          <div style={{ position: "absolute", left: left + tw * 0.04, top: priceY - th * 0.06, transform: `scale(${now.scale})`, transformOrigin: "0 100%", padding: `${h * 0.008}px ${h * 0.018}px`, borderRadius: 999, background: C.bone, fontFamily: mono, fontSize: h * 0.024, color: C.obsidian0 }}>Now $180.00</div>
+          <div style={{ position: "absolute", left: left + tw * 0.86, top: priceY, width: 3, height: (dashY - priceY) * gap, background: C.amber }} />
+          <div style={{ position: "absolute", left: left + tw * 0.86 - h * 0.085, top: priceY + (dashY - priceY) / 2 - h * 0.016, opacity: gap, fontFamily: mono, fontSize: h * 0.026, color: C.amber }}>-5.0%</div>
+        </>}
+        {/* the week going by */}
+        <div style={{ position: "absolute", left, top: top + th + h * 0.045, width: tw, display: "flex", gap: tw * 0.02 }}>
+          {days.map((d, i) => {
+            const lit = t >= 4.0 + i * 0.25;
+            return <div key={d} style={{ flex: 1, textAlign: "center", padding: `${h * 0.012}px 0`, borderRadius: 14, background: lit ? C.bone : C.obsidian2, color: lit ? C.obsidian0 : C.boneFaint, fontFamily: mono, fontSize: h * 0.022, transform: lit && t < 4.0 + i * 0.25 + 0.2 ? "scale(1.12)" : undefined, opacity: t >= 3.6 ? 1 : 0 }}>{d}</div>;
+          })}
+        </div>
+      </AbsoluteFill>
+      {/* flatline: the line gives up */}
+      {t >= 5.3 && <>
+        <div style={{ position: "absolute", left, top, width: tw, height: th, borderRadius: tw * 0.05, background: C.obsidian1, opacity: 0.96 * flat }} />
+        <div style={{ position: "absolute", left, top: top + th * 0.5 - 2, width: tw * flat, height: 4, borderRadius: 2, background: C.boneFaint }} />
+      </>}
+      {t >= 5.4 && <Word text="nothing." at={5.4 * 30} f={f} size={w * 0.175} x={w * 0.1} y={top + th * 0.5 - w * 0.1} color={C.bone} />}
+      <AbsoluteFill style={{ background: C.bone, opacity: Math.max(flash(f, 5.3 * 30, 3, 0.18), flash(f, 2.45 * 30, 3, 0.12)) }} />
     </AbsoluteFill>
   );
 };
@@ -176,7 +221,7 @@ export const Intro2: React.FC<{ w: number; h: number }> = ({ w, h }) => (
   <AbsoluteFill style={{ background: C.obsidian0 }}>
     <Audio src={staticFile("mix.wav")} />
     <Sequence from={bar(1)} durationInFrames={BAR * 5}><Cut><PullBack w={w} h={h} /></Cut></Sequence>
-    <Sequence from={bar(6)} durationInFrames={BAR * 3}><Cut><Story w={w} h={h} /></Cut></Sequence>
+    <Sequence from={bar(6)} durationInFrames={BAR * 3}><Cut><StoryV2 w={w} h={h} /></Cut></Sequence>
     <Sequence from={bar(9)} durationInFrames={BAR * 2}><Stomp w={w} h={h} stompAt={BAR} /></Sequence>
     <Sequence from={bar(11)} durationInFrames={BAR * 2}><Cut><PhoneSolo w={w} h={h} /></Cut></Sequence>
     <Sequence from={bar(13)} durationInFrames={BAR * 2}><Cut><RoomWrap w={w} h={h} /></Cut></Sequence>

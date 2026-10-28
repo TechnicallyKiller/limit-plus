@@ -49,13 +49,14 @@ export const Act3: React.FC<{ w: number; h: number }> = ({ w, h }) => {
 const price = (seed: number, t: number) => { let v = 0.5; for (let i = 0; i < 3; i++) v += Math.sin(t * (0.6 + i * 0.9) + seed * (i + 1) * 3.1) * (0.12 / (i + 1)); return v; };
 
 /** The opening tile again. `wob` > 0 makes the price hover and wobble at the dashed line (the totem). */
-export const HeroTile: React.FC<{ w: number; h: number; t: number; wob?: number; amberLabel?: boolean; scale?: number; y?: number; pad?: number }> = ({ w, h, t, wob = 0, amberLabel = false, scale = 1, y = 0 }) => {
+export const HeroTile: React.FC<{ w: number; h: number; t: number; wob?: number; amberLabel?: boolean; scale?: number; y?: number; pad?: number; above?: boolean }> = ({ w, h, t, wob = 0, amberLabel = false, scale = 1, y = 0, above = false }) => {
   const tw = Math.min(w, h) * 0.66 * scale, th = tw * 0.92;
   const dashY = th * 0.58;
   const pts: string[] = [];
   for (let i = 0; i <= 40; i++) {
     const tt = t - (40 - i) * 0.12;
-    const base = th * 0.3 + (1 - price(1, tt)) * th * 0.4;
+    let base = th * 0.3 + (1 - price(1, tt)) * th * 0.4;
+    if (above) base = Math.min(base, dashY - th * 0.09);
     const hover = wob > 0 ? dashY - th * 0.02 + Math.sin(tt * 7) * th * 0.022 * wob : base;
     const mixk = wob > 0 ? clamp01(i / 40) : 0;
     pts.push(`${(i / 40) * tw},${base * (1 - mixk) + hover * mixk}`);
