@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import PoolsTreemap from "@/components/PoolsTreemap";
 import { Odometer, ExampleNote } from "@/components/ui";
 import { loadPools, useNow, usePolled } from "@/lib/live";
+import { RadarPill } from "@/components/RiskRadar";
+import { useRadar } from "@/lib/radar";
 import { EXAMPLE_POOLS } from "@/lib/examples";
 import { countdown, pct, signedPct, usdWhole } from "@/lib/format";
 import type { PoolView } from "@/lib/types";
@@ -24,6 +26,7 @@ export default function PoolsPage() {
   const waiting = pools.reduce((a, p) => a + p.waitingUsd, 0);
   const paid = pools.reduce((a, p) => a + (p.waitingUsd * p.ratePct) / 100, 0);
   const peek = sel ?? shown[0];
+  const radar = useRadar(peek?.ticker ?? "NVDAx");
   return (
     <main className="mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10">
       <h1 className="sr-only">Pools board</h1>
@@ -67,6 +70,7 @@ export default function PoolsPage() {
                 <dt className="text-bone-dim">Waiting</dt><dd className="text-right">{usdWhole(peek.waitingUsd)}</dd>
                 <dt className="text-bone-dim">Paid this week</dt><dd className="text-right text-amber">{pct(peek.ratePct)}</dd>
                 <dt className="text-bone-dim">Your price</dt><dd className="text-right">{signedPct(peek.distancePct)}</dd></dl>
+              <div className="mt-4 flex items-center justify-between gap-3"><span className="text-bone-dim">Risk radar</span><RadarPill snap={radar.snap} state={radar.state} /></div>
             </div>)}
         </aside>
       </div>

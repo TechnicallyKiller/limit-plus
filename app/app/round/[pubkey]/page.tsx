@@ -8,7 +8,9 @@ import FairPriceLevel from "@/components/FairPriceLevel";
 import OrderTicket from "@/components/OrderTicket";
 import PriceSpark from "@/components/PriceSpark";
 import TicketSheet from "@/components/TicketSheet";
+import RiskRadar, { RadarPill } from "@/components/RiskRadar";
 import { ExampleNote } from "@/components/ui";
+import { useRadar } from "@/lib/radar";
 import { exampleRound } from "@/lib/examples";
 import { STABLE_T, loadRound, useNow, usePolled } from "@/lib/live";
 import { clock, countdown, explorerAddr, signedPct, usd } from "@/lib/format";
@@ -36,6 +38,7 @@ export default function RoundPage({ params }: { params: Promise<{ pubkey: string
   const { pubkey } = use(params);
   const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound("reveal", STABLE_T), 2000, [pubkey]);
   const now = useNow();
+  const radar = useRadar(round.ticker);
   const [table, setTable] = useState(false);
   const buy = round.side === "buyLower";
   const Icon = buy ? ArrowDown : ArrowUp;
@@ -53,6 +56,7 @@ export default function RoundPage({ params }: { params: Promise<{ pubkey: string
           <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[14px] font-semibold text-obsidian-0" style={{ background: buy ? "var(--color-volt)" : "var(--color-iris)" }}>
             <Icon size={16} aria-hidden="true" />{buy ? "Buy lower" : "Sell higher"}
           </span>
+          <RadarPill snap={radar.snap} state={radar.state} />
         </div>
         <dl className="flex flex-wrap items-baseline gap-x-8 gap-y-1">
           <div className="flex items-baseline gap-2"><dt className="text-bone-dim">Your price</dt><dd className="mono text-[22px]">{usd(round.yourPrice)}</dd></div>
@@ -112,6 +116,7 @@ export default function RoundPage({ params }: { params: Promise<{ pubkey: string
               ) : <FairPriceLevel round={round} />}
             </section>
           </div>
+          <RiskRadar ticker={round.ticker} snap={radar.snap} state={radar.state} nowMs={now * 1000} />
           <p className="text-[13px] text-bone-dim">Settles at Friday's official close, 4:00 pm ET. {round.example ? "" : <a className="underline hover:text-flame" href={explorerAddr(round.key)} target="_blank" rel="noreferrer">View this round on the explorer</a>}</p>
           <ExampleNote show={round.example} />
           {error && !round.example && <p role="alert" className="text-[13px] text-down">Could not refresh this round. Showing the last good data.</p>}
