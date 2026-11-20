@@ -36,13 +36,26 @@ export const startOfUtcDay = (ms: number) => Math.floor(ms / 86_400_000) * 86_40
 export const isoDay = (d: Date | number) => new Date(typeof d === "number" ? d : d.getTime()).toISOString().slice(0, 10);
 export const daysBetween = (fromMs: number, toMs: number) => Math.round((startOfUtcDay(toMs) - startOfUtcDay(fromMs)) / 86_400_000);
 
-/** The next official US close (Friday 4pm ET, taken as 21:00 UTC) at or after `nowMs`, used when a round has no expiry. */
+const NY = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year: "numeric", month: "numeric", day: "numeric", weekday: "short", hour: "numeric", hourCycle: "h23" });
+const nyParts = (ms: number) => {
+  const p = Object.fromEntries(NY.formatToParts(ms).map((x) => [x.type, x.value]));
+  return { y: +p.year, m: +p.month, d: +p.day, hour: +p.hour, weekday: p.weekday };
+};
+
+/**
+ * The next official US close, Friday 4:00 pm New York time (21:00 UTC in winter, 20:00 UTC in summer), at or after
+ * `nowMs`. On a Friday before the close it is that same day; after the close it is a week later.
+ */
 export function nextFridayClose(nowMs: number): number {
-  const d = new Date(nowMs);
-  let add = (5 - d.getUTCDay() + 7) % 7;
-  let t = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + add, 21, 0, 0);
-  if (t < nowMs) t += 7 * 86_400_000;
-  return t;
+  for (let add = 0; add <= 7; add++) {
+    const day = nyParts(nowMs + add * 86_400_000);
+    if (day.weekday !== "Fri") continue;
+    // 12:00 UTC is 7 or 8 in the morning in New York, so the gap to noon tells us the UTC offset on that date.
+    const offset = 12 - nyParts(Date.UTC(day.y, day.m - 1, day.d, 12)).hour;
+    const close = Date.UTC(day.y, day.m - 1, day.d, 16 + offset);
+    if (close >= nowMs) return close;
+  }
+  throw new Error("no Friday close found within 8 days");
 }
 
 const UNIT_MS: Record<string, number> = { second: 1000, minute: 60_000, hour: 3_600_000, day: 86_400_000, week: 7 * 86_400_000, month: 30 * 86_400_000 };

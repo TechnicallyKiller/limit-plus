@@ -3,7 +3,7 @@ import webpack from "next/dist/compiled/webpack/webpack-lib.js";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: { cpus: 1, webpackMemoryOptimizations: true, workerThreads: false },
-  transpilePackages: ["@limit-plus/sdk", "@limit-plus/pricing"],
+  transpilePackages: ["@limit-plus/sdk", "@limit-plus/pricing", "@limit-plus/radar"],
   webpack(config) {
     // Anchor and web3.js expect Node's Buffer in the browser.
     config.plugins.push(new webpack.ProvidePlugin({ Buffer: ["buffer", "Buffer"] }));

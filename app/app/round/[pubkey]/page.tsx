@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useState } from "react";
 import { ArrowDown, ArrowUp } from "@phosphor-icons/react";
 import AuctionStage from "@/components/AuctionStage";
 import BidsTable from "@/components/BidsTable";
@@ -10,7 +10,7 @@ import PriceSpark from "@/components/PriceSpark";
 import TicketSheet from "@/components/TicketSheet";
 import { ExampleNote } from "@/components/ui";
 import { exampleRound } from "@/lib/examples";
-import { loadRound, usePolled } from "@/lib/live";
+import { STABLE_T, loadRound, useNow, usePolled } from "@/lib/live";
 import { clock, countdown, explorerAddr, signedPct, usd } from "@/lib/format";
 import type { PhaseName, RoundView } from "@/lib/types";
 
@@ -34,10 +34,9 @@ const day = (ts: number) => new Date(ts * 1000).toLocaleString("en-US", { weekda
 
 export default function RoundPage({ params }: { params: Promise<{ pubkey: string }> }) {
   const { pubkey } = use(params);
-  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound(), 2000, [pubkey]);
-  const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
+  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound("reveal", STABLE_T), 2000, [pubkey]);
+  const now = useNow();
   const [table, setTable] = useState(false);
-  useEffect(() => { const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000); return () => clearInterval(id); }, []);
   const buy = round.side === "buyLower";
   const Icon = buy ? ArrowDown : ArrowUp;
   const vsNow = ((round.yourPrice - round.spot) / round.spot) * 100;

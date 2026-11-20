@@ -95,6 +95,24 @@ export async function loadTickets(owner: PublicKey): Promise<TicketView[]> {
 }
 
 /** Polls `fn` every `ms` and keeps the last good value. */
+/**
+ * A fixed instant (2026-01-01 UTC) used for the first render. These pages are prerendered at build time, so any
+ * clock read during render makes the server HTML differ from what the browser computes and breaks hydration.
+ */
+export const STABLE_T = 1_767_225_600;
+
+/** Seconds since epoch. Equals STABLE_T on the server and on the first client render, then follows the real clock every second. */
+export function useNow(intervalMs = 1000): number {
+  const [now, setNow] = useState(STABLE_T);
+  useEffect(() => {
+    const tick = () => setNow(Math.floor(Date.now() / 1000));
+    tick();
+    const id = setInterval(tick, intervalMs);
+    return () => clearInterval(id);
+  }, [intervalMs]);
+  return now;
+}
+
 export function usePolled<T>(fn: () => Promise<T>, initial: T, ms = 2000, deps: unknown[] = []): { data: T; error: string | null } {
   const [data, setData] = useState<T>(initial);
   const [error, setError] = useState<string | null>(null);

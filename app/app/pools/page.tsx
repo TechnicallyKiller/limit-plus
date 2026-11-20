@@ -1,28 +1,24 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PoolsTreemap from "@/components/PoolsTreemap";
 import { Odometer, ExampleNote } from "@/components/ui";
-import { loadPools, usePolled } from "@/lib/live";
+import { loadPools, useNow, usePolled } from "@/lib/live";
 import { EXAMPLE_POOLS } from "@/lib/examples";
 import { countdown, pct, signedPct, usdWhole } from "@/lib/format";
 import type { PoolView } from "@/lib/types";
+import { nextFridayClose } from "@limit-plus/radar/src/dates";
 import { SegmentedControl } from "@/components/ui";
 import Link from "next/link";
 
-function nextFriday(now: number) {
-  const d = new Date(now * 1000);
-  const add = ((5 - d.getUTCDay() + 7) % 7) || 7;
-  const t = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + add, 20, 0, 0) / 1000; // 16:00 New York (EDT)
-  return t;
-}
+/** Seconds until the next official close (Friday 4pm New York), counting the same Friday before the close. */
+const untilClose = (now: number) => Math.floor(nextFridayClose(now * 1000) / 1000) - now;
 
 export default function PoolsPage() {
   const { data: pools } = usePolled<PoolView[]>(loadPools, EXAMPLE_POOLS, 2000);
   const [stock, setStock] = useState("all");
   const [view, setView] = useState<"board" | "list">("board");
   const [sel, setSel] = useState<PoolView | undefined>();
-  const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
-  useEffect(() => { const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000); return () => clearInterval(id); }, []);
+  const now = useNow();
   const tickers = useMemo(() => Array.from(new Set(pools.map((p) => p.ticker))), [pools]);
   const shown = pools.filter((p) => stock === "all" || p.ticker === stock);
   const waiting = pools.reduce((a, p) => a + p.waitingUsd, 0);
@@ -37,7 +33,7 @@ export default function PoolsPage() {
         <div className="flex flex-col gap-2.5"><span className="text-bone-dim">Paid out this week</span>
           <Odometer value={usdWhole(paid)} className="text-[40px] font-medium leading-none tracking-[-0.04em] text-amber md:text-[54px]" /></div>
         <div className="flex flex-col gap-2.5"><span className="text-bone-dim">Next Friday close</span>
-          <span className="mono text-[40px] font-medium leading-none tracking-[-0.04em] md:text-[54px]">{countdown(nextFriday(now) - now)}</span></div>
+          <span className="mono text-[40px] font-medium leading-none tracking-[-0.04em] md:text-[54px]">{countdown(untilClose(now))}</span></div>
       </section>
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
         <div>

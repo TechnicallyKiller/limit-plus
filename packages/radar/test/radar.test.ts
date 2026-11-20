@@ -34,14 +34,30 @@ describe("radar dates", () => {
     expect(extractDates("Feb 30, 2027")).to.have.length(0);
     expect(extractDates("Feb 24, 2027 and 2027-02-24")).to.have.length(1);
   });
-  it("next Friday close is a Friday at 21:00 UTC, never in the past", () => {
-    for (const day of [16, 17, 18, 19, 20, 21, 22]) {
-      const now = Date.parse(`2026-11-${day}T12:00:00Z`);
+  it("next Friday close is 4pm New York: 21:00 UTC in winter, 20:00 UTC in summer", () => {
+    expect(new Date(nextFridayClose(Date.parse("2026-11-16T12:00:00Z"))).toISOString()).to.equal("2026-11-20T21:00:00.000Z"); // EST
+    expect(new Date(nextFridayClose(Date.parse("2026-07-13T12:00:00Z"))).toISOString()).to.equal("2026-07-17T20:00:00.000Z"); // EDT
+  });
+  it("on a Friday it is that day before the close and the next week after it", () => {
+    expect(new Date(nextFridayClose(Date.parse("2026-11-20T15:00:00Z"))).toISOString()).to.equal("2026-11-20T21:00:00.000Z");
+    expect(new Date(nextFridayClose(Date.parse("2026-11-20T21:00:00Z"))).toISOString()).to.equal("2026-11-20T21:00:00.000Z");
+    expect(new Date(nextFridayClose(Date.parse("2026-11-20T21:00:01Z"))).toISOString()).to.equal("2026-11-27T21:00:00.000Z");
+    expect(new Date(nextFridayClose(Date.parse("2026-11-21T03:00:00Z"))).toISOString()).to.equal("2026-11-27T21:00:00.000Z");
+  });
+  it("handles the daylight saving changeovers", () => {
+    // US clocks go back on 2026-11-01 and forward on 2026-03-08.
+    expect(new Date(nextFridayClose(Date.parse("2026-10-30T12:00:00Z"))).toISOString()).to.equal("2026-10-30T20:00:00.000Z"); // still EDT
+    expect(new Date(nextFridayClose(Date.parse("2026-11-02T12:00:00Z"))).toISOString()).to.equal("2026-11-06T21:00:00.000Z"); // EST
+    expect(new Date(nextFridayClose(Date.parse("2026-03-06T12:00:00Z"))).toISOString()).to.equal("2026-03-06T21:00:00.000Z"); // EST
+    expect(new Date(nextFridayClose(Date.parse("2026-03-09T12:00:00Z"))).toISOString()).to.equal("2026-03-13T20:00:00.000Z"); // EDT
+  });
+  it("is always a Friday within a week and never in the past", () => {
+    for (let h = 0; h < 24 * 14; h += 5) {
+      const now = Date.parse("2026-11-01T00:00:00Z") + h * 3_600_000;
       const t = nextFridayClose(now);
-      expect(new Date(t).getUTCDay()).to.equal(5);
-      expect(new Date(t).getUTCHours()).to.equal(21);
       expect(t).to.be.at.least(now);
-      expect(t - now).to.be.lessThan(7 * 86_400_000);
+      expect(t - now).to.be.at.most(7 * 86_400_000);
+      expect(new Date(t).getUTCDay()).to.equal(5);
     }
   });
 });
