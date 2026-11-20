@@ -1,0 +1,306 @@
+[
+  {
+    "ticker": "NVDA",
+    "company": "NVIDIA",
+    "asOf": "2026-11-20T11:17:03.984Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings Feb 24, 2027.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-02-24",
+        "severity": 0,
+        "label": "Earnings on Feb 24, 2027, after this round closes",
+        "sourceName": "investing.com",
+        "sourceUrl": "https://uk.investing.com/equities/nvidia-corp-earnings"
+      }
+    ],
+    "sources": [
+      {
+        "name": "investing.com",
+        "url": "https://uk.investing.com/equities/nvidia-corp-earnings"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "TSLA",
+    "company": "Tesla",
+    "asOf": "2026-11-20T11:17:07.747Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Jan 27, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-01-27",
+        "severity": 0,
+        "label": "Earnings on Jan 27, 2027, after this round closes",
+        "sourceName": "public.com",
+        "sourceUrl": "https://public.com/stocks/tsla/earnings"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "public.com",
+        "sourceUrl": "https://public.com/stocks/tsla/earnings",
+        "label": "Next earnings expected Jan 27, 2027 to Feb 3, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "public.com",
+        "url": "https://public.com/stocks/tsla/earnings"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "AAPL",
+    "company": "Apple",
+    "asOf": "2026-11-20T11:17:11.156Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Jan 28, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-01-28",
+        "severity": 0,
+        "label": "Earnings on Jan 28, 2027, after this round closes",
+        "sourceName": "public.com",
+        "sourceUrl": "https://public.com/stocks/aapl/earnings"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "public.com",
+        "sourceUrl": "https://public.com/stocks/aapl/earnings",
+        "label": "Next earnings expected Jan 28, 2027 to Apr 2, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "public.com",
+        "url": "https://public.com/stocks/aapl/earnings"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "MSFT",
+    "company": "Microsoft",
+    "asOf": "2026-11-20T11:17:13.418Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Jan 26, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-01-27",
+        "severity": 0,
+        "label": "Earnings on Jan 27, 2027, after this round closes",
+        "sourceName": "zacks.com",
+        "sourceUrl": "https://zacks.com/stock/research/msft/earnings-calendar"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "zacks.com",
+        "sourceUrl": "https://zacks.com/stock/research/msft/earnings-calendar",
+        "label": "Next earnings expected Jan 26, 2027 to Jan 28, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "zacks.com",
+        "url": "https://zacks.com/stock/research/msft/earnings-calendar"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "AMZN",
+    "company": "Amazon",
+    "asOf": "2026-11-20T11:17:16.445Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Feb 4, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-02-04",
+        "severity": 0,
+        "label": "Earnings on Feb 4, 2027, after this round closes",
+        "sourceName": "investing.com",
+        "sourceUrl": "https://investing.com/equities/amazon-com-inc-earnings"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "investing.com",
+        "sourceUrl": "https://investing.com/equities/amazon-com-inc-earnings",
+        "label": "Next earnings expected Feb 4, 2027 to Apr 2, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "investing.com",
+        "url": "https://investing.com/equities/amazon-com-inc-earnings"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "META",
+    "company": "Meta Platforms",
+    "asOf": "2026-11-20T11:17:19.247Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Jan 20, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-01-27",
+        "severity": 0,
+        "label": "Earnings on Jan 27, 2027, after this round closes",
+        "sourceName": "marketbeat.com",
+        "sourceUrl": "https://www.marketbeat.com/stocks/NASDAQ/META/earnings/"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "marketbeat.com",
+        "sourceUrl": "https://www.marketbeat.com/stocks/NASDAQ/META/earnings/",
+        "label": "Next earnings expected Jan 20, 2027 to Feb 3, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "marketbeat.com",
+        "url": "https://www.marketbeat.com/stocks/NASDAQ/META/earnings/"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "COIN",
+    "company": "Coinbase",
+    "asOf": "2026-11-20T11:17:22.199Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "watch",
+    "headline": "Sharp price move reported: Coinbase Stocks Fall 7.54% as Bitcoin Slides Toward $64,000 and Trading Volumes Shrink",
+    "events": [
+      {
+        "kind": "news",
+        "label": "Sharp price move reported: Coinbase Stocks Fall 7.54% as Bitcoin Slides Toward $64,000 and Trading Volumes Shrink",
+        "date": "2026-11-16",
+        "severity": 1,
+        "sourceName": "yahoo.com",
+        "sourceUrl": "https://finance.yahoo.com/markets/crypto/articles/coinbase-stocks-fall-7-54-185946617.html?.tsrc=rss"
+      },
+      {
+        "kind": "earnings",
+        "date": "2027-01-14",
+        "severity": 0,
+        "label": "Earnings on Jan 14, 2027, after this round closes",
+        "sourceName": "marketchameleon.com",
+        "sourceUrl": "https://marketchameleon.com/Overview/COIN/Earnings/Earnings-Dates/"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "marketchameleon.com",
+        "sourceUrl": "https://marketchameleon.com/Overview/COIN/Earnings/Earnings-Dates/",
+        "label": "Next earnings expected Jan 14, 2027 to Feb 18, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "yahoo.com",
+        "url": "https://finance.yahoo.com/markets/crypto/articles/coinbase-stocks-fall-7-54-185946617.html?.tsrc=rss"
+      },
+      {
+        "name": "marketchameleon.com",
+        "url": "https://marketchameleon.com/Overview/COIN/Earnings/Earnings-Dates/"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "GOOGL",
+    "company": "Alphabet",
+    "asOf": "2026-11-20T11:17:25.022Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings expected Feb 2, 2027 or later.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-02-03",
+        "severity": 0,
+        "label": "Earnings on Feb 3, 2027, after this round closes",
+        "sourceName": "zacks.com",
+        "sourceUrl": "https://www.zacks.com/stock/research/GOOGL/earnings-calendar"
+      },
+      {
+        "kind": "earnings",
+        "severity": 0,
+        "sourceName": "zacks.com",
+        "sourceUrl": "https://www.zacks.com/stock/research/GOOGL/earnings-calendar",
+        "label": "Next earnings expected Feb 2, 2027 to Feb 3, 2027, after this round closes"
+      }
+    ],
+    "sources": [
+      {
+        "name": "zacks.com",
+        "url": "https://www.zacks.com/stock/research/GOOGL/earnings-calendar"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  },
+  {
+    "ticker": "AMD",
+    "company": "Advanced Micro Devices",
+    "asOf": "2026-11-20T11:17:27.432Z",
+    "windowEnd": "2026-11-20T21:00:00.000Z",
+    "level": "calm",
+    "headline": "No catalysts before this round closes. Next earnings Feb 2, 2027.",
+    "events": [
+      {
+        "kind": "earnings",
+        "date": "2027-02-02",
+        "severity": 0,
+        "label": "Earnings on Feb 2, 2027, after this round closes",
+        "sourceName": "zacks.com",
+        "sourceUrl": "https://www.zacks.com/stock/research/AMD/earnings-calendar"
+      }
+    ],
+    "sources": [
+      {
+        "name": "zacks.com",
+        "url": "https://www.zacks.com/stock/research/AMD/earnings-calendar"
+      }
+    ],
+    "conflict": false,
+    "provider": "snapshot",
+    "failures": []
+  }
+]
