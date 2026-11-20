@@ -18,8 +18,12 @@ import { airdrop, buildRound, createMint, fund, sendCreateRound } from "./lib";
 const FEED = Uint8Array.from(Buffer.from("b1073854ed24cbc755dc527418f52b7d271f6cc967bbf8d8129112b18860a593", "hex"));
 const RPC = "http://127.0.0.1:8899";
 
+let ledgerDir = "";
 async function startValidator(): Promise<ChildProcess> {
-  const ledger = fs.mkdtempSync(path.join(os.tmpdir(), "limitplus-ledger-"));
+  // On disk under ~/.cache, not /tmp (often memory backed), and removed when the run ends.
+  const root = process.env.LIMITPLUS_LEDGER_DIR ?? path.join(os.homedir(), ".cache", "limitplus");
+  fs.mkdirSync(root, { recursive: true });
+  const ledger = ledgerDir = fs.mkdtempSync(path.join(root, "demo-"));
   const so = path.join(__dirname, "../target/deploy/limit_plus.so");
   const p = spawn("solana-test-validator", ["--reset", "--quiet", "--limit-ledger-size", "5000", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), so], { stdio: "ignore" });
   const c = new Connection(RPC, "confirmed");
@@ -37,7 +41,7 @@ const usd = (x: bigint | number) => `$${(Number(x) / 1e6).toFixed(4)}`;
   const stamp = () => `[${Math.round((Date.now() - t0) / 1000)}s]`;
   const log = (m: string) => say(`${stamp()} ${m}`);
   const validator = await startValidator();
-  const killValidator = () => { if (!process.argv.includes("--keep")) validator.kill(); };
+  const killValidator = () => { if (!process.argv.includes("--keep")) { validator.kill(); try { fs.rmSync(ledgerDir, { recursive: true, force: true }); } catch { /* best effort */ } } };
   process.on("exit", killValidator);
   try {
     const c = new Connection(RPC, "confirmed");

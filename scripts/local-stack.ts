@@ -21,25 +21,31 @@ import { arg, sleep } from "../bots/common";
 
 const RPC = "http://127.0.0.1:8899";
 
-async function startValidator(): Promise<ChildProcess> {
-  const ledger = fs.mkdtempSync(path.join(os.tmpdir(), "limitplus-stack-"));
-  const out = fs.openSync(path.join(os.tmpdir(), "limitplus-stack-validator.log"), "w");
-  const p = spawn("solana-test-validator", ["--reset", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), path.join(__dirname, "../target/deploy/limit_plus.so")], { stdio: ["ignore", out, out] });
+/** Ledgers live on disk under ~/.cache, not in /tmp (often memory backed): a validator ledger can reach gigabytes. */
+const ledgerRoot = process.env.LIMITPLUS_LEDGER_DIR ?? path.join(os.homedir(), ".cache", "limitplus");
+
+async function startValidator(): Promise<{ proc: ChildProcess; ledger: string }> {
+  fs.mkdirSync(ledgerRoot, { recursive: true });
+  const ledger = fs.mkdtempSync(path.join(ledgerRoot, "stack-"));
+  const out = fs.openSync(path.join(ledger, "validator.out"), "w");
+  const p = spawn("solana-test-validator", ["--reset", "--limit-ledger-size", "10000", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), path.join(__dirname, "../target/deploy/limit_plus.so")], { stdio: ["ignore", out, out] });
   const c = new Connection(RPC, "confirmed");
   for (let i = 0; i < 90; i++) {
-    try { await c.getVersion(); if ((await c.getSlot("finalized")) > 2) return p; } catch { /* not up yet */ }
+    try { await c.getVersion(); if ((await c.getSlot("finalized")) > 2) return { proc: p, ledger }; } catch { /* not up yet */ }
     await sleep(1000);
   }
   p.kill();
+  fs.rmSync(ledger, { recursive: true, force: true });
   throw new Error("validator did not start");
 }
 
 (async () => {
   const outFile = arg("out", "/tmp/limitplus-local.json");
   const workerPort = arg("worker-port", "8787");
-  const validator = await startValidator();
+  const { proc: validator, ledger } = await startValidator();
   let worker: ChildProcess | undefined;
-  const stop = () => { worker?.kill(); validator.kill(); };
+  // Always remove the ledger on the way out so repeated runs never pile up gigabytes.
+  const stop = () => { worker?.kill(); validator.kill(); try { fs.rmSync(ledger, { recursive: true, force: true }); } catch { /* best effort */ } };
   process.on("exit", stop);
   process.on("SIGINT", () => process.exit(0));
   process.on("SIGTERM", () => process.exit(0));

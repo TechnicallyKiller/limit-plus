@@ -27,12 +27,16 @@ const SECRET = "test-secret";
 const results: string[] = [];
 const ok = (name: string) => { results.push(name); console.log(`ok   ${name}`); };
 
+const ledgerRoot = process.env.LIMITPLUS_LEDGER_DIR ?? path.join(os.homedir(), ".cache", "limitplus");
+let ledgerDir = "";
+
 async function startValidator(): Promise<ChildProcess> {
-  const ledger = fs.mkdtempSync(path.join(os.tmpdir(), "limitplus-e2e-"));
-  const logFile = path.join(os.tmpdir(), "limitplus-e2e-validator.log");
+  fs.mkdirSync(ledgerRoot, { recursive: true });
+  const ledger = ledgerDir = fs.mkdtempSync(path.join(ledgerRoot, "e2e-"));
+  const logFile = path.join(ledger, "validator.out");
   const out = fs.openSync(logFile, "w");
   console.log(`validator log: ${logFile}`);
-  const p = spawn("solana-test-validator", ["--reset", "--limit-ledger-size", "5000", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), path.join(__dirname, "../target/deploy/limit_plus.so")], { stdio: ["ignore", out, out] });
+  const p = spawn("solana-test-validator", ["--reset", "--limit-ledger-size", "10000", "--ledger", ledger, "--bpf-program", PROGRAM_ID.toBase58(), path.join(__dirname, "../target/deploy/limit_plus.so")], { stdio: ["ignore", out, out] });
   p.on("exit", (code) => console.log(`validator exited with code ${code}`));
   const c = new Connection(RPC, "confirmed");
   for (let i = 0; i < 90; i++) {
@@ -54,7 +58,7 @@ const FAST = { bidSecs: 30, candleSecs: 8, revealSecs: 14, expirySecs: 12, exerc
   process.chdir(fs.mkdtempSync(path.join(os.tmpdir(), "limitplus-cwd-")));
   const validator = await startValidator();
   let server: ReturnType<typeof createServer> | undefined;
-  const cleanup = () => { try { server?.close(); } catch { /* ignore */ } validator.kill(); };
+  const cleanup = () => { try { server?.close(); } catch { /* ignore */ } validator.kill(); try { fs.rmSync(ledgerDir, { recursive: true, force: true }); } catch { /* best effort */ } };
   process.on("exit", cleanup);
   try {
     const c = new Connection(RPC, "confirmed");
