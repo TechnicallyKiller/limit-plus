@@ -105,3 +105,4 @@ export async function volOrDefault(symbol: string, override?: number): Promise<{
     return { vol: DEFAULT_VOL, source: "default" };
   }
 }
+export * from "./spot";

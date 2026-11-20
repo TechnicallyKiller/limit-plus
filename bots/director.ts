@@ -11,6 +11,7 @@ import { Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transa
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { createHash } from "crypto";
 import { LimitPlusClient, getProgram, phaseOf, roundPda, type Phase } from "../packages/sdk/src";
+import { fetchSpot } from "../packages/pricing/src/spot";
 import { buildRound, fund, sendCreateRound } from "../scripts/lib";
 import { chainNow, errText, send, sleep } from "./common";
 import { runKeeper } from "./keeper";
@@ -31,6 +32,8 @@ export interface DemoState {
   closePrice?: number;
   startedAt?: number;
   phase?: Phase;
+  /** When deposits close and bidding opens, in seconds since epoch. */
+  bidStartTs?: number;
   expiryTs?: number;
   error?: string;
   /** The last lines of what the bots and keeper did, newest last. */
@@ -60,15 +63,8 @@ export interface DirectorOpts {
 
 const deriveKey = (admin: Keypair, label: string) => Keypair.fromSeed(createHash("sha256").update(admin.secretKey).update(label).digest());
 
-export async function hermesSpot(): Promise<number> {
-  const id = Buffer.from(NVDA_FEED).toString("hex");
-  const res = await fetch(`https://hermes.pyth.network/v2/updates/price/latest?ids[]=0x${id}&parsed=true`, { signal: AbortSignal.timeout(4000) });
-  const j: any = await res.json();
-  const p = j.parsed[0].price;
-  const v = Number(p.price) * 10 ** p.expo;
-  if (!Number.isFinite(v) || v < 1 || v > 10_000) throw new Error("implausible price");
-  return v;
-}
+/** Live NVDA price: Pyth when it answers, Yahoo otherwise. Throws if neither does. */
+export const liveNvdaSpot = async () => (await fetchSpot({ feedHex: Buffer.from(NVDA_FEED).toString("hex"), symbol: "NVDA" })).price;
 
 export class Director {
   private client: LimitPlusClient;
@@ -132,7 +128,7 @@ export class Director {
       this.stop = { stop: false };
       const c = this.o.connection;
       let spot = 180;
-      try { spot = await (this.o.spot ?? hermesSpot)(); } catch { this.say("Live NVDA price unavailable, using $180."); }
+      try { spot = await (this.o.spot ?? liveNvdaSpot)(); } catch { this.say("Live NVDA price unavailable, using $180."); }
       spot = Math.round(spot * 100) / 100;
 
       await this.topUp(this.house, 0.02, 10, 0n);
@@ -144,7 +140,7 @@ export class Director {
       const { _meta, ...args } = built;
       const round = await sendCreateRound(c, this.client, this.o.admin, this.o.underlyingMint, this.o.quoteMint, args);
       const yourPrice = _meta.strikeUsd / 0.01;
-      this.state = { status: "running", roundKey: round.toBase58(), outcome, spot, yourPrice, startedAt: secs, expiryTs: Number(args.expiryTs), feed: [] };
+      this.state = { status: "running", roundKey: round.toBase58(), outcome, spot, yourPrice, startedAt: secs, bidStartTs: Number(args.bidStartTs), expiryTs: Number(args.expiryTs), feed: [] };
       this.say(`Demo week started. NVDAx is $${spot.toFixed(2)}. You can name a price of $${yourPrice.toFixed(2)}, which is 5% below.`);
 
       // The house position guarantees the auction has something to bid on even if nobody else deposits.
@@ -216,7 +212,7 @@ export class Director {
       const id = BigInt(latest.account.roundId.toString());
       const outcome: Outcome = id % 2n === 0n ? "buy" : "skip";
       const yourPrice = Number(latest.account.strikePerContract.toString()) / 1e6 / (Number(latest.account.sharesPerContractE9.toString()) / 1e9);
-      this.state = { status: "running", roundKey: latest.publicKey.toBase58(), outcome, yourPrice, startedAt: Number(latest.account.openTs.toString()), expiryTs: Number(latest.account.expiryTs.toString()), feed: [] };
+      this.state = { status: "running", roundKey: latest.publicKey.toBase58(), outcome, yourPrice, startedAt: Number(latest.account.openTs.toString()), bidStartTs: Number(latest.account.bidStartTs.toString()), expiryTs: Number(latest.account.expiryTs.toString()), feed: [] };
       this.stop = { stop: false };
       this.say("Restarted. Picking the demo week back up.");
       void this.run(latest.publicKey, outcome, yourPrice);

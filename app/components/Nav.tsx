@@ -5,11 +5,13 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { Wallet } from "@phosphor-icons/react";
 import { shortKey } from "@/lib/format";
+import { DEMO } from "@/lib/demo";
 
 const links = [
   { href: "/pools", label: "Pools" },
   { href: "/round/demo", label: "Rounds" },
   { href: "/portfolio", label: "Portfolio" },
+  ...(DEMO ? [{ href: "/demo", label: "Demo" }] : []),
 ];
 
 export default function Nav() {

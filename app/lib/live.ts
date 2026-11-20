@@ -14,14 +14,36 @@ const TICKERS: Record<string, string> = (() => {
 const tickerOf = (mint: string) => TICKERS[mint] ?? "NVDAx";
 const client = () => new LimitPlusClient(getProgram(connection()));
 
-async function spotFor(feedId: Uint8Array, fallback: number): Promise<number> {
-  try {
-    const hex = Buffer.from(feedId).toString("hex");
-    const res = await fetch(`https://hermes.pyth.network/v2/updates/price/latest?ids[]=0x${hex}&parsed=true`);
-    const j = await res.json();
-    const p = j.parsed[0].price;
-    return Number(p.price) * 10 ** p.expo;
-  } catch { return fallback; }
+const spotCache = new Map<string, { at: number; price: number }>();
+const spotInFlight = new Map<string, Promise<number | null>>();
+
+/**
+ * The live price for a stock, through our own /api/spot (never straight from Pyth or Yahoo in the browser). Answers are cached for
+ * 10 seconds and shared between callers, and the last good price is kept if a refresh fails, so a flaky upstream never
+ * spams the console or blanks the page. Falls back to `fallback` only when no price was ever fetched.
+ */
+async function spotFor(feedId: Uint8Array, ticker: string, fallback: number): Promise<number> {
+  const hex = Buffer.from(feedId).toString("hex");
+  const symbol = ticker.replace(/x$/, "");
+  const key = `${hex}:${symbol}`;
+  const hit = spotCache.get(key);
+  if (hit && Date.now() - hit.at < 10_000) return hit.price;
+  let job = spotInFlight.get(key);
+  if (!job) {
+    job = (async () => {
+      try {
+        const res = await fetch(`/api/spot?feed=${hex}&symbol=${encodeURIComponent(symbol)}`);
+        if (!res.ok) return null;
+        const j = await res.json();
+        if (typeof j.price !== "number") return null;
+        spotCache.set(key, { at: Date.now(), price: j.price });
+        return j.price as number;
+      } catch { return null; }
+      finally { spotInFlight.delete(key); }
+    })();
+    spotInFlight.set(key, job);
+  }
+  return (await job) ?? hit?.price ?? fallback;
 }
 
 export async function loadPools(): Promise<PoolView[]> {
@@ -48,7 +70,7 @@ export async function loadRound(key: string): Promise<RoundView> {
   const shares = n(r.sharesPerContractE9) / 1e9;
   const strikeContract = n(r.strikePerContract) / 1e6;
   const yourPrice = strikeContract / shares;
-  const spot = await spotFor(Uint8Array.from(r.pythFeedId), yourPrice * (buy ? 1.05 : 0.95));
+  const spot = await spotFor(Uint8Array.from(r.pythFeedId), tickerOf(r.underlyingMint.toBase58()), yourPrice * (buy ? 1.05 : 0.95));
   const bidAccounts = await c.fetchBidsForRound(pk);
   const bids: BidView[] = bidAccounts.map(({ account: b }) => ({
     bidder: b.bidder.toBase58(), commitTs: n(b.commitTs), revealed: b.revealed, valid: b.valid,
