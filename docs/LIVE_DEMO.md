@@ -44,5 +44,6 @@ Run it a second time with **Stock rises, money back**: the dollars come back and
 
 `docs/proof` holds two recordings of a visitor playing a full week in a real browser, each ending with a balance check on chain:
 
+- `demo-buy` and `demo-skip`: on a local chain. `devnet-buy` and `devnet-skip`: on the public site and real Solana devnet.
 - `demo-buy`: 1,000 USDC became 3.67 USDC plus 7.21 NVDAx, with 3.55 USDC paid up front.
 - `demo-skip`: 1,000 USDC became 1,003.55 USDC, no stock.

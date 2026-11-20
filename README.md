@@ -116,6 +116,17 @@ Code: [`packages/radar`](packages/radar) (36 tests), [`app/components/RiskRadar.
 
 A **Demo week** compresses a whole week into about three minutes on devnet with test money: connect a built-in wallet, get test USDC, deposit, watch two market-maker bots bid in secret, collect the payment, and see Friday decide. Script and what is real versus simulated: [`docs/LIVE_DEMO.md`](docs/LIVE_DEMO.md). Deploying it: [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
+**Live now (devnet, test money):**
+
+| | |
+|---|---|
+| Web app | https://limit-plus-chi.vercel.app (open the **Demo** tab) |
+| Worker (radar, bots, faucet) | https://limitplus-worker.onrender.com/status |
+| Program | [`HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB`](https://explorer.solana.com/address/HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB?cluster=devnet) (mock-oracle build, so a week fits in minutes) |
+| Mock USDC / mock NVDAx | see [`config/addresses.devnet.json`](config/addresses.devnet.json) |
+
+The worker runs on a free host, so the first request after a quiet spell can take about 30 seconds while it wakes up. The public devnet RPC is rate limited; a dedicated RPC endpoint (set `NEXT_PUBLIC_RPC_URL` and `SOLANA_RPC_URL`) removes that risk for a busy demo.
+
 [`docs/proof`](docs/proof) has recordings of a visitor playing a full week in a real browser, with balances checked on chain: 1,000 USDC became 3.67 USDC plus 7.21 NVDAx with 3.55 paid up front (stock falls), and 1,003.55 USDC (stock rises).
 
 ## Project status
