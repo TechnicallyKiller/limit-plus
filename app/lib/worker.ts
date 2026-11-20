@@ -14,6 +14,7 @@ export async function callWorker(req: Request, path: string, init: { method: "GE
       headers: {
         "content-type": "application/json",
         "x-forwarded-for": client,
+        "x-limitplus-client-ip": client,
         ...(process.env.WORKER_SHARED_SECRET ? { "x-limitplus-key": process.env.WORKER_SHARED_SECRET } : {}),
       },
       body: init.body === undefined ? undefined : JSON.stringify(init.body),

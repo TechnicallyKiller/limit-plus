@@ -38,7 +38,7 @@ export function createServer(o: ServerOpts): http.Server {
   const started = now();
   const reads = new Limiter(120, 60_000, now);
   const writes = new Limiter(10, 60_000, now);
-  const faucetIp = new Limiter(3, 3_600_000, now);
+  const faucetIp = new Limiter(15, 3_600_000, now); // a venue is often one address for every visitor; the global cap below still bounds spending
   const faucetGlobal = new Limiter(80, 3_600_000, now);
   const faucetWallet = new Limiter(1, 10 * 60_000, now);
 
@@ -53,7 +53,12 @@ export function createServer(o: ServerOpts): http.Server {
     req.on("end", () => { if (!chunks.length) return resolve({}); try { resolve(JSON.parse(Buffer.concat(chunks).toString("utf8"))); } catch { reject(new DirectorError("bad_request", "body is not valid JSON")); } });
     req.on("error", reject);
   });
-  const ipOf = (req: http.IncomingMessage) => String(req.headers["x-forwarded-for"] ?? req.socket.remoteAddress ?? "unknown").split(",")[0].trim();
+  // The web tier tells us the visitor's address in x-limitplus-client-ip. It is only believed when the shared secret matches,
+  // because a proxy in between may rewrite x-forwarded-for.
+  const ipOf = (req: http.IncomingMessage) => {
+    const trusted = o.sharedSecret && req.headers["x-limitplus-key"] === o.sharedSecret && req.headers["x-limitplus-client-ip"];
+    return String(trusted ?? req.headers["x-forwarded-for"] ?? req.socket.remoteAddress ?? "unknown").split(",")[0].trim();
+  };
 
   let rpcCache: { at: number; ok: boolean; sol?: number } | undefined;
 

@@ -55,7 +55,7 @@ export default function PoolsPage() {
               </table>
             </div>
           )}
-          <div className="mt-3"><ExampleNote show={pools.every((p) => p.example)} /></div>
+          <div className="mt-3"><ExampleNote show={pools.some((p) => p.example)} /></div>
         </div>
         <aside className="flex flex-col gap-5" aria-label="Filters">
           <div className="flex flex-col gap-2"><label htmlFor="stock" className="text-bone-dim">Stock</label>

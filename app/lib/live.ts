@@ -48,9 +48,12 @@ async function spotFor(feedId: Uint8Array, ticker: string, fallback: number): Pr
 
 export async function loadPools(): Promise<PoolView[]> {
   if (!hasChain) return EXAMPLE_POOLS;
-  const rounds = await client().fetchAllRounds();
+  const all = await client().fetchAllRounds();
+  const nowSecs = Math.floor(Date.now() / 1000);
+  // Finished rounds are history, not pools. Without this filter every demo week would leave another tile on the board for good.
+  const rounds = all.filter(({ account: r }) => !["finalized", "noSale"].includes(phaseOf(r, nowSecs)));
   if (!rounds.length) return EXAMPLE_POOLS;
-  return rounds.map(({ publicKey, account: r }) => {
+  const live = rounds.map(({ publicKey, account: r }) => {
     const buy = "buyLower" in r.side;
     const strike = n(r.strikePerContract) / 1e6;
     const waitingUsd = buy ? (n(r.totalContracts) * strike) : n(r.totalContracts) * strike;
@@ -58,6 +61,9 @@ export async function loadPools(): Promise<PoolView[]> {
     return { id: publicKey.toBase58(), ticker: tickerOf(r.underlyingMint.toBase58()), side: buy ? "buyLower" : "sellHigher",
       waitingUsd, ratePct: rate, distancePct: buy ? -5 : 5, roundKey: publicKey.toBase58(), example: false } as PoolView;
   });
+  // Keep the rest of the board for stocks that have no live round yet; those tiles are marked as examples.
+  const liveTickers = new Set(live.map((p) => p.ticker));
+  return [...live, ...EXAMPLE_POOLS.filter((e) => !liveTickers.has(e.ticker))];
 }
 
 export async function loadRound(key: string): Promise<RoundView> {
@@ -98,7 +104,8 @@ export async function loadRound(key: string): Promise<RoundView> {
 export async function loadTickets(owner: PublicKey): Promise<TicketView[]> {
   if (!hasChain) return EXAMPLE_TICKETS;
   const c = client();
-  const rounds = await c.fetchAllRounds();
+  // One position lookup per round: look at the newest few only, so the page stays fast as demo rounds pile up.
+  const rounds = (await c.fetchAllRounds()).sort((a, b) => n(b.account.openTs) - n(a.account.openTs)).slice(0, 12);
   const out: TicketView[] = [];
   for (const { publicKey, account: r } of rounds) {
     try {
