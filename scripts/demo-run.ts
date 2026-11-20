@@ -138,4 +138,8 @@ const usd = (x: bigint | number) => `$${(Number(x) / 1e6).toFixed(4)}`;
   } finally {
     killValidator();
   }
-})().catch((e) => { console.error(e); process.exit(1); });
+})()
+  // Exit explicitly: open web3.js websocket subscriptions keep retrying after the validator is killed and would
+  // otherwise keep the process alive (and spam the log) after a successful run.
+  .then(() => process.exit(0))
+  .catch((e) => { console.error(e); process.exit(1); });

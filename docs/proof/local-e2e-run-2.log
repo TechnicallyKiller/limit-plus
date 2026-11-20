@@ -1,0 +1,35 @@
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+» [10s] Round created. You name your price: NVDAx at $171.00 (spot $180). Fair pay-now per contract: $0.0106.
+» [11s] User 1 deposited 4 contracts.
+» [11s] User 2 deposited 3 contracts.
+» [12s] User 3 deposited 3 contracts.
+» [36s] beta-828G: sealed bid placed. Nobody can see my price until bidding is over.
+  beta-828G: fair $0.0106 per contract, bidding $0.0085 (edge 20%), 6 contracts
+» [36s] alpha-828G: sealed bid placed. Nobody can see my price until bidding is over.
+  alpha-828G: fair $0.0106 per contract, bidding $0.0095 (edge 10%), 6 contracts
+» [78s] Bidding closed at a random moment.
+» [80s] close-bidding: already done by someone else
+» [81s] alpha-828G: bid revealed at $0.0095 per contract.
+» [81s] beta-828G: bid revealed at $0.0085 per contract.
+» [97s] Winners picked. Premiums are ready to claim.
+» [99s] Friday close price: $165.00 (below your price, so you buy).
+» [99s] alpha-828G: won 6 contracts at $0.0085 each.
+» [99s] beta-828G: won 4 contracts at $0.0085 each.
+» [100s] Users were paid $0.0761 up front (split pro-rata).
+» [100s] alpha-828G: unused bid money returned.
+» [100s] beta-828G: unused bid money returned.
+» [112s] Friday close price recorded.
+» [115s] alpha-828G: the price moved our way, so I took the stock at the agreed price.
+» [115s] beta-828G: the price moved our way, so I took the stock at the agreed price.
+» [116s] Round finalized.
+» [118s] Round is final. Payouts are open.
+» [119s] Round is final. Payouts are open.
+┌─────────┬──────┬───────────┬──────────────┬────────┐
+│ (index) │ user │ contracts │ usdc         │ nvdax  │
+├─────────┼──────┼───────────┼──────────────┼────────┤
+│ 0       │ 1    │ 4         │ '993.190456' │ '0.04' │
+│ 1       │ 2    │ 3         │ '994.892842' │ '0.03' │
+│ 2       │ 3    │ 3         │ '994.892842' │ '0.03' │
+└─────────┴──────┴───────────┴──────────────┴────────┘
+» [120s] Done in 120s. Keepers: [{"did":1,"alreadyDone":1},{"did":3,"alreadyDone":0}]
+DEMO_RUN_OK
