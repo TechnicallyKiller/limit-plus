@@ -1,9 +1,31 @@
 {
   "cluster": "devnet",
-  "pyth_receiver_program": { "address": "rec5EKMGg6MxZYaMdyBfgwp4d5rB9T1VQH5pJv5LtFJ", "source": "https://github.com/pyth-network/pyth-crosschain/blob/main/target_chains/solana/sdk/js/pyth_solana_receiver/src/address.ts" },
-  "pyth_feed_nvda_us": { "id": "0xb1073854ed24cbc755dc527418f52b7d271f6cc967bbf8d8129112b18860a593", "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity (Equity.US.NVDA/USD, regular US hours)" },
-  "pyth_feed_nvda_24_7": { "id": "0xa470c4ac46f44b547b2cba52338f311fb642b79375ce5f0cfd5cb5b99227b852", "source": "same query (Equity.Index.NVDA/USD, 24/7 index feed, not the official close)" },
-  "quote_mint": { "address": "TODO: written by scripts/setup-devnet.ts (mock USDC, 6 decimals)", "source": "created by us on devnet" },
-  "underlying_mint": { "address": "TODO: written by scripts/setup-devnet.ts (mock NVDAx, Token-2022)", "source": "created by us on devnet" },
-  "program_id": { "address": "HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB", "source": "keypair backed up outside the repo; run anchor keys list" }
+  "pyth_receiver_program": {
+    "address": "rec5EKMGg6MxZYaMdyBfgwp4d5rB9T1VQH5pJv5LtFJ",
+    "source": "https://github.com/pyth-network/pyth-crosschain/blob/main/target_chains/solana/sdk/js/pyth_solana_receiver/src/address.ts"
+  },
+  "pyth_feed_nvda_us": {
+    "id": "0xb1073854ed24cbc755dc527418f52b7d271f6cc967bbf8d8129112b18860a593",
+    "source": "https://hermes.pyth.network/v2/price_feeds?query=NVDA&asset_type=equity (Equity.US.NVDA/USD, regular US hours)"
+  },
+  "pyth_feed_nvda_24_7": {
+    "id": "0xa470c4ac46f44b547b2cba52338f311fb642b79375ce5f0cfd5cb5b99227b852",
+    "source": "same query (Equity.Index.NVDA/USD, 24/7 index feed, not the official close)"
+  },
+  "quote_mint": {
+    "address": "2V8rmbiPSCv15f4gKhHm6nAiKPQB2xwmub4RR7j5Lc4N",
+    "source": "mock USDC (6 decimals), created by scripts/setup-devnet.ts, mint authority is the demo admin"
+  },
+  "underlying_mint": {
+    "address": "5Y3NKYrZhJR1rfmHJ56qQN2r9sS3FSKDEH32nKpzFt6",
+    "source": "mock NVDAx (Token-2022 scaled UI amount, 8 decimals), created by scripts/setup-devnet.ts"
+  },
+  "program_id": {
+    "address": "HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB",
+    "source": "keypair backed up outside the repo; run anchor keys list"
+  },
+  "treasury": {
+    "address": "AwhHxN3HFgDJ9XXpp9nyNgxgvADvyZmA9XhzyySPdnvV",
+    "source": "admin's mock USDC token account"
+  }
 }

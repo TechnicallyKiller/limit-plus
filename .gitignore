@@ -22,3 +22,4 @@ video/vo/*Zone.Identifier
 notes/
 # local proof scratch: only the curated docs/proof set is committed
 docs/proof/**/page@*.webm
+.vercel

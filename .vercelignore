@@ -1,0 +1,18 @@
+# Keep the upload small: the web app only needs app/, packages/ and the workspace files.
+target
+node_modules
+**/node_modules
+.next
+**/.next
+video
+docs/proof
+docs/images
+docs/mockups
+programs
+tests
+tools
+scripts
+bots
+.bids
+.git
+*.log

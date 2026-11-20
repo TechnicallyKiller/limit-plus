@@ -13,6 +13,7 @@ import { ExampleNote } from "@/components/ui";
 import { useRadar } from "@/lib/radar";
 import { exampleRound } from "@/lib/examples";
 import { STABLE_T, loadRound, useNow, usePolled } from "@/lib/live";
+import { POLL_MS } from "@/lib/chain";
 import { clock, countdown, explorerAddr, signedPct, usd } from "@/lib/format";
 import type { PhaseName, RoundView } from "@/lib/types";
 
@@ -36,7 +37,7 @@ const day = (ts: number) => new Date(ts * 1000).toLocaleString("en-US", { weekda
 
 export default function RoundPage({ params }: { params: Promise<{ pubkey: string }> }) {
   const { pubkey } = use(params);
-  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound("reveal", STABLE_T), 2000, [pubkey]);
+  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound("reveal", STABLE_T), POLL_MS, [pubkey]);
   const now = useNow();
   const radar = useRadar(round.ticker);
   const [table, setTable] = useState(false);

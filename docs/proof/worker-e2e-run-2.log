@@ -1,0 +1,27 @@
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+validator log: /home/divyanshh1/.cache/limitplus/e2e-GlLoWB/validator.out
+ok   chain setup creates mints and config, and re-running reuses them
+ok   health, status, radar and unknown routes behave
+ok   secret, bad wallet, bad outcome, bad deposit time, bad JSON and oversized bodies are rejected
+ok   a burst of writes or reads from one address gets 429 with Retry-After, while other addresses are unaffected
+ok   faucet funds a wallet with 1000 mock USDC and SOL, and refuses a second call
+ok   buy: a second start while one runs is refused with 409
+ok   buy: deposited 584 contracts, USDC left the wallet
+  beta-44Ta: fair $0.0084 per contract, bidding $0.0067 (edge 20%), 293 contracts
+  alpha-44Ta: fair $0.0084 per contract, bidding $0.0076 (edge 10%), 293 contracts
+ok   buy: paid now, claimed right after the auction: +$3.5473 USDC
+ok   buy: round finalized, in the money = true
+ok   buy: claimed. USDC 1000.00 -> 4.91, NVDAx 0.0000 -> 5.8400, premium 3.5594 total, yours 3.5473
+ok   buy: a second claim is refused and moves nothing
+ok   skip: a second start while one runs is refused with 409
+ok   skip: deposited 584 contracts, USDC left the wallet
+  beta-3pmN: fair $0.0084 per contract, bidding $0.0067 (edge 20%), 293 contracts
+  alpha-3pmN: fair $0.0084 per contract, bidding $0.0076 (edge 10%), 293 contracts
+ok   skip: service restarted mid-week with the bots' files deleted, and picked the round back up
+ok   skip: paid now, claimed right after the auction: +$3.5473 USDC
+ok   skip: round finalized, in the money = false
+ok   skip: claimed. USDC 1000.00 -> 1003.55, NVDAx 0.0000 -> 0.0000, premium 3.5594 total, yours 3.5473
+ok   skip: a second claim is refused and moves nothing
+
+WORKER_E2E_OK (18 checks)
+e2e-exit-0

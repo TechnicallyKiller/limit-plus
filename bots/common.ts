@@ -1,4 +1,5 @@
-import { Connection, Keypair, PublicKey, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
+import { confirmByPolling, rpcFetch } from "../packages/sdk/src";
 import * as fs from "fs";
 import * as os from "os";
 
@@ -30,19 +31,44 @@ export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 export const say = (msg: string) => console.log(`» ${msg}`);
 export const debug = (msg: string) => console.log(`  ${msg}`);
 
-/** Cluster time (what the program sees), falling back to wall-clock. */
+/**
+ * A Connection that survives a busy public RPC: paced, retries 429 and 5xx, and never opens a websocket. web3.js throws a
+ * 429 from a background callback as an uncaught exception, which would kill the process. Local validators are not paced.
+ */
+export function makeConnection(url: string, log?: (m: string) => void): Connection {
+  const local = /^https?:\/\/(127\.0\.0\.1|localhost)/.test(url);
+  let lastLog = 0;
+  const onRetry = (m: string) => { if (log && Date.now() - lastLog > 10_000) { lastLog = Date.now(); log(`${m} (RPC is busy, backing off)`); } };
+  return new Connection(url, { commitment: "confirmed", fetch: rpcFetch({ minGapMs: local ? 0 : 120, onRetry }), disableRetryOnRateLimit: true });
+}
+
+const clockCache = new WeakMap<Connection, { offset: number; at: number }>();
+
+/**
+ * Cluster time (what the program sees), falling back to wall-clock. Two RPC calls per read is a lot on a rate limited
+ * endpoint, so the offset between chain time and our clock is cached for 20 seconds; the difference is far below a second.
+ */
 export async function chainNow(c: Connection): Promise<number> {
+  const nowMs = Date.now();
+  const hit = clockCache.get(c);
+  if (hit && nowMs - hit.at < 20_000) return Math.floor(nowMs / 1000) + hit.offset;
   try {
     const slot = await c.getSlot("confirmed");
     const t = await c.getBlockTime(slot);
-    if (t) return t;
+    if (t) { clockCache.set(c, { offset: t - Math.floor(nowMs / 1000), at: nowMs }); return t; }
   } catch { /* fall through */ }
-  return Math.floor(Date.now() / 1000);
+  return hit ? Math.floor(Date.now() / 1000) + hit.offset : Math.floor(Date.now() / 1000);
 }
 
+/** Signs, sends and waits by polling over HTTP. The first signer pays. Preflight runs, so program errors carry their logs. */
 export async function send(c: Connection, ixs: TransactionInstruction[], signers: Keypair[]): Promise<string> {
   const tx = new Transaction().add(...ixs);
-  return sendAndConfirmTransaction(c, tx, signers, { commitment: "confirmed", skipPreflight: false });
+  tx.feePayer = signers[0].publicKey;
+  tx.recentBlockhash = (await c.getLatestBlockhash("confirmed")).blockhash;
+  tx.sign(...signers);
+  const sig = await c.sendRawTransaction(tx.serialize(), { skipPreflight: false, preflightCommitment: "confirmed" });
+  await confirmByPolling(c, sig);
+  return sig;
 }
 
 /** Retries with exponential backoff. `isDone` lets callers treat "someone else already did it" as success. */

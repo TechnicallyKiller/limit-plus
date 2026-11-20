@@ -7,13 +7,13 @@
  * Restart safe: nothing is kept only in memory. The outcome is encoded in the round id, the bots derive their bid salts from
  * the admin key, and `resume()` picks an unfinished round back up.
  */
-import { Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, sendAndConfirmTransaction } from "@solana/web3.js";
+import { Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram } from "@solana/web3.js";
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { createHash } from "crypto";
 import { LimitPlusClient, getProgram, phaseOf, roundPda, type Phase } from "../packages/sdk/src";
 import { fetchSpot } from "../packages/pricing/src/spot";
 import { buildRound, fund, sendCreateRound } from "../scripts/lib";
-import { chainNow, errText, send, sleep } from "./common";
+import { chainNow, errText, retry, send, sleep } from "./common";
 import { runKeeper } from "./keeper";
 import { runMmBot } from "./mm-bot";
 
@@ -101,7 +101,7 @@ export class Director {
     const c = this.o.connection;
     const bal = await c.getBalance(kp.publicKey);
     if (bal < minSol * LAMPORTS_PER_SOL) {
-      await sendAndConfirmTransaction(c, new Transaction().add(SystemProgram.transfer({ fromPubkey: this.o.admin.publicKey, toPubkey: kp.publicKey, lamports: Math.ceil(minSol * 2 * LAMPORTS_PER_SOL) })), [this.o.admin], { commitment: "confirmed" });
+      await send(c, [SystemProgram.transfer({ fromPubkey: this.o.admin.publicKey, toPubkey: kp.publicKey, lamports: Math.ceil(minSol * 2 * LAMPORTS_PER_SOL) })], [this.o.admin]);
     }
     const have = async (mint: PublicKey, prog: PublicKey) => {
       try { return BigInt((await c.getTokenAccountBalance(getAssociatedTokenAddressSync(mint, kp.publicKey, true, prog))).value.amount); } catch { return 0n; }
@@ -162,29 +162,29 @@ export class Director {
         // Bots start bidding when the window opens, sized to the pool that actually deposited.
         for (;;) {
           if (signal.stop) return;
-          const r = await this.client.fetchRound(round);
-          const ph = phaseOf(r, await chainNow(c));
+          let r: any, ph: Phase;
+          try { r = await this.client.fetchRound(round); ph = phaseOf(r, await chainNow(c)); } catch { await sleep(this.o.pollMs ?? 1500); continue; }
           if (ph !== "deposit") {
             const total = Math.max(Number(r.totalContracts.toString()), 2);
             const size = Math.max(Math.ceil(total / 2), 1);
             await Promise.all(this.mm.map((b) => runMmBot({ connection: c, wallet: b.kp, name: `${b.name}-${round.toBase58().slice(0, 4)}`, edge: b.edge, size, round, pollMs: this.o.pollMs ?? 1500, signal, log, saltSecret: this.saltSecret, stateDir: ".bids" })));
             return;
           }
-          await sleep(1000);
+          await sleep(this.o.pollMs ?? 1500);
         }
       })();
       const closer = (async () => {
         for (;;) {
           if (signal.stop) return;
-          const r = await this.client.fetchRound(round);
-          const ph = phaseOf(r, await chainNow(c));
+          let ph: Phase;
+          try { ph = phaseOf(await this.client.fetchRound(round), await chainNow(c)); } catch { await sleep(this.o.pollMs ?? 1500); continue; }
           if (ph === "cleared" || ph === "awaitingSettle") break;
           if (ph === "noSale" || ph === "finalized") return;
-          await sleep(1500);
+          await sleep(this.o.pollMs ?? 1500);
         }
         const r = await this.client.fetchRound(round);
         const close = Math.round(yourPrice * (outcome === "buy" ? 0.96 : 1.04) * 100) / 100;
-        await send(c, [await this.client.setMockPrice(this.o.admin.publicKey, NVDA_FEED, Math.round(close * 1e5), -5, 1000, Number(r.expiryTs.toString()))], [this.o.admin]);
+        await retry(async () => send(c, [await this.client.setMockPrice(this.o.admin.publicKey, NVDA_FEED, Math.round(close * 1e5), -5, 1000, Number(r.expiryTs.toString()))], [this.o.admin]), 5, 1000);
         this.state.closePrice = close;
         this.say(outcome === "buy" ? `Friday close: $${close.toFixed(2)}, below your price, so you buy.` : `Friday close: $${close.toFixed(2)}, above your price, so you get your money back.`);
       })();
@@ -229,7 +229,7 @@ export class Director {
     const bal = await c.getBalance(owner);
     let sentSol = 0;
     if (bal < sol * LAMPORTS_PER_SOL) {
-      await sendAndConfirmTransaction(c, new Transaction().add(SystemProgram.transfer({ fromPubkey: this.o.admin.publicKey, toPubkey: owner, lamports: Math.round(sol * LAMPORTS_PER_SOL) })), [this.o.admin], { commitment: "confirmed" });
+      await send(c, [SystemProgram.transfer({ fromPubkey: this.o.admin.publicKey, toPubkey: owner, lamports: Math.round(sol * LAMPORTS_PER_SOL) })], [this.o.admin]);
       sentSol = sol;
     }
     await fund(c, this.o.admin, this.o.quoteMint, TOKEN_PROGRAM_ID, owner, BigInt(usdc) * 1_000_000n);

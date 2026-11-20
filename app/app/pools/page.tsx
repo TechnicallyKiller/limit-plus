@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import PoolsTreemap from "@/components/PoolsTreemap";
 import { Odometer, ExampleNote } from "@/components/ui";
 import { loadPools, useNow, usePolled } from "@/lib/live";
+import { POLL_MS } from "@/lib/chain";
 import { RadarPill } from "@/components/RiskRadar";
 import { useRadar } from "@/lib/radar";
 import { EXAMPLE_POOLS } from "@/lib/examples";
@@ -16,7 +17,7 @@ import Link from "next/link";
 const untilClose = (now: number) => Math.floor(nextFridayClose(now * 1000) / 1000) - now;
 
 export default function PoolsPage() {
-  const { data: pools } = usePolled<PoolView[]>(loadPools, EXAMPLE_POOLS, 2000);
+  const { data: pools } = usePolled<PoolView[]>(loadPools, EXAMPLE_POOLS, POLL_MS);
   const [stock, setStock] = useState("all");
   const [view, setView] = useState<"board" | "list">("board");
   const [sel, setSel] = useState<PoolView | undefined>();

@@ -16,9 +16,10 @@ fs.mkdirSync(outDir, { recursive: true });
 const log = (m) => console.log(`${new Date().toISOString().slice(11, 19)} ${m}`);
 const fail = (m) => { throw new Error(m); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const until = async (what, fn, ms = 240_000) => {
+// `every` is the poll interval. Waits that read the chain use a slower one so a public RPC does not rate-limit the test itself.
+const until = async (what, fn, ms = 360_000, every = 500) => {
   const t0 = Date.now();
-  for (;;) { try { const v = await fn(); if (v) return v; } catch { /* keep trying */ } if (Date.now() - t0 > ms) fail(`timed out waiting for: ${what}`); await sleep(500); }
+  for (;;) { try { const v = await fn(); if (v) return v; } catch { /* keep trying */ } if (Date.now() - t0 > ms) fail(`timed out waiting for: ${what}`); await sleep(every); }
 };
 
 const browser = await chromium.launch(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {});
@@ -73,7 +74,10 @@ try {
 
   // helpers to read balances straight from the chain
   const bal = async (mint, prog) => { try { return Number((await c.getTokenAccountBalance(getAssociatedTokenAddressSync(new PublicKey(mint), owner, true, prog))).value.uiAmount ?? 0); } catch { return 0; } };
-  const mints = JSON.parse(fs.readFileSync("/tmp/limitplus-local.json", "utf8"));
+  // Mint addresses: DEMO_MINTS points at a JSON file. Both the local stack's file and config/addresses.<cluster>.json work.
+  const raw = JSON.parse(fs.readFileSync(process.env.DEMO_MINTS ?? "/tmp/limitplus-local.json", "utf8"));
+  const mints = { quoteMint: raw.quoteMint ?? raw.quote_mint?.address, underlyingMint: raw.underlyingMint ?? raw.underlying_mint?.address };
+  if (!mints.quoteMint || !mints.underlyingMint) fail("could not read the mint addresses from DEMO_MINTS");
   const usdc = () => bal(mints.quoteMint, TOKEN_PROGRAM_ID);
   const nvda = () => bal(mints.underlyingMint, TOKEN_2022_PROGRAM_ID);
   const afterDeposit = { usdc: await usdc(), nvda: await nvda() };
@@ -93,7 +97,7 @@ try {
   await snap("portfolio-paid");
   const before = await usdc();
   await claim.click();
-  await until("paid now arrived", async () => (await usdc()) > before + 0.01);
+  await until("paid now arrived", async () => (await usdc()) > before + 0.01, 120_000, 2500);
   const paidNow = (await usdc()) - before;
   log(`claimed the up-front payment through the UI: +$${paidNow.toFixed(4)}`);
   await snap("portfolio-claimed-premium");
@@ -110,7 +114,7 @@ try {
   await until("final claim button", () => claim2.count());
   await snap("portfolio-settled");
   await claim2.click();
-  await until("final claim landed", async () => outcome === "buy" ? (await nvda()) > 0 : (await usdc()) > 990);
+  await until("final claim landed", async () => outcome === "buy" ? (await nvda()) > 0 : (await usdc()) > 990, 120_000, 2500);
   await until("ticket marked claimed", () => page.getByText("Claimed", { exact: true }).count());
   const end = { usdc: await usdc(), nvda: await nvda() };
   await snap("portfolio-claimed");

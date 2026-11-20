@@ -31,16 +31,17 @@ export async function runKeeper(o: KeeperOpts): Promise<KeeperStats> {
       stats.done.push(name);
     } catch (e) {
       // Another keeper may have moved the round on: that is fine.
-      const r = await client.fetchRound(round);
-      const after = phaseOf(r, await chainNow(connection));
+      let after: Phase;
+      try { after = phaseOf(await client.fetchRound(round), await chainNow(connection)); } catch { log(`${name}: waiting, the RPC is busy`); return; }
       if (after !== phaseBefore) { stats.noops.push(name); log(`${name}: already done by someone else`); }
       else log(`${name}: not ready yet (${errText(e).slice(0, 120)})`);
     }
   };
 
   while (!o.signal?.stop) {
-    const r = await client.fetchRound(round);
-    const now = await chainNow(connection);
+    let r: any, now: number;
+    // A busy or briefly unreachable RPC must never abort a week: look again on the next tick.
+    try { r = await client.fetchRound(round); now = await chainNow(connection); } catch { await sleep(o.pollMs ?? 2000); continue; }
     const phase = phaseOf(r, now);
     if (phase === "finalized" || phase === "noSale") { log(phase === "noSale" ? "Round ended with no sale. Everyone can take their money back." : "Round is final. Payouts are open."); break; }
 

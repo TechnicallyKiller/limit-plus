@@ -68,8 +68,9 @@ export async function runMmBot(o: BotOpts) {
   }
 
   while (!o.signal?.stop) {
-    const r = await client.fetchRound(round);
-    const now = await chainNow(connection);
+    let r: any, now: number;
+    // A busy or briefly unreachable RPC must never end the bot: look again on the next tick.
+    try { r = await client.fetchRound(round); now = await chainNow(connection); } catch { await sleep(o.pollMs ?? 2000); continue; }
     const phase = phaseOf(r, now);
     const save = (extra: any) => fs.writeFileSync(saltFile, JSON.stringify({ ...(fs.existsSync(saltFile) ? JSON.parse(fs.readFileSync(saltFile, "utf8")) : {}), ...extra, progress: { ...state } }));
 

@@ -11,15 +11,21 @@
  *   WORKER_SHARED_SECRET  required in x-limitplus-key for POST routes
  *   DEMO_ENABLED          "0" turns the demo and faucet off
  */
-import { Connection, Keypair, PublicKey } from "@solana/web3.js";
+import { Keypair, PublicKey } from "@solana/web3.js";
 import * as fs from "fs";
 import * as path from "path";
 import { COMPANIES, RadarService, tinyfishSearch, type RadarSnapshot } from "../packages/radar/src";
 import snapshot from "../packages/radar/src/snapshot.json";
+import { makeConnection } from "./common";
 import { Director } from "./director";
 import { createServer } from "./server";
 
 const log = (m: string) => console.log(`${new Date().toISOString()} ${m}`);
+
+// web3.js can throw a rate limit error from a background callback, which Node treats as fatal. A service that has other work
+// in flight (a demo week, the radar) should log it and carry on rather than die; the loops retry on their own.
+process.on("uncaughtException", (e) => log(`uncaught exception, carrying on: ${String((e as any)?.message ?? e).slice(0, 200)}`));
+process.on("unhandledRejection", (e) => log(`unhandled rejection, carrying on: ${String((e as any)?.message ?? e).slice(0, 200)}`));
 
 (async () => {
   const cluster = process.env.CLUSTER ?? "devnet";
@@ -32,9 +38,11 @@ const log = (m: string) => console.log(`${new Date().toISOString()} ${m}`);
     const cfg = (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, `../config/addresses.${cluster}.json`), "utf8")); } catch { return {}; } })();
     const quote = process.env.QUOTE_MINT ?? cfg.quote_mint?.address, underlying = process.env.UNDERLYING_MINT ?? cfg.underlying_mint?.address;
     if (!quote || !underlying) throw new Error("QUOTE_MINT and UNDERLYING_MINT are not set and not in the config file. Run scripts/setup-devnet.ts first.");
-    const connection = new Connection(process.env.SOLANA_RPC_URL, "confirmed");
+    const connection = makeConnection(process.env.SOLANA_RPC_URL, log);
     const admin = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(process.env.ADMIN_KEYPAIR)));
-    director = new Director({ connection, admin, quoteMint: new PublicKey(quote), underlyingMint: new PublicKey(underlying), log });
+    // Public networks rate limit hard, so the bots look at the chain every 4 seconds there instead of every 1.5.
+    const pollMs = Number(process.env.POLL_MS ?? (cluster === "localnet" ? 1500 : 4000));
+    director = new Director({ connection, admin, quoteMint: new PublicKey(quote), underlyingMint: new PublicKey(underlying), pollMs, log });
     adminSol = async () => (await connection.getBalance(admin.publicKey)) / 1e9;
     log(`Demo enabled on ${cluster}. Admin ${admin.publicKey.toBase58()}`);
     if (await director.resume()) log("Resumed an unfinished demo week.");
