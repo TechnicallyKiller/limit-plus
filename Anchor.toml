@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-limit_plus = "HX8kE9ryRfoFbs36CB49pHsPn2iUCFgfHzq17drGVLUs"
+limit_plus = "HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB"
 
 [registry]
 url = "https://api.apr.dev"

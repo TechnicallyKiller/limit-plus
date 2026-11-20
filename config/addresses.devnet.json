@@ -5,5 +5,5 @@
   "pyth_feed_nvda_24_7": { "id": "0xa470c4ac46f44b547b2cba52338f311fb642b79375ce5f0cfd5cb5b99227b852", "source": "same query (Equity.Index.NVDA/USD, 24/7 index feed, not the official close)" },
   "quote_mint": { "address": "TODO: written by scripts/setup-devnet.ts (mock USDC, 6 decimals)", "source": "created by us on devnet" },
   "underlying_mint": { "address": "TODO: written by scripts/setup-devnet.ts (mock NVDAx, Token-2022)", "source": "created by us on devnet" },
-  "program_id": { "address": "HX8kE9ryRfoFbs36CB49pHsPn2iUCFgfHzq17drGVLUs", "source": "anchor keys list (local keypair)" }
+  "program_id": { "address": "HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB", "source": "keypair backed up outside the repo; run anchor keys list" }
 }
