@@ -1,0 +1,10 @@
+12:28:00 connected the demo wallet 3HxC...
+12:28:01 got test funds
+12:28:10 week started (buy)
+12:28:14 deposited through the UI
+12:30:38 auction cleared
+12:30:40 claimed the up-front payment through the UI: +$3.5508
+12:31:00 round final
+
+DEMO_FLOW_OK buy: USDC 1000 -> 3.67, NVDAx 0 -> 7.2100, paid up front $3.5508
+flow-exit-0

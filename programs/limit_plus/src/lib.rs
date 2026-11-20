@@ -11,7 +11,7 @@ pub mod token;
 
 use instructions::*;
 
-declare_id!("HX8kE9ryRfoFbs36CB49pHsPn2iUCFgfHzq17drGVLUs");
+declare_id!("HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB");
 
 #[program]
 pub mod limit_plus {

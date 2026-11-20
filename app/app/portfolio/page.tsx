@@ -10,13 +10,13 @@ import { loadTickets, usePolled } from "@/lib/live";
 import { EXAMPLE_TICKETS } from "@/lib/examples";
 import { usd } from "@/lib/format";
 import type { TicketView } from "@/lib/types";
-import { hasChain } from "@/lib/chain";
+import { POLL_MS, hasChain } from "@/lib/chain";
 
 export default function PortfolioPage() {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
   const { setVisible } = useWalletModal();
-  const { data: tickets } = usePolled<TicketView[]>(async () => (publicKey || !hasChain ? loadTickets(publicKey!) : []), hasChain ? [] : EXAMPLE_TICKETS, 2000, [publicKey?.toBase58()]);
+  const { data: tickets } = usePolled<TicketView[]>(async () => (publicKey || !hasChain ? loadTickets(publicKey!) : []), hasChain ? [] : EXAMPLE_TICKETS, POLL_MS, [publicKey?.toBase58()]);
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const paid = tickets.reduce((a, t) => a + t.paidNow, 0);

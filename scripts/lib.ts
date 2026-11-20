@@ -1,4 +1,5 @@
-import { Connection, Keypair, PublicKey, SystemProgram, Transaction, sendAndConfirmTransaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { send } from "../bots/common";
 import {
   ExtensionType, MINT_SIZE, TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction,
   createInitializeMintInstruction, createInitializeScaledUiAmountConfigInstruction, createMintToInstruction,
@@ -24,7 +25,7 @@ export async function createMint(c: Connection, payer: Keypair, decimals: number
   );
   if (t22) tx.add(createInitializeScaledUiAmountConfigInstruction(mint.publicKey, payer.publicKey, 1.0, program));
   tx.add(createInitializeMintInstruction(mint.publicKey, decimals, payer.publicKey, null, program));
-  await sendAndConfirmTransaction(c, tx, [payer, mint], { commitment: "confirmed" });
+  await send(c, tx.instructions, [payer, mint]);
   return mint.publicKey;
 }
 
@@ -33,7 +34,7 @@ export async function fund(c: Connection, payer: Keypair, mint: PublicKey, progr
   const ata = getAssociatedTokenAddressSync(mint, owner, true, program);
   const tx = new Transaction().add(createAssociatedTokenAccountIdempotentInstruction(payer.publicKey, ata, owner, mint, program));
   if (amount > 0n) tx.add(createMintToInstruction(mint, ata, payer.publicKey, amount, [], program));
-  await sendAndConfirmTransaction(c, tx, [payer], { commitment: "confirmed" });
+  await send(c, tx.instructions, [payer]);
   return ata;
 }
 
@@ -86,6 +87,6 @@ export async function buildRound(o: NewRoundOpts): Promise<CreateRoundArgs & { _
 
 export async function sendCreateRound(c: Connection, client: LimitPlusClient, admin: Keypair, underlying: PublicKey, quote: PublicKey, args: CreateRoundArgs) {
   const ix = await client.createRound(admin.publicKey, underlying, quote, args);
-  await sendAndConfirmTransaction(c, new Transaction().add(ix), [admin], { commitment: "confirmed" });
+  await send(c, [ix], [admin]);
   return roundPda(underlying, new BN(args.roundId as any));
 }

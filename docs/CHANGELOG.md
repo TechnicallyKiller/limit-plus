@@ -27,3 +27,13 @@
 - `video/` is a Remotion project (React) that renders the 1 minute pitch from the same design tokens as the app. Sound design, particle fire and the beat-locked edit are code, not footage.
 - Scripts and delivery notes live in `docs/video`.
 - Media (renders, voice recordings, music) is intentionally not in the repository.
+
+## Ship to devnet
+
+- **Risk radar**: `packages/radar`, TinyFish Search turned into a Calm, Watch or High risk verdict per stock, with sources. Honest by design: never Calm on missing data, next earnings only, announced events only.
+- **Worker** (`bots/worker.ts`): radar refresher, demo director, keeper, two market-maker bots, faucet and a small HTTP API with rate limits and a shared secret. Restart safe: the outcome rides in the round id, bid salts are derived, `resume()` picks a round back up.
+- **Demo week**: a built-in wallet, a faucet, a one-click compressed week and a Demo page. `docs/LIVE_DEMO.md` is the script.
+- **Program id** is now `HzCjmdAX5qrDgX8eEgJ6oBBJLy9nWqtE3wTVcdzQeVkB`. The original keypair was not in the repo, so the id was synced to one we hold.
+- **Build**: `--arch v0` (newer Solana toolchains default to SBPF v3, which LiteSVM 0.3.x cannot load).
+- **Fixes to the prototype**: React hydration errors (prerendered pages read the build-time clock), a halftone canvas crash, a Friday-close countdown that was a week off on Fridays and ignored winter time, and live prices (Pyth's public Hermes endpoint now returns 401, so prices come from a cached server route with a Yahoo Finance fallback).
+- **Tests added**: 36 radar, 7 spot price, 18 worker end-to-end checks on a real validator, 40 radar UI checks, a 14-page design-rule capture, and a recorded browser run of both demo endings.

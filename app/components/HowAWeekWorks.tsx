@@ -1,6 +1,7 @@
 "use client";
 import CandleRing from "./CandleRing";
 import { exampleRound } from "@/lib/examples";
+import { STABLE_T, useNow } from "@/lib/live";
 
 const STEPS = [
   ["You deposit", "Pick a pool and name your price. Your money waits in a vault only the program controls."],
@@ -11,8 +12,8 @@ const STEPS = [
 ];
 
 export default function HowAWeekWorks() {
-  const r = exampleRound("reveal");
-  const now = Math.floor(Date.now() / 1000);
+  const now = useNow();
+  const r = exampleRound("reveal", now === STABLE_T ? STABLE_T : now);
   return (
     <section aria-label="How a week works" className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1fr_1fr] md:px-10">
       <div><h2 className="text-[32px] font-semibold">How a week works</h2>

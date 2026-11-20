@@ -14,21 +14,46 @@ const TICKERS: Record<string, string> = (() => {
 const tickerOf = (mint: string) => TICKERS[mint] ?? "NVDAx";
 const client = () => new LimitPlusClient(getProgram(connection()));
 
-async function spotFor(feedId: Uint8Array, fallback: number): Promise<number> {
-  try {
-    const hex = Buffer.from(feedId).toString("hex");
-    const res = await fetch(`https://hermes.pyth.network/v2/updates/price/latest?ids[]=0x${hex}&parsed=true`);
-    const j = await res.json();
-    const p = j.parsed[0].price;
-    return Number(p.price) * 10 ** p.expo;
-  } catch { return fallback; }
+const spotCache = new Map<string, { at: number; price: number }>();
+const spotInFlight = new Map<string, Promise<number | null>>();
+
+/**
+ * The live price for a stock, through our own /api/spot (never straight from Pyth or Yahoo in the browser). Answers are cached for
+ * 10 seconds and shared between callers, and the last good price is kept if a refresh fails, so a flaky upstream never
+ * spams the console or blanks the page. Falls back to `fallback` only when no price was ever fetched.
+ */
+async function spotFor(feedId: Uint8Array, ticker: string, fallback: number): Promise<number> {
+  const hex = Buffer.from(feedId).toString("hex");
+  const symbol = ticker.replace(/x$/, "");
+  const key = `${hex}:${symbol}`;
+  const hit = spotCache.get(key);
+  if (hit && Date.now() - hit.at < 10_000) return hit.price;
+  let job = spotInFlight.get(key);
+  if (!job) {
+    job = (async () => {
+      try {
+        const res = await fetch(`/api/spot?feed=${hex}&symbol=${encodeURIComponent(symbol)}`);
+        if (!res.ok) return null;
+        const j = await res.json();
+        if (typeof j.price !== "number") return null;
+        spotCache.set(key, { at: Date.now(), price: j.price });
+        return j.price as number;
+      } catch { return null; }
+      finally { spotInFlight.delete(key); }
+    })();
+    spotInFlight.set(key, job);
+  }
+  return (await job) ?? hit?.price ?? fallback;
 }
 
 export async function loadPools(): Promise<PoolView[]> {
   if (!hasChain) return EXAMPLE_POOLS;
-  const rounds = await client().fetchAllRounds();
+  const all = await client().fetchAllRounds();
+  const nowSecs = Math.floor(Date.now() / 1000);
+  // Finished rounds are history, not pools. Without this filter every demo week would leave another tile on the board for good.
+  const rounds = all.filter(({ account: r }) => !["finalized", "noSale"].includes(phaseOf(r, nowSecs)));
   if (!rounds.length) return EXAMPLE_POOLS;
-  return rounds.map(({ publicKey, account: r }) => {
+  const live = rounds.map(({ publicKey, account: r }) => {
     const buy = "buyLower" in r.side;
     const strike = n(r.strikePerContract) / 1e6;
     const waitingUsd = buy ? (n(r.totalContracts) * strike) : n(r.totalContracts) * strike;
@@ -36,6 +61,9 @@ export async function loadPools(): Promise<PoolView[]> {
     return { id: publicKey.toBase58(), ticker: tickerOf(r.underlyingMint.toBase58()), side: buy ? "buyLower" : "sellHigher",
       waitingUsd, ratePct: rate, distancePct: buy ? -5 : 5, roundKey: publicKey.toBase58(), example: false } as PoolView;
   });
+  // Keep the rest of the board for stocks that have no live round yet; those tiles are marked as examples.
+  const liveTickers = new Set(live.map((p) => p.ticker));
+  return [...live, ...EXAMPLE_POOLS.filter((e) => !liveTickers.has(e.ticker))];
 }
 
 export async function loadRound(key: string): Promise<RoundView> {
@@ -48,7 +76,7 @@ export async function loadRound(key: string): Promise<RoundView> {
   const shares = n(r.sharesPerContractE9) / 1e9;
   const strikeContract = n(r.strikePerContract) / 1e6;
   const yourPrice = strikeContract / shares;
-  const spot = await spotFor(Uint8Array.from(r.pythFeedId), yourPrice * (buy ? 1.05 : 0.95));
+  const spot = await spotFor(Uint8Array.from(r.pythFeedId), tickerOf(r.underlyingMint.toBase58()), yourPrice * (buy ? 1.05 : 0.95));
   const bidAccounts = await c.fetchBidsForRound(pk);
   const bids: BidView[] = bidAccounts.map(({ account: b }) => ({
     bidder: b.bidder.toBase58(), commitTs: n(b.commitTs), revealed: b.revealed, valid: b.valid,
@@ -76,7 +104,8 @@ export async function loadRound(key: string): Promise<RoundView> {
 export async function loadTickets(owner: PublicKey): Promise<TicketView[]> {
   if (!hasChain) return EXAMPLE_TICKETS;
   const c = client();
-  const rounds = await c.fetchAllRounds();
+  // One position lookup per round: look at the newest few only, so the page stays fast as demo rounds pile up.
+  const rounds = (await c.fetchAllRounds()).sort((a, b) => n(b.account.openTs) - n(a.account.openTs)).slice(0, 12);
   const out: TicketView[] = [];
   for (const { publicKey, account: r } of rounds) {
     try {
@@ -92,6 +121,24 @@ export async function loadTickets(owner: PublicKey): Promise<TicketView[]> {
     } catch { /* no position in this round */ }
   }
   return out.length ? out : [];
+}
+
+/**
+ * A fixed instant (2026-01-01 UTC) used for the first render. These pages are prerendered at build time, so any
+ * clock read during render makes the server HTML differ from what the browser computes and breaks hydration.
+ */
+export const STABLE_T = 1_767_225_600;
+
+/** Seconds since epoch. Equals STABLE_T on the server and on the first client render, then follows the real clock every second. */
+export function useNow(intervalMs = 1000): number {
+  const [now, setNow] = useState(STABLE_T);
+  useEffect(() => {
+    const tick = () => setNow(Math.floor(Date.now() / 1000));
+    tick();
+    const id = setInterval(tick, intervalMs);
+    return () => clearInterval(id);
+  }, [intervalMs]);
+  return now;
 }
 
 /** Polls `fn` every `ms` and keeps the last good value. */

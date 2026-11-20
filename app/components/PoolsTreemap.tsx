@@ -52,11 +52,16 @@ export default function PoolsTreemap({ pools, selectedId, onSelect, height = 580
     ro.observe(el); setW(el.getBoundingClientRect().width);
     return () => ro.disconnect();
   }, []);
-  const sorted = useMemo(() => [...pools].sort((a, b) => b.waitingUsd - a.waitingUsd), [pools]);
+  // A real pool can be tiny next to the example numbers around it. Give live tiles a minimum share of the board so they stay readable.
+  const weightOf = useMemo(() => {
+    const floor = 0.12 * pools.reduce((a, p) => a + p.waitingUsd, 0);
+    return (p: PoolView) => (p.example ? p.waitingUsd : Math.max(p.waitingUsd, floor));
+  }, [pools]);
+  const sorted = useMemo(() => [...pools].sort((a, b) => weightOf(b) - weightOf(a)), [pools, weightOf]);
   const mobile = w > 0 && w < 640;
   const leaves = useMemo(() => {
     if (!w || mobile) return [];
-    const root = hierarchy<any>({ children: sorted.map((p) => ({ p, value: p.waitingUsd })) }).sum((d) => d.value ?? 0);
+    const root = hierarchy<any>({ children: sorted.map((p) => ({ p, value: weightOf(p) })) }).sum((d) => d.value ?? 0);
     treemap<any>().tile(treemapSquarify).size([w - PAD * 2, height - PAD * 2]).paddingInner(GAP)(root);
     return root.leaves() as any[];
   }, [sorted, w, height, mobile]);

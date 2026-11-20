@@ -250,3 +250,4 @@ export class LimitPlusClient {
 export function newSalt(): Uint8Array {
   return Keypair.generate().secretKey.slice(0, 32);
 }
+export * from "./rpc";

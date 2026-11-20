@@ -1,6 +1,6 @@
 "use client";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
-import { LimitPlusClient, getProgram } from "@limit-plus/sdk";
+import { LimitPlusClient, confirmByPolling, getProgram } from "@limit-plus/sdk";
 import { getAssociatedTokenAddressSync, createAssociatedTokenAccountIdempotentInstruction } from "@solana/spl-token";
 
 type Sender = (tx: Transaction, c: Connection) => Promise<string>;
@@ -10,7 +10,7 @@ async function run(connection: Connection, owner: PublicKey, send: Sender, ixs: 
   tx.feePayer = owner;
   tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
   const sig = await send(tx, connection);
-  await connection.confirmTransaction(sig, "confirmed");
+  await confirmByPolling(connection, sig); // HTTP polling: a websocket confirm gets rate limited on public RPCs
   return sig;
 }
 

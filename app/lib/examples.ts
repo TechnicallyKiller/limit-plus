@@ -15,8 +15,7 @@ export const EXAMPLE_POOLS: PoolView[] = [
 
 const now = () => Math.floor(Date.now() / 1000);
 
-export function exampleRound(phase: RoundView["phase"] = "reveal"): RoundView {
-  const t = now();
+export function exampleRound(phase: RoundView["phase"] = "reveal", t: number = now()): RoundView {
   const expiry = t + 2 * 86400 + 4 * 3600 + 731;
   const bidEnd = t - 5400;
   const spark = [172.4, 174.1, 173.0, 175.8, 177.2, 176.5, 178.9, 180.3, 179.1, 181.6, 183.0, 182.1, 184.4, 185.9, 184.2, 183.1, 181.7, 182.9, 180.6, 179.8, 178.2, 179.9, 181.2, 180.4, 182.2, 181.1, 180.0, 179.4, 180.7, 180.0];

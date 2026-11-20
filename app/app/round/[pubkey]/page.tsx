@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useState } from "react";
 import { ArrowDown, ArrowUp } from "@phosphor-icons/react";
 import AuctionStage from "@/components/AuctionStage";
 import BidsTable from "@/components/BidsTable";
@@ -8,9 +8,12 @@ import FairPriceLevel from "@/components/FairPriceLevel";
 import OrderTicket from "@/components/OrderTicket";
 import PriceSpark from "@/components/PriceSpark";
 import TicketSheet from "@/components/TicketSheet";
+import RiskRadar, { RadarPill } from "@/components/RiskRadar";
 import { ExampleNote } from "@/components/ui";
+import { useRadar } from "@/lib/radar";
 import { exampleRound } from "@/lib/examples";
-import { loadRound, usePolled } from "@/lib/live";
+import { STABLE_T, loadRound, useNow, usePolled } from "@/lib/live";
+import { POLL_MS } from "@/lib/chain";
 import { clock, countdown, explorerAddr, signedPct, usd } from "@/lib/format";
 import type { PhaseName, RoundView } from "@/lib/types";
 
@@ -34,10 +37,10 @@ const day = (ts: number) => new Date(ts * 1000).toLocaleString("en-US", { weekda
 
 export default function RoundPage({ params }: { params: Promise<{ pubkey: string }> }) {
   const { pubkey } = use(params);
-  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound(), 2000, [pubkey]);
-  const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
+  const { data: round, error } = usePolled<RoundView>(() => loadRound(pubkey), exampleRound("reveal", STABLE_T), POLL_MS, [pubkey]);
+  const now = useNow();
+  const radar = useRadar(round.ticker);
   const [table, setTable] = useState(false);
-  useEffect(() => { const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000); return () => clearInterval(id); }, []);
   const buy = round.side === "buyLower";
   const Icon = buy ? ArrowDown : ArrowUp;
   const vsNow = ((round.yourPrice - round.spot) / round.spot) * 100;
@@ -54,6 +57,7 @@ export default function RoundPage({ params }: { params: Promise<{ pubkey: string
           <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[14px] font-semibold text-obsidian-0" style={{ background: buy ? "var(--color-volt)" : "var(--color-iris)" }}>
             <Icon size={16} aria-hidden="true" />{buy ? "Buy lower" : "Sell higher"}
           </span>
+          <RadarPill snap={radar.snap} state={radar.state} />
         </div>
         <dl className="flex flex-wrap items-baseline gap-x-8 gap-y-1">
           <div className="flex items-baseline gap-2"><dt className="text-bone-dim">Your price</dt><dd className="mono text-[22px]">{usd(round.yourPrice)}</dd></div>
@@ -113,6 +117,7 @@ export default function RoundPage({ params }: { params: Promise<{ pubkey: string
               ) : <FairPriceLevel round={round} />}
             </section>
           </div>
+          <RiskRadar ticker={round.ticker} snap={radar.snap} state={radar.state} nowMs={now * 1000} />
           <p className="text-[13px] text-bone-dim">Settles at Friday's official close, 4:00 pm ET. {round.example ? "" : <a className="underline hover:text-flame" href={explorerAddr(round.key)} target="_blank" rel="noreferrer">View this round on the explorer</a>}</p>
           <ExampleNote show={round.example} />
           {error && !round.example && <p role="alert" className="text-[13px] text-down">Could not refresh this round. Showing the last good data.</p>}

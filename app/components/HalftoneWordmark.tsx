@@ -21,8 +21,13 @@ export default function HalftoneWordmark() {
     const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
     const [br, bg, bb] = rgb(bone.length === 7 ? bone : "#EDE8DD"), [fr, fg, fb] = rgb(flame.length === 7 ? flame : "#FF5B22");
 
+    let disposed = false;
     const build = () => {
+      // build() also runs from document.fonts.ready, possibly after unmount, and before the host has a size
+      // (content-visibility can skip layout). A 0 x 0 canvas makes getImageData throw, so wait: the ResizeObserver calls again.
+      if (disposed) return;
       const r = host.getBoundingClientRect();
+      if (r.width < 1 || r.height < 1) return;
       dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; pitch = W < 640 ? 10 : 7;
       cv.width = W * dpr; cv.height = H * dpr; cv.style.width = `${W}px`; cv.style.height = `${H}px`;
       const off = document.createElement("canvas"); off.width = W; off.height = H;
@@ -80,7 +85,7 @@ export default function HalftoneWordmark() {
     io.observe(host); ro.observe(host); document.addEventListener("visibilitychange", vis);
     if (!reduced) { cv.addEventListener("pointermove", move); cv.addEventListener("pointerleave", leave); }
     document.fonts.ready.then(build);
-    return () => { cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); document.removeEventListener("visibilitychange", vis); cv.removeEventListener("pointermove", move); cv.removeEventListener("pointerleave", leave); };
+    return () => { disposed = true; cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); document.removeEventListener("visibilitychange", vis); cv.removeEventListener("pointermove", move); cv.removeEventListener("pointerleave", leave); };
   }, []);
 
   return (

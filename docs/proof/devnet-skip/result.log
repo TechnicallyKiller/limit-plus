@@ -1,0 +1,10 @@
+13:38:39 connected the demo wallet DMtH...
+13:38:44 got test funds
+13:38:52 week started (skip)
+13:39:01 deposited through the UI
+13:41:24 auction cleared
+13:41:37 claimed the up-front payment through the UI: +$3.5508
+13:41:49 round final
+
+DEMO_FLOW_OK skip: USDC 1000 -> 1003.55, NVDAx 0 -> 0.0000, paid up front $3.5508
+flow-exit-0
