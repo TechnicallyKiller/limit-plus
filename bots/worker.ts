@@ -45,6 +45,13 @@ const log = (m: string) => console.log(`${new Date().toISOString()} ${m}`);
   server.listen(port, () => log(`Worker listening on :${port}`));
   if (process.env.TINYFISH_API_KEY) radar.start(30 * 60_000); else log("TINYFISH_API_KEY not set: serving the saved radar snapshot only.");
 
+  // A free Render web service sleeps after 15 minutes without inbound traffic, and a sleeping worker cannot crank rounds.
+  // Calling our own public URL counts as traffic. RENDER_EXTERNAL_URL is set by Render and absent everywhere else.
+  if (process.env.RENDER_EXTERNAL_URL) {
+    const self = `${process.env.RENDER_EXTERNAL_URL.replace(/\/$/, "")}/health`;
+    setInterval(() => { fetch(self, { signal: AbortSignal.timeout(10_000) }).catch((e) => log(`keep-alive ping failed: ${String(e?.message ?? e).slice(0, 80)}`)); }, 10 * 60_000).unref();
+  }
+
   const bye = () => { log("Shutting down."); radar.stop(); director?.shutdown(); server.close(() => process.exit(0)); setTimeout(() => process.exit(0), 3000).unref(); };
   process.on("SIGTERM", bye); process.on("SIGINT", bye);
 })().catch((e) => { console.error(e); process.exit(1); });

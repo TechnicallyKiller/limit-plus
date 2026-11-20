@@ -1,0 +1,34 @@
+# Render blueprint for the Limit+ worker: Risk Radar refresher, demo director, keeper and market-maker bots, faucet.
+# Free plan on purpose. A free web service sleeps after 15 minutes without traffic; the worker pings its own public URL
+# every 10 minutes to stay awake (see bots/worker.ts). Free instance hours are shared across a workspace, so several
+# always-on free services in one workspace can run out of hours before the month ends. Upgrade `plan` for a hard guarantee.
+services:
+  - type: web
+    name: limitplus-worker
+    runtime: node
+    plan: free
+    region: oregon
+    branch: master
+    buildCommand: ./scripts/render-build.sh
+    startCommand: yarn ts-node --transpile-only -P tsconfig.json bots/worker.ts
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: CLUSTER
+        value: devnet
+      - key: SOLANA_RPC_URL
+        sync: false          # a devnet RPC endpoint
+      - key: ADMIN_KEYPAIR
+        sync: false          # JSON array: the devnet demo admin (mint authority, round admin, keeper). Devnet only, never mainnet.
+      - key: QUOTE_MINT
+        sync: false          # from config/addresses.devnet.json after scripts/setup-devnet.ts
+      - key: UNDERLYING_MINT
+        sync: false
+      - key: WORKER_SHARED_SECRET
+        generateValue: true  # also set the same value as WORKER_SHARED_SECRET on the web app
+      - key: TINYFISH_API_KEY
+        sync: false          # enables live Risk Radar refreshes; without it the saved snapshot is served
+      - key: DEMO_ENABLED
+        value: "1"

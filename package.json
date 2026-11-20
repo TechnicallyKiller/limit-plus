@@ -7,7 +7,13 @@
     "demo": "ts-node -P tsconfig.json scripts/demo-run.ts",
     "app:dev": "yarn workspace app dev",
     "app:build": "yarn workspace app build",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "stack": "ts-node -P tsconfig.json scripts/local-stack.ts",
+    "test:worker": "ts-node -P tsconfig.json scripts/worker-e2e.ts",
+    "radar:snapshot": "ts-node -P tsconfig.json scripts/radar-snapshot.ts",
+    "qa:ui": "node tools/qa/capture.mjs",
+    "qa:radar": "node tools/qa/radar.mjs",
+    "qa:demo": "node tools/qa/demo-flow.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.32.1",
